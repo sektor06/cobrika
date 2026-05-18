@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cobrika — Sistema de Préstamos</title>
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <style>
+    body {
+      min-height: 100vh;
+      display: flex;
+      background: linear-gradient(135deg, #1e3a8a 0%, #1a56db 50%, #0ea5e9 100%);
+    }
+
+    /* Panel izquierdo — decorativo */
+    .login-left {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 48px;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    .login-left::before {
+      content: '';
+      position: absolute;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.06);
+      top: -150px; right: -100px;
+    }
+    .login-left::after {
+      content: '';
+      position: absolute;
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.05);
+      bottom: -80px; left: -80px;
+    }
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 48px;
+      position: relative;
+      z-index: 1;
+    }
+    .brand-icon {
+      width: 56px; height: 56px;
+      background: rgba(255,255,255,.2);
+      border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,.3);
+    }
+    .brand-icon svg { width: 28px; height: 28px; color: #fff; }
+    .brand-name {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -.5px;
+    }
+    .brand-tagline {
+      font-size: .9rem;
+      color: rgba(255,255,255,.65);
+      margin-top: 2px;
+    }
+
+    .features {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      position: relative;
+      z-index: 1;
+      max-width: 380px;
+      width: 100%;
+    }
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 18px;
+      background: rgba(255,255,255,.1);
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.15);
+      backdrop-filter: blur(8px);
+    }
+    .feature-icon {
+      width: 40px; height: 40px; flex-shrink: 0;
+      background: rgba(255,255,255,.15);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .feature-icon svg { width: 20px; height: 20px; color: #fff; }
+    .feature-title { font-size: .9rem; font-weight: 600; color: #fff; }
+    .feature-desc  { font-size: .8rem; color: rgba(255,255,255,.7); margin-top: 2px; }
+
+    /* Panel derecho — formulario */
+    .login-right {
+      width: 460px;
+      flex-shrink: 0;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 40px;
+      box-shadow: -20px 0 60px rgba(0,0,0,.15);
+    }
+    .login-form-wrap {
+      width: 100%;
+      max-width: 360px;
+    }
+    .login-title {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--gray-900);
+      margin-bottom: 6px;
+    }
+    .login-sub {
+      font-size: .9rem;
+      color: var(--gray-500);
+      margin-bottom: 32px;
+    }
+
+    /* Selector de tipo de usuario */
+    .user-type-tabs {
+      display: flex;
+      background: var(--gray-100);
+      border-radius: 10px;
+      padding: 4px;
+      margin-bottom: 28px;
+      gap: 4px;
+    }
+    .user-tab {
+      flex: 1;
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: none;
+      background: transparent;
+      font-size: .85rem;
+      font-weight: 500;
+      color: var(--gray-500);
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .user-tab.active {
+      background: #fff;
+      color: var(--cobrika-primary);
+      font-weight: 600;
+      box-shadow: 0 1px 4px rgba(0,0,0,.1);
+    }
+
+    .form-row { display: flex; flex-direction: column; gap: 18px; }
+
+    .forgot-link {
+      font-size: .82rem;
+      color: var(--cobrika-primary);
+      text-align: right;
+      display: block;
+      margin-top: -10px;
+      margin-bottom: 4px;
+      cursor: pointer;
+    }
+    .forgot-link:hover { text-decoration: underline; }
+
+    .login-footer {
+      text-align: center;
+      margin-top: 28px;
+      font-size: .82rem;
+      color: var(--gray-500);
+    }
+    .login-footer a { color: var(--cobrika-primary); font-weight: 500; }
+    .login-footer a:hover { text-decoration: underline; }
+
+    .divider {
+      display: flex; align-items: center; gap: 12px;
+      margin: 24px 0; color: var(--gray-400); font-size: .82rem;
+    }
+    .divider::before, .divider::after {
+      content: ''; flex: 1; height: 1px; background: var(--gray-200);
+    }
+
+    /* Error box */
+    #login-error {
+      display: none;
+      padding: 12px 14px;
+      background: var(--cobrika-danger-bg);
+      border: 1px solid #fca5a5;
+      border-radius: var(--radius);
+      color: var(--cobrika-danger);
+      font-size: .85rem;
+      margin-bottom: 16px;
+    }
+
+    /* Toggle password */
+    .pw-wrapper { position: relative; }
+    .pw-wrapper input { padding-right: 42px; }
+    .pw-toggle {
+      position: absolute;
+      right: 12px; top: 50%; transform: translateY(-50%);
+      background: none; border: none;
+      color: var(--gray-400); cursor: pointer;
+      padding: 4px;
+      display: flex;
+    }
+    .pw-toggle:hover { color: var(--gray-600); }
+
+    @media (max-width: 768px) {
+      body { flex-direction: column; background: #fff; }
+      .login-left  { display: none; }
+      .login-right { width: 100%; padding: 40px 24px; box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Panel izquierdo ── -->
+  <div class="login-left">
+    <div class="brand-logo">
+      <div class="brand-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75"/>
+        </svg>
+      </div>
+      <div>
+        <div class="brand-name">Cobrika</div>
+        <div class="brand-tagline">Sistema de préstamos y cobros</div>
+      </div>
+    </div>
+
+    <div class="features">
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+        </div>
+        <div>
+          <div class="feature-title">Control total de préstamos</div>
+          <div class="feature-desc">Gestiona capital, intereses, cuotas y mora en tiempo real</div>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 14.25v2.25m3-4.5v4.5m3-6.75v6.75m3-9v9M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z"/>
+          </svg>
+        </div>
+        <div>
+          <div class="feature-title">Dashboard con estadísticas</div>
+          <div class="feature-desc">KPIs, gráficos y reportes siempre actualizados</div>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/>
+          </svg>
+        </div>
+        <div>
+          <div class="feature-title">Notificaciones por WhatsApp</div>
+          <div class="feature-desc">Recuérdales a tus clientes sus pagos automáticamente</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Panel derecho (formulario) ── -->
+  <div class="login-right">
+    <div class="login-form-wrap">
+      <h1 class="login-title">Bienvenido</h1>
+      <p class="login-sub">Inicia sesión para continuar</p>
+
+      <!-- Tabs -->
+      <div class="user-type-tabs">
+        <button class="user-tab active" data-tipo="admin">Prestamista</button>
+        <button class="user-tab"        data-tipo="cliente">Soy cliente</button>
+      </div>
+
+      <!-- Error -->
+      <div id="login-error"></div>
+
+      <!-- Formulario -->
+      <form id="login-form" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="email">Correo electrónico</label>
+            <div class="input-icon">
+              <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/>
+              </svg>
+              <input class="form-control" type="email" id="email" placeholder="tu@email.com" autocomplete="email" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="password">Contraseña</label>
+            <div class="pw-wrapper">
+              <input class="form-control" type="password" id="password" placeholder="••••••••" autocomplete="current-password" required>
+              <button type="button" class="pw-toggle" id="pw-toggle" aria-label="Ver contraseña">
+                <svg id="eye-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                </svg>
+              </button>
+            </div>
+            <a class="forgot-link" id="forgot-link">¿Olvidaste tu contraseña?</a>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-lg btn-full" id="login-btn">
+            <span id="btn-text">Iniciar sesión</span>
+            <span id="btn-spinner" class="spinner" style="display:none"></span>
+          </button>
+        </div>
+      </form>
+
+      <div class="divider">o</div>
+
+      <div class="login-footer">
+        ¿No tienes cuenta? <a href="#" id="registro-link">Registra tu negocio</a>
+      </div>
+
+      <div style="margin-top:40px; padding-top:20px; border-top:1px solid var(--gray-100); text-align:center">
+        <p style="font-size:.75rem; color:var(--gray-400)">
+          © 2024 Cobrika · Todos los derechos reservados
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast-container"></div>
+
+  <script type="module">
+    import { login } from '/shared/auth.js';
+    import { supabase } from '/shared/supabase-client.js';
+    import { toast } from '/shared/helpers.js';
+
+    const form       = document.getElementById('login-form');
+    const btnText    = document.getElementById('btn-text');
+    const btnSpinner = document.getElementById('btn-spinner');
+    const loginBtn   = document.getElementById('login-btn');
+    const errorBox   = document.getElementById('login-error');
+    const tabs       = document.querySelectorAll('.user-tab');
+    let tipoUsuario  = 'admin';
+
+    // ── Tabs ──
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        tipoUsuario = tab.dataset.tipo;
+      });
+    });
+
+    // ── Toggle password ──
+    document.getElementById('pw-toggle').addEventListener('click', () => {
+      const input = document.getElementById('password');
+      input.type = input.type === 'password' ? 'text' : 'password';
+    });
+
+    // ── Mostrar error ──
+    function showError(msg) {
+      errorBox.textContent = msg;
+      errorBox.style.display = 'block';
+    }
+    function hideError() {
+      errorBox.style.display = 'none';
+    }
+
+    // ── Loading state ──
+    function setLoading(v) {
+      loginBtn.disabled = v;
+      btnText.style.display    = v ? 'none'   : 'inline';
+      btnSpinner.style.display = v ? 'inline' : 'none';
+    }
+
+    // ── Submit ──
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      hideError();
+
+      const email    = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+
+      if (!email || !password) {
+        showError('Completa todos los campos.');
+        return;
+      }
+
+      setLoading(true);
+
+      try {
+        await login(email, password);
+
+        // Redirigir según tipo
+        if (tipoUsuario === 'admin') {
+          window.location.href = '/admin/dashboard/index.html';
+        } else {
+          window.location.href = '/app/index.html';
+        }
+      } catch (err) {
+        setLoading(false);
+        const msg = err.message?.includes('Invalid login')
+          ? 'Correo o contraseña incorrectos.'
+          : err.message || 'Error al iniciar sesión. Intenta de nuevo.';
+        showError(msg);
+      }
+    });
+
+    // ── Forgot password ──
+    document.getElementById('forgot-link').addEventListener('click', async e => {
+      e.preventDefault();
+      const email = document.getElementById('email').value.trim();
+      if (!email) {
+        showError('Escribe tu correo primero para recuperar la contraseña.');
+        return;
+      }
+      try {
+        await supabase.auth.resetPasswordForEmail(email, {
+          redirectTo: window.location.origin + '/index.html',
+        });
+        toast('Revisa tu correo — te enviamos el enlace de recuperación.', 'success', 5000);
+      } catch {
+        toast('No se pudo enviar el correo. Verifica el email.', 'error');
+      }
+    });
+
+    // ── Registro link ──
+    document.getElementById('registro-link').addEventListener('click', e => {
+      e.preventDefault();
+      window.location.href = '/registro.html';
+    });
+
+    // ── Si ya hay sesión, redirigir ──
+    const { data: { session } } = await supabase.auth.getSession();
+    if (session) {
+      window.location.href = '/admin/dashboard/index.html';
+    }
+  </script>
+</body>
+</html>
