@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nuevo préstamo — Cobrika</title>
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/admin.css">
+</head>
+<body>
+<div class="admin-layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="sidebar-logo-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75"/></svg></div>
+      <div><div class="sidebar-logo-text">Cobrika</div><div class="sidebar-logo-sub">Panel administrativo</div></div>
+    </div>
+    <div class="sidebar-tenant"><div class="sidebar-tenant-label">Negocio</div><div class="sidebar-tenant-name" id="admin-tenant">—</div></div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Principal</div>
+      <a href="../dashboard/index.html" class="nav-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z"/></svg>Dashboard</a>
+      <a href="../clientes/index.html" class="nav-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"/></svg>Clientes</a>
+      <a href="index.html" class="nav-item active"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Préstamos</a>
+      <a href="../pagos/index.html" class="nav-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z"/></svg>Pagos</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user" id="logout-btn">
+        <div class="avatar" id="admin-avatar">A</div>
+        <div class="sidebar-user-info"><div class="sidebar-user-name" id="admin-nombre">Andy Polanco</div><div class="sidebar-user-role">Administrador</div></div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  <main class="admin-main">
+    <div class="topbar">
+      <div class="topbar-left">
+        <button class="sidebar-toggle" id="sidebar-toggle"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg></button>
+        <div>
+          <div class="topbar-title">Nuevo préstamo</div>
+          <div class="topbar-breadcrumb"><a href="index.html" style="color:var(--cobrika-primary)">Préstamos</a> / Nuevo</div>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <a href="index.html" class="btn btn-secondary btn-sm">← Volver</a>
+      </div>
+    </div>
+
+    <div class="page-content">
+      <form id="form-prestamo" novalidate>
+        <div style="display:grid;grid-template-columns:1fr 320px;gap:20px;align-items:start">
+
+          <!-- Columna principal -->
+          <div style="display:flex;flex-direction:column;gap:20px">
+
+            <!-- Cliente -->
+            <div class="card">
+              <div class="card-header"><h4 style="font-size:.95rem">Cliente</h4></div>
+              <div class="card-body">
+                <div class="form-group">
+                  <label class="form-label">Seleccionar cliente <span class="required">*</span></label>
+                  <div style="position:relative">
+                    <input class="form-control" type="text" id="cliente-buscar" placeholder="Buscar cliente por nombre o cédula..." autocomplete="off">
+                    <div id="cliente-dropdown" style="display:none;position:absolute;top:100%;left:0;right:0;background:#fff;border:1.5px solid var(--gray-200);border-radius:var(--radius);box-shadow:var(--shadow-lg);z-index:100;max-height:220px;overflow-y:auto;margin-top:4px"></div>
+                  </div>
+                  <input type="hidden" id="cliente-id">
+                  <div id="cliente-seleccionado" style="display:none;margin-top:10px;padding:12px;background:var(--cobrika-primary-light);border-radius:var(--radius);border:1px solid #bfdbfe">
+                    <div style="display:flex;align-items:center;gap:10px">
+                      <div id="cliente-avatar" style="width:36px;height:36px;border-radius:50%;background:var(--cobrika-primary);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem;flex-shrink:0">?</div>
+                      <div style="flex:1">
+                        <div id="cliente-nombre-sel" style="font-weight:600;font-size:.875rem;color:var(--cobrika-primary-dark)"></div>
+                        <div id="cliente-info-sel" style="font-size:.75rem;color:var(--gray-500)"></div>
+                      </div>
+                      <button type="button" id="btn-cambiar-cliente" style="font-size:.75rem;color:var(--cobrika-primary);background:none;border:none;cursor:pointer;text-decoration:underline">Cambiar</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Condiciones del préstamo -->
+            <div class="card">
+              <div class="card-header"><h4 style="font-size:.95rem">Condiciones del préstamo</h4></div>
+              <div class="card-body">
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+
+                  <div class="form-group">
+                    <label class="form-label">Monto del capital <span class="required">*</span></label>
+                    <div style="position:relative">
+                      <span style="position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:.85rem;font-weight:600;color:var(--gray-500)">RD$</span>
+                      <input class="form-control calc-trigger" type="number" id="capital" min="100" step="100" placeholder="0.00" style="padding-left:44px" required>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label">Tasa de interés mensual <span class="required">*</span></label>
+                    <div style="position:relative">
+                      <input class="form-control calc-trigger" type="number" id="tasa" min="0.1" max="100" step="0.5" placeholder="10" required>
+                      <span style="position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:.85rem;font-weight:600;color:var(--gray-500)">%</span>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label">Tipo de interés <span class="required">*</span></label>
+                    <select class="form-control calc-trigger" id="tipo-interes">
+                      <option value="fijo">Fijo (sobre capital original)</option>
+                      <option value="reducido">Reducido (sobre saldo)</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label">Frecuencia de pago <span class="required">*</span></label>
+                    <select class="form-control calc-trigger" id="frecuencia">
+                      <option value="mensual">Mensual</option>
+                      <option value="quincenal">Quincenal</option>
+                      <option value="semanal">Semanal</option>
+                      <option value="diario">Diario</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label">Número de cuotas <span class="required">*</span></label>
+                    <input class="form-control calc-trigger" type="number" id="num-cuotas" min="1" max="360" placeholder="12" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label">Fecha primer pago <span class="required">*</span></label>
+                    <input class="form-control calc-trigger" type="date" id="fecha-primer-pago" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label">Tasa de mora mensual</label>
+                    <div style="position:relative">
+                      <input class="form-control" type="number" id="tasa-mora" min="0" max="50" step="0.5" value="2">
+                      <span style="position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:.85rem;color:var(--gray-500)">%</span>
+                    </div>
+                    <div class="form-hint">Se aplica sobre saldo vencido por día de atraso</div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label">Días de gracia</label>
+                    <input class="form-control" type="number" id="dias-gracia" min="0" max="30" value="3">
+                    <div class="form-hint">Días antes de aplicar mora</div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <!-- Garantía -->
+            <div class="card">
+              <div class="card-header"><h4 style="font-size:.95rem">Garantía (opcional)</h4></div>
+              <div class="card-body">
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+                  <div class="form-group">
+                    <label class="form-label">Tipo de garantía</label>
+                    <select class="form-control" id="garantia-tipo">
+                      <option value="">Sin garantía</option>
+                      <option value="vehiculo">Vehículo</option>
+                      <option value="inmueble">Inmueble</option>
+                      <option value="electrodomestico">Electrodoméstico</option>
+                      <option value="joya">Joya / Alhajas</option>
+                      <option value="otro">Otro</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Valor estimado (RD$)</label>
+                    <input class="form-control" type="number" id="garantia-valor" min="0" placeholder="0">
+                  </div>
+                  <div class="form-group" style="grid-column:1/-1">
+                    <label class="form-label">Descripción de la garantía</label>
+                    <textarea class="form-control" id="garantia-desc" rows="2" placeholder="Ej: Toyota Corolla 2018, placa A123456..."></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Observaciones -->
+            <div class="card">
+              <div class="card-header"><h4 style="font-size:.95rem">Observaciones</h4></div>
+              <div class="card-body">
+                <textarea class="form-control" id="observaciones" rows="3" placeholder="Notas internas sobre este préstamo..."></textarea>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Columna lateral: resumen calculado -->
+          <div style="display:flex;flex-direction:column;gap:16px;position:sticky;top:80px">
+
+            <!-- Calculadora en vivo -->
+            <div class="card" style="border:2px solid var(--cobrika-primary)">
+              <div class="card-header" style="background:var(--cobrika-primary-light)">
+                <h4 style="font-size:.95rem;color:var(--cobrika-primary-dark)">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" style="width:16px;height:16px;display:inline;margin-right:6px"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V13.5zm0 2.25h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V18zm2.498-6.75h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007V13.5zm0 2.25h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007V18zm2.504-6.75h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V13.5zm0 2.25h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V18zm2.498-6.75h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V13.5zM8.25 6h7.5v2.25h-7.5V6zM12 2.25c-1.892 0-3.758.11-5.593.322C5.307 2.7 4.5 3.616 4.5 4.668V18a2.25 2.25 0 002.25 2.25h10.5A2.25 2.25 0 0019.5 18V4.668c0-1.052-.807-1.967-1.907-2.096A48.507 48.507 0 0012 2.25z"/></svg>
+                  Resumen del préstamo
+                </h4>
+              </div>
+              <div class="card-body" id="resumen-calc">
+                <div style="text-align:center;padding:24px;color:var(--gray-400)">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:36px;height:36px;margin:0 auto 8px;opacity:.4;display:block"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                  <p style="font-size:.85rem">Completa los campos para ver el cálculo</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Plan de cuotas preview -->
+            <div class="card" id="card-cuotas" style="display:none">
+              <div class="card-header">
+                <h4 style="font-size:.9rem">Plan de cuotas</h4>
+                <span id="badge-cuotas" class="badge badge-primary">0</span>
+              </div>
+              <div style="max-height:280px;overflow-y:auto">
+                <table style="width:100%;font-size:.78rem">
+                  <thead>
+                    <tr>
+                      <th style="padding:8px 12px;background:var(--gray-50);color:var(--gray-500);font-size:.7rem;text-transform:uppercase;border-bottom:1px solid var(--gray-200)">#</th>
+                      <th style="padding:8px 12px;background:var(--gray-50);color:var(--gray-500);font-size:.7rem;text-transform:uppercase;border-bottom:1px solid var(--gray-200)">Vence</th>
+                      <th style="padding:8px 12px;background:var(--gray-50);color:var(--gray-500);font-size:.7rem;text-transform:uppercase;border-bottom:1px solid var(--gray-200);text-align:right">Monto</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tbody-cuotas-preview"></tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Botones -->
+            <button type="submit" class="btn btn-primary btn-lg btn-full" id="btn-guardar" disabled>
+              <span id="btn-texto">Aprobar y crear préstamo</span>
+              <span id="btn-spinner" class="spinner" style="display:none"></span>
+            </button>
+            <a href="index.html" class="btn btn-secondary btn-full" style="text-align:center">Cancelar</a>
+
+          </div>
+        </div>
+      </form>
+    </div>
+  </main>
+</div>
+<div id="toast-container"></div>
+
+<style>
+@media (max-width:900px) {
+  #form-prestamo > div { grid-template-columns:1fr !important; }
+  #form-prestamo > div > div:last-child { position:static !important; }
+}
+</style>
+
+<script type="module">
+import { requireAdmin, logout } from '../../shared/auth.js';
+import { supabase }             from '../../shared/supabase-client.js';
+import { calcularPlan }         from '../../shared/calculadora-core.js';
+import { formatMoney, formatFecha, iniciales, toast, confirmar, debounce } from '../../shared/helpers.js';
+
+const usuario  = await requireAdmin();
+if (!usuario) throw new Error('No auth');
+const tenantId = usuario.perfil.tenant_id;
+
+const sidebar = document.getElementById('sidebar');
+const overlay = document.getElementById('sidebar-overlay');
+document.getElementById('sidebar-toggle').addEventListener('click', () => { sidebar.classList.toggle('open'); overlay.classList.toggle('open'); });
+overlay.addEventListener('click', () => { sidebar.classList.remove('open'); overlay.classList.remove('open'); });
+document.getElementById('logout-btn').addEventListener('click', async () => { if (await confirmar('¿Cerrar sesión?')) logout(); });
+
+// Establecer fecha por defecto (mañana)
+const manana = new Date(); manana.setDate(manana.getDate() + 1);
+document.getElementById('fecha-primer-pago').value = manana.toISOString().split('T')[0];
+document.getElementById('fecha-primer-pago').min   = new Date().toISOString().split('T')[0];
+
+// ── Si viene con cliente_id desde perfil ─────────────────
+const params = new URLSearchParams(location.search);
+const clienteIdParam = params.get('cliente_id');
+if (clienteIdParam) await precargarCliente(clienteIdParam);
+
+async function precargarCliente(id) {
+  const { data } = await supabase.from('clientes').select('id,nombre,cedula,telefono').eq('id',id).single();
+  if (data) seleccionarCliente(data);
+}
+
+// ── Búsqueda de clientes ──────────────────────────────────
+let clienteSeleccionado = null;
+
+document.getElementById('cliente-buscar').addEventListener('input', debounce(async e => {
+  const q = e.target.value.trim();
+  if (q.length < 2) { document.getElementById('cliente-dropdown').style.display = 'none'; return; }
+
+  const { data } = await supabase
+    .from('clientes')
+    .select('id,nombre,cedula,telefono')
+    .eq('tenant_id', tenantId)
+    .or(`nombre.ilike.%${q}%,cedula.ilike.%${q}%`)
+    .limit(6);
+
+  const dd = document.getElementById('cliente-dropdown');
+  if (!data?.length) { dd.innerHTML = `<div style="padding:12px;color:var(--gray-400);font-size:.85rem">Sin resultados</div>`; dd.style.display = 'block'; return; }
+  dd.innerHTML = data.map(c => `
+    <div class="dd-item" data-id="${c.id}" style="padding:10px 14px;cursor:pointer;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--gray-100);transition:background .1s">
+      <div style="width:30px;height:30px;border-radius:50%;background:var(--cobrika-primary-light);color:var(--cobrika-primary);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.75rem;flex-shrink:0">${iniciales(c.nombre)}</div>
+      <div>
+        <div style="font-weight:600;font-size:.875rem">${c.nombre}</div>
+        <div style="font-size:.75rem;color:var(--gray-400)">${c.cedula||''} ${c.telefono||''}</div>
+      </div>
+    </div>`).join('');
+  dd.querySelectorAll('.dd-item').forEach(el => {
+    el.addEventListener('mouseover', () => el.style.background = 'var(--gray-50)');
+    el.addEventListener('mouseout',  () => el.style.background = '');
+    el.addEventListener('click', () => {
+      const c = data.find(x => x.id === el.dataset.id);
+      if (c) seleccionarCliente(c);
+      dd.style.display = 'none';
+    });
+  });
+  dd.style.display = 'block';
+}, 300));
+
+document.addEventListener('click', e => {
+  if (!e.target.closest('#cliente-buscar') && !e.target.closest('#cliente-dropdown'))
+    document.getElementById('cliente-dropdown').style.display = 'none';
+});
+
+function seleccionarCliente(c) {
+  clienteSeleccionado = c;
+  document.getElementById('cliente-id').value                     = c.id;
+  document.getElementById('cliente-nombre-sel').textContent        = c.nombre;
+  document.getElementById('cliente-info-sel').textContent          = [c.cedula, c.telefono].filter(Boolean).join(' · ');
+  document.getElementById('cliente-avatar').textContent            = iniciales(c.nombre);
+  document.getElementById('cliente-buscar').style.display          = 'none';
+  document.getElementById('cliente-seleccionado').style.display    = 'flex';
+  actualizarBoton();
+}
+
+document.getElementById('btn-cambiar-cliente').addEventListener('click', () => {
+  clienteSeleccionado = null;
+  document.getElementById('cliente-id').value                  = '';
+  document.getElementById('cliente-buscar').style.display      = '';
+  document.getElementById('cliente-buscar').value              = '';
+  document.getElementById('cliente-seleccionado').style.display= 'none';
+  actualizarBoton();
+});
+
+// ── Calculadora en tiempo real ────────────────────────────
+let planActual = null;
+
+function recalcular() {
+  const capital   = parseFloat(document.getElementById('capital').value);
+  const tasa      = parseFloat(document.getElementById('tasa').value) / 100;
+  const tipo      = document.getElementById('tipo-interes').value;
+  const frecuencia= document.getElementById('frecuencia').value;
+  const numCuotas = parseInt(document.getElementById('num-cuotas').value);
+  const fechaInicio = document.getElementById('fecha-primer-pago').value;
+
+  if (!capital || !tasa || !numCuotas || !fechaInicio) {
+    planActual = null;
+    document.getElementById('resumen-calc').innerHTML = `<div style="text-align:center;padding:20px;color:var(--gray-400);font-size:.85rem">Completa los campos para ver el cálculo</div>`;
+    document.getElementById('card-cuotas').style.display = 'none';
+    actualizarBoton();
+    return;
+  }
+
+  planActual = calcularPlan({ capital, tasa, tipo, numCuotas, frecuencia, fechaInicio });
+  if (!planActual) return;
+
+  // Resumen
+  document.getElementById('resumen-calc').innerHTML = `
+    <div style="display:flex;flex-direction:column;gap:0">
+      ${resumenRow('Capital', formatMoney(capital), 'var(--gray-800)')}
+      ${resumenRow('Interés total', formatMoney(planActual.totalInteres), 'var(--cobrika-warning)')}
+      <div style="height:1px;background:var(--gray-200);margin:8px 0"></div>
+      ${resumenRow('Total a pagar', formatMoney(planActual.montoTotal), 'var(--cobrika-primary)', true)}
+      <div style="height:1px;background:var(--gray-200);margin:8px 0"></div>
+      ${resumenRow('Cuota ' + labelFrecuencia(frecuencia).toLowerCase(), formatMoney(planActual.montoCuota), 'var(--gray-800)')}
+      ${resumenRow('Número de cuotas', numCuotas, 'var(--gray-800)')}
+      ${resumenRow('Último pago', formatFecha(planActual.fechaVencimiento), 'var(--gray-800)')}
+    </div>`;
+
+  // Plan de cuotas (primeras 12)
+  document.getElementById('card-cuotas').style.display = '';
+  document.getElementById('badge-cuotas').textContent  = planActual.cuotas.length;
+  const preview = planActual.cuotas.slice(0, 12);
+  document.getElementById('tbody-cuotas-preview').innerHTML = preview.map(c => `
+    <tr>
+      <td style="padding:7px 12px;border-bottom:1px solid var(--gray-100);color:var(--gray-500)">${c.numero}</td>
+      <td style="padding:7px 12px;border-bottom:1px solid var(--gray-100)">${formatFecha(c.fecha_vence)}</td>
+      <td style="padding:7px 12px;border-bottom:1px solid var(--gray-100);text-align:right;font-weight:600">${formatMoney(c.monto_total)}</td>
+    </tr>`).join('') +
+    (planActual.cuotas.length > 12 ? `<tr><td colspan="3" style="padding:8px 12px;color:var(--gray-400);font-size:.75rem;text-align:center">... y ${planActual.cuotas.length - 12} cuotas más</td></tr>` : '');
+
+  actualizarBoton();
+}
+
+function resumenRow(label, value, color, bold = false) {
+  return `<div style="display:flex;justify-content:space-between;align-items:center;padding:7px 0">
+    <span style="font-size:.82rem;color:var(--gray-500)">${label}</span>
+    <span style="font-size:${bold?'.95rem':'.85rem'};font-weight:${bold?'800':'600'};color:${color}">${value}</span>
+  </div>`;
+}
+
+function labelFrecuencia(f) {
+  return { diario:'Diaria', semanal:'Semanal', quincenal:'Quincenal', mensual:'Mensual' }[f] || f;
+}
+
+function actualizarBoton() {
+  document.getElementById('btn-guardar').disabled = !(clienteSeleccionado && planActual);
+}
+
+document.querySelectorAll('.calc-trigger').forEach(el => el.addEventListener('input', recalcular));
+document.querySelectorAll('.calc-trigger').forEach(el => el.addEventListener('change', recalcular));
+
+// ── Guardar préstamo ──────────────────────────────────────
+document.getElementById('form-prestamo').addEventListener('submit', async e => {
+  e.preventDefault();
+  if (!clienteSeleccionado || !planActual) return;
+
+  const btn = document.getElementById('btn-guardar');
+  btn.disabled = true;
+  document.getElementById('btn-texto').style.display   = 'none';
+  document.getElementById('btn-spinner').style.display = 'inline-block';
+
+  try {
+    const tasaMora  = parseFloat(document.getElementById('tasa-mora').value || 2) / 100;
+    const diasGracia= parseInt(document.getElementById('dias-gracia').value || 3);
+
+    // 1. Insertar préstamo
+    const { data: prestamo, error: errP } = await supabase.from('prestamos').insert({
+      tenant_id:        tenantId,
+      cliente_id:       clienteSeleccionado.id,
+      monto_capital:    planActual.capital,
+      tasa_interes:     parseFloat(document.getElementById('tasa').value) / 100,
+      tipo_interes:     document.getElementById('tipo-interes').value,
+      frecuencia_pago:  document.getElementById('frecuencia').value,
+      num_cuotas:       planActual.numCuotas,
+      monto_cuota:      planActual.montoCuota,
+      monto_total:      planActual.montoTotal,
+      total_interes:    planActual.totalInteres,
+      saldo_capital:    planActual.capital,
+      saldo_total:      planActual.montoTotal,
+      tasa_mora:        tasaMora,
+      dias_gracia:      diasGracia,
+      fecha_aprobacion: new Date().toISOString().split('T')[0],
+      fecha_primer_pago:document.getElementById('fecha-primer-pago').value,
+      fecha_vencimiento:planActual.fechaVencimiento,
+      estado:           'activo',
+      garantia_tipo:    document.getElementById('garantia-tipo').value || null,
+      garantia_descripcion: document.getElementById('garantia-desc').value.trim() || null,
+      garantia_valor:   document.getElementById('garantia-valor').value || null,
+      observaciones:    document.getElementById('observaciones').value.trim() || null,
+      aprobado_por:     usuario.id,
+    }).select().single();
+
+    if (errP) throw errP;
+
+    // 2. Insertar cuotas
+    const cuotasInsert = planActual.cuotas.map(c => ({
+      tenant_id:     tenantId,
+      prestamo_id:   prestamo.id,
+      numero:        c.numero,
+      fecha_vence:   c.fecha_vence,
+      monto_capital: c.monto_capital,
+      monto_interes: c.monto_interes,
+      monto_total:   c.monto_total,
+      monto_mora:    0,
+      monto_pagado:  0,
+      estado:        'pendiente',
+    }));
+
+    const { error: errC } = await supabase.from('cuotas').insert(cuotasInsert);
+    if (errC) throw errC;
+
+    toast('Préstamo creado exitosamente', 'success');
+    setTimeout(() => window.location.href = `detalle.html?id=${prestamo.id}`, 1200);
+
+  } catch (err) {
+    toast('Error: ' + err.message, 'error');
+    btn.disabled = false;
+    document.getElementById('btn-texto').style.display   = 'inline';
+    document.getElementById('btn-spinner').style.display = 'none';
+  }
+});
+
+// Inicializar cálculo si ya hay valores
+recalcular();
+</script>
+</body>
+</html>
