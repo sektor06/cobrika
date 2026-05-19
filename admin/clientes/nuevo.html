@@ -96,17 +96,27 @@
               <div class="card-header"><h4 style="font-size:.95rem">Dirección</h4></div>
               <div class="card-body">
                 <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+                  <div class="form-group">
+                    <label class="form-label">Provincia</label>
+                    <select class="form-control" id="provincia" style="appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:36px">
+                      <option value="">Selecciona la provincia...</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Municipio</label>
+                    <select class="form-control" id="ciudad" disabled>
+                      <option value="">Selecciona primero la provincia...</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Sector / Barrio</label>
+                    <select class="form-control" id="barrio" disabled>
+                      <option value="">Selecciona primero el municipio...</option>
+                    </select>
+                  </div>
                   <div class="form-group" style="grid-column:1/-1">
-                    <label class="form-label">Dirección</label>
-                    <input class="form-control" id="direccion" type="text" placeholder="Calle, número, sector">
-                  </div>
-                  <div class="form-group">
-                    <label class="form-label">Barrio / Sector</label>
-                    <input class="form-control" id="barrio" type="text" placeholder="Los Mina">
-                  </div>
-                  <div class="form-group">
-                    <label class="form-label">Ciudad</label>
-                    <input class="form-control" id="ciudad" type="text" placeholder="Santo Domingo">
+                    <label class="form-label">Dirección específica</label>
+                    <input class="form-control" id="direccion" type="text" placeholder="Calle, número, edificio, apartamento...">
                   </div>
                 </div>
               </div>
@@ -241,6 +251,7 @@
 
 <script type="module">
 import { requireAdmin, logout } from '../../shared/auth.js';
+import { poblarProvincias, poblarMunicipios, poblarSectores } from '../../shared/geo-rd.js';
 import { supabase }             from '../../shared/supabase-client.js';
 import { toast, confirmar }     from '../../shared/helpers.js';
 
@@ -259,6 +270,18 @@ document.getElementById('logout-btn').addEventListener('click', async () => { if
 const params      = new URLSearchParams(location.search);
 const clienteId   = params.get('id');
 const esEdicion   = !!clienteId;
+
+// ── Inicializar selectores geográficos ─────────────────────
+poblarProvincias(document.getElementById('provincia'));
+
+document.getElementById('provincia').addEventListener('change', e => {
+  poblarMunicipios(document.getElementById('ciudad'), e.target.value);
+  poblarSectores(document.getElementById('barrio'), '');
+});
+
+document.getElementById('ciudad').addEventListener('change', e => {
+  poblarSectores(document.getElementById('barrio'), e.target.value);
+});
 let fotoUrl       = null;
 
 if (esEdicion) {
@@ -280,6 +303,14 @@ async function cargarCliente() {
   document.getElementById('telefono_alt').value  = data.telefono_alt || '';
   document.getElementById('email').value         = data.email        || '';
   document.getElementById('direccion').value     = data.direccion    || '';
+  // Restaurar selects geográficos encadenados
+  if (data.ciudad) {
+    poblarProvincias(document.getElementById('provincia'));
+    document.getElementById('provincia').value = data.provincia || '';
+    poblarMunicipios(document.getElementById('ciudad'), data.provincia || '');
+    document.getElementById('ciudad').value = data.ciudad || '';
+    poblarSectores(document.getElementById('barrio'), data.ciudad || '');
+  }
   document.getElementById('barrio').value        = data.barrio       || '';
   document.getElementById('ciudad').value        = data.ciudad       || '';
   document.getElementById('trabajo').value       = data.trabajo      || '';
@@ -353,6 +384,7 @@ document.getElementById('form-cliente').addEventListener('submit', async e => {
     telefono,
     telefono_alt:       document.getElementById('telefono_alt').value.trim() || null,
     email:              document.getElementById('email').value.trim()        || null,
+    provincia:          document.getElementById('provincia').value            || null,
     direccion:          document.getElementById('direccion').value.trim()    || null,
     barrio:             document.getElementById('barrio').value.trim()       || null,
     ciudad:             document.getElementById('ciudad').value.trim()       || null,
