@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfil cliente — Cobrika</title>
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/admin.css">
+</head>
+<body>
+<div class="admin-layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="sidebar-logo-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75"/></svg>
+      </div>
+      <div><div class="sidebar-logo-text">Cobrika</div><div class="sidebar-logo-sub">Panel administrativo</div></div>
+    </div>
+    <div class="sidebar-tenant"><div class="sidebar-tenant-label">Negocio</div><div class="sidebar-tenant-name" id="admin-tenant">—</div></div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Principal</div>
+      <a href="../dashboard/index.html" class="nav-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z"/></svg>Dashboard</a>
+      <a href="index.html" class="nav-item active"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"/></svg>Clientes</a>
+      <a href="../prestamos/index.html" class="nav-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Préstamos</a>
+      <a href="../pagos/index.html" class="nav-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z"/></svg>Pagos</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user" id="logout-btn">
+        <div class="avatar" id="admin-avatar">A</div>
+        <div class="sidebar-user-info">
+          <div class="sidebar-user-name" id="admin-nombre">Andy Polanco</div>
+          <div class="sidebar-user-role">Administrador</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  <main class="admin-main">
+    <div class="topbar">
+      <div class="topbar-left">
+        <button class="sidebar-toggle" id="sidebar-toggle">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
+        </button>
+        <div>
+          <div class="topbar-title" id="topbar-nombre">Perfil del cliente</div>
+          <div class="topbar-breadcrumb"><a href="index.html" style="color:var(--cobrika-primary)">Clientes</a> / <span>Perfil</span></div>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <button class="btn btn-secondary btn-sm" id="btn-whatsapp" style="display:none">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="width:14px;height:14px;color:#16a34a"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp
+        </button>
+        <a id="btn-editar" href="#" class="btn btn-primary btn-sm">Editar</a>
+      </div>
+    </div>
+
+    <div class="page-content" id="contenido" style="display:none">
+      <div style="display:grid;grid-template-columns:340px 1fr;gap:20px;align-items:start">
+
+        <!-- Columna izquierda: info del cliente -->
+        <div style="display:flex;flex-direction:column;gap:16px">
+
+          <!-- Tarjeta de perfil -->
+          <div class="card">
+            <div class="card-body" style="text-align:center;padding:28px 24px 20px">
+              <div id="perfil-foto" style="width:90px;height:90px;border-radius:50%;background:var(--cobrika-primary-light);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;overflow:hidden;border:3px solid var(--gray-200);font-size:1.6rem;font-weight:700;color:var(--cobrika-primary)">?</div>
+              <h3 id="perfil-nombre" style="font-size:1.15rem;margin-bottom:6px">—</h3>
+              <div id="perfil-estado" style="margin-bottom:14px"></div>
+              <!-- Score -->
+              <div style="background:var(--gray-50);border-radius:10px;padding:12px;margin-bottom:14px">
+                <div style="font-size:.75rem;color:var(--gray-500);margin-bottom:6px">Score interno</div>
+                <div style="display:flex;align-items:center;gap:10px">
+                  <div style="flex:1;height:8px;border-radius:4px;background:var(--gray-200);overflow:hidden">
+                    <div id="score-bar" style="height:100%;border-radius:4px;transition:width .5s"></div>
+                  </div>
+                  <span id="score-num" style="font-weight:700;font-size:.9rem;min-width:36px;text-align:right">—</span>
+                </div>
+              </div>
+              <div style="display:flex;gap:8px;justify-content:center">
+                <div style="text-align:center;flex:1">
+                  <div id="stat-prestamos" style="font-size:1.4rem;font-weight:800;color:var(--cobrika-primary)">0</div>
+                  <div style="font-size:.72rem;color:var(--gray-500)">Préstamos</div>
+                </div>
+                <div style="width:1px;background:var(--gray-200)"></div>
+                <div style="text-align:center;flex:1">
+                  <div id="stat-pagados" style="font-size:1.4rem;font-weight:800;color:var(--cobrika-success)">0</div>
+                  <div style="font-size:.72rem;color:var(--gray-500)">Saldados</div>
+                </div>
+                <div style="width:1px;background:var(--gray-200)"></div>
+                <div style="text-align:center;flex:1">
+                  <div id="stat-mora" style="font-size:1.4rem;font-weight:800;color:var(--cobrika-danger)">0</div>
+                  <div style="font-size:.72rem;color:var(--gray-500)">En mora</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Información de contacto -->
+          <div class="card">
+            <div class="card-header"><h4 style="font-size:.9rem">Contacto</h4></div>
+            <div class="card-body" style="padding-top:12px">
+              <div id="info-contacto" style="display:flex;flex-direction:column;gap:10px"></div>
+            </div>
+          </div>
+
+          <!-- Trabajo -->
+          <div class="card" id="card-trabajo" style="display:none">
+            <div class="card-header"><h4 style="font-size:.9rem">Trabajo</h4></div>
+            <div class="card-body" style="padding-top:12px">
+              <div id="info-trabajo" style="display:flex;flex-direction:column;gap:10px"></div>
+            </div>
+          </div>
+
+          <!-- Referencias -->
+          <div class="card" id="card-referencias" style="display:none">
+            <div class="card-header"><h4 style="font-size:.9rem">Referencias</h4></div>
+            <div class="card-body" style="padding-top:12px">
+              <div id="info-referencias" style="display:flex;flex-direction:column;gap:10px"></div>
+            </div>
+          </div>
+
+          <!-- Observaciones -->
+          <div class="card" id="card-obs" style="display:none">
+            <div class="card-header"><h4 style="font-size:.9rem">Observaciones</h4></div>
+            <div class="card-body">
+              <p id="texto-obs" style="font-size:.85rem;color:var(--gray-600);line-height:1.6"></p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Columna derecha: préstamos y pagos -->
+        <div style="display:flex;flex-direction:column;gap:16px">
+
+          <!-- Resumen financiero -->
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px">
+            <div class="card" style="border-left:4px solid var(--cobrika-primary)">
+              <div class="card-body" style="padding:16px">
+                <div style="font-size:.75rem;color:var(--gray-500);margin-bottom:4px">Total prestado</div>
+                <div id="fin-prestado" style="font-size:1.2rem;font-weight:800;color:var(--cobrika-primary)">—</div>
+              </div>
+            </div>
+            <div class="card" style="border-left:4px solid var(--cobrika-success)">
+              <div class="card-body" style="padding:16px">
+                <div style="font-size:.75rem;color:var(--gray-500);margin-bottom:4px">Total cobrado</div>
+                <div id="fin-cobrado" style="font-size:1.2rem;font-weight:800;color:var(--cobrika-success)">—</div>
+              </div>
+            </div>
+            <div class="card" style="border-left:4px solid var(--cobrika-warning)">
+              <div class="card-body" style="padding:16px">
+                <div style="font-size:.75rem;color:var(--gray-500);margin-bottom:4px">Saldo pendiente</div>
+                <div id="fin-saldo" style="font-size:1.2rem;font-weight:800;color:var(--cobrika-warning)">—</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Préstamos -->
+          <div class="card">
+            <div class="card-header">
+              <h4 style="font-size:.95rem">Préstamos</h4>
+              <a id="btn-nuevo-prestamo" href="#" class="btn btn-primary btn-sm">+ Nuevo préstamo</a>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Capital</th>
+                    <th>Interés</th>
+                    <th>Cuotas</th>
+                    <th>Saldo</th>
+                    <th>Vence</th>
+                    <th>Estado</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="tbody-prestamos">
+                  <tr><td colspan="8" style="text-align:center;padding:30px;color:var(--gray-400)">Sin préstamos registrados</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Últimos pagos -->
+          <div class="card">
+            <div class="card-header">
+              <h4 style="font-size:.95rem">Últimos pagos</h4>
+              <span id="pagos-count" class="badge badge-gray">0</span>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Fecha</th>
+                    <th>Monto</th>
+                    <th>Método</th>
+                    <th>Referencia</th>
+                    <th>Estado</th>
+                  </tr>
+                </thead>
+                <tbody id="tbody-pagos">
+                  <tr><td colspan="5" style="text-align:center;padding:30px;color:var(--gray-400)">Sin pagos registrados</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Loading -->
+    <div id="loading" style="display:flex;align-items:center;justify-content:center;height:60vh;flex-direction:column;gap:14px;color:var(--gray-400)">
+      <div class="spinner spinner-dark" style="width:36px;height:36px;border-width:3px"></div>
+      <p>Cargando perfil...</p>
+    </div>
+
+  </main>
+</div>
+<div id="toast-container"></div>
+
+<style>
+.info-row { display:flex; align-items:flex-start; gap:10px; }
+.info-icon { width:32px; height:32px; border-radius:8px; background:var(--gray-100); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.info-icon svg { width:15px; height:15px; color:var(--gray-500); }
+.info-label { font-size:.72rem; color:var(--gray-400); }
+.info-value { font-size:.85rem; font-weight:500; color:var(--gray-800); }
+@media (max-width:900px) {
+  .page-content > div { grid-template-columns:1fr !important; }
+  .page-content > div > div:first-child > div:first-child > div { grid-template-columns:1fr !important; }
+}
+</style>
+
+<script type="module">
+import { requireAdmin, logout } from '../../shared/auth.js';
+import { supabase }             from '../../shared/supabase-client.js';
+import { formatMoney, formatFecha, iniciales, badgeCliente, badgePrestamo, formatTel, linkWhatsApp, toast, confirmar } from '../../shared/helpers.js';
+
+const usuario  = await requireAdmin();
+if (!usuario) throw new Error('No auth');
+const tenantId = usuario.perfil.tenant_id;
+
+// Mobile sidebar
+const sidebar = document.getElementById('sidebar');
+const overlay = document.getElementById('sidebar-overlay');
+document.getElementById('sidebar-toggle').addEventListener('click', () => { sidebar.classList.toggle('open'); overlay.classList.toggle('open'); });
+overlay.addEventListener('click', () => { sidebar.classList.remove('open'); overlay.classList.remove('open'); });
+document.getElementById('logout-btn').addEventListener('click', async () => { if (await confirmar('¿Cerrar sesión?')) logout(); });
+
+const params     = new URLSearchParams(location.search);
+const clienteId  = params.get('id');
+if (!clienteId) { window.location.href = 'index.html'; }
+
+// ── Cargar datos ──────────────────────────────────────────
+const [{ data: cliente }, { data: prestamos }, { data: pagos }] = await Promise.all([
+  supabase.from('clientes').select('*').eq('id', clienteId).eq('tenant_id', tenantId).single(),
+  supabase.from('prestamos').select('*').eq('cliente_id', clienteId).eq('tenant_id', tenantId).order('created_at', { ascending: false }),
+  supabase.from('pagos').select('*').eq('cliente_id', clienteId).eq('tenant_id', tenantId).order('fecha_pago', { ascending: false }).limit(20),
+]);
+
+if (!cliente) { toast('Cliente no encontrado', 'error'); setTimeout(() => window.location.href = 'index.html', 1500); }
+
+// ── Render perfil ─────────────────────────────────────────
+document.getElementById('topbar-nombre').textContent = cliente.nombre;
+document.getElementById('btn-editar').href = `nuevo.html?id=${clienteId}`;
+document.getElementById('btn-nuevo-prestamo').href = `../prestamos/nuevo.html?cliente_id=${clienteId}`;
+
+// Foto / avatar
+const fotoEl = document.getElementById('perfil-foto');
+if (cliente.foto_url) {
+  fotoEl.innerHTML = `<img src="${cliente.foto_url}" style="width:100%;height:100%;object-fit:cover">`;
+} else {
+  fotoEl.textContent = iniciales(cliente.nombre);
+}
+
+document.getElementById('perfil-nombre').textContent = cliente.nombre;
+document.getElementById('perfil-estado').innerHTML   = badgeCliente(cliente.estado);
+
+// Score
+const score = cliente.score || 50;
+const scoreColor = score >= 70 ? '#10b981' : score >= 40 ? '#f59e0b' : '#ef4444';
+document.getElementById('score-bar').style.width      = score + '%';
+document.getElementById('score-bar').style.background = scoreColor;
+document.getElementById('score-num').textContent      = score + '/100';
+document.getElementById('score-num').style.color      = scoreColor;
+
+// Estadísticas
+const prests = prestamos || [];
+document.getElementById('stat-prestamos').textContent = prests.length;
+document.getElementById('stat-pagados').textContent   = prests.filter(p => p.estado === 'saldado').length;
+document.getElementById('stat-mora').textContent      = prests.filter(p => p.estado === 'en_mora').length;
+
+// Resumen financiero
+const totalPrestado  = prests.reduce((s,p) => s + Number(p.monto_capital||0), 0);
+const totalCobrado   = prests.reduce((s,p) => s + Number(p.total_pagado||0), 0);
+const saldoPendiente = prests.reduce((s,p) => s + Number(p.saldo_total||0), 0);
+document.getElementById('fin-prestado').textContent = formatMoney(totalPrestado);
+document.getElementById('fin-cobrado').textContent  = formatMoney(totalCobrado);
+document.getElementById('fin-saldo').textContent    = formatMoney(saldoPendiente);
+
+// WhatsApp button
+if (cliente.telefono) {
+  const btnWA = document.getElementById('btn-whatsapp');
+  btnWA.style.display = 'inline-flex';
+  btnWA.addEventListener('click', () => {
+    window.open(linkWhatsApp(cliente.telefono, `Hola ${cliente.nombre}, le contactamos de parte de su prestamista.`), '_blank');
+  });
+}
+
+// Info de contacto
+function infoRow(iconSvg, label, value) {
+  if (!value) return '';
+  return `<div class="info-row">
+    <div class="info-icon">${iconSvg}</div>
+    <div><div class="info-label">${label}</div><div class="info-value">${value}</div></div>
+  </div>`;
+}
+const iconTel  = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>`;
+const iconMail = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>`;
+const iconLoc  = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>`;
+const iconId   = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5zm6-10.125a1.875 1.875 0 11-3.75 0 1.875 1.875 0 013.75 0zm1.294 6.336a6.721 6.721 0 01-3.17.789 6.721 6.721 0 01-3.168-.789 3.376 3.376 0 016.338 0z"/></svg>`;
+
+document.getElementById('info-contacto').innerHTML = [
+  infoRow(iconId,   'Cédula',          cliente.cedula),
+  infoRow(iconTel,  'Teléfono',        formatTel(cliente.telefono)),
+  infoRow(iconTel,  'Tel. alternativo', formatTel(cliente.telefono_alt)),
+  infoRow(iconMail, 'Correo',          cliente.email),
+  infoRow(iconLoc,  'Dirección',       [cliente.direccion, cliente.barrio, cliente.ciudad].filter(Boolean).join(', ')),
+].join('');
+
+// Trabajo
+if (cliente.trabajo || cliente.empleador || cliente.salario_aprox) {
+  document.getElementById('card-trabajo').style.display = '';
+  const iconWork = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38m0 0A2.18 2.18 0 013 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 013.413-.387m7.5 0V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25v.894m7.5 0a48.667 48.667 0 00-7.5 0"/></svg>`;
+  const iconMoney= `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>`;
+  document.getElementById('info-trabajo').innerHTML = [
+    infoRow(iconWork,  'Ocupación',  cliente.trabajo),
+    infoRow(iconWork,  'Empleador',  cliente.empleador),
+    infoRow(iconMoney, 'Salario aprox.', cliente.salario_aprox ? formatMoney(cliente.salario_aprox) : null),
+  ].join('');
+}
+
+// Referencias
+if (cliente.referencia1_nombre || cliente.referencia2_nombre) {
+  document.getElementById('card-referencias').style.display = '';
+  const iconRef = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>`;
+  let refs = '';
+  if (cliente.referencia1_nombre) refs += infoRow(iconRef, cliente.referencia1_nombre, formatTel(cliente.referencia1_tel) || 'Sin teléfono');
+  if (cliente.referencia2_nombre) refs += infoRow(iconRef, cliente.referencia2_nombre, formatTel(cliente.referencia2_tel) || 'Sin teléfono');
+  document.getElementById('info-referencias').innerHTML = refs;
+}
+
+// Observaciones
+if (cliente.observaciones) {
+  document.getElementById('card-obs').style.display = '';
+  document.getElementById('texto-obs').textContent  = cliente.observaciones;
+}
+
+// ── Tabla de préstamos ────────────────────────────────────
+if (prests.length > 0) {
+  document.getElementById('tbody-prestamos').innerHTML = prests.map(p => `
+    <tr>
+      <td style="font-size:.8rem;color:var(--gray-500)">#${p.numero || '—'}</td>
+      <td class="td-num">${formatMoney(p.monto_capital)}</td>
+      <td style="font-size:.82rem">${(Number(p.tasa_interes)*100).toFixed(0)}% ${p.tipo_interes === 'fijo' ? 'fijo' : 'reducido'}</td>
+      <td style="text-align:center;font-size:.82rem">${p.cuotas_pagadas||0}/${p.num_cuotas}</td>
+      <td class="td-num" style="color:${Number(p.saldo_total) > 0 ? 'var(--cobrika-warning)' : 'var(--cobrika-success)'}">${formatMoney(p.saldo_total||0)}</td>
+      <td style="font-size:.82rem">${formatFecha(p.fecha_vencimiento)}</td>
+      <td>${badgePrestamo(p.estado)}</td>
+      <td>
+        <a href="../prestamos/detalle.html?id=${p.id}" class="btn btn-secondary btn-sm">Ver</a>
+      </td>
+    </tr>`).join('');
+}
+
+// ── Tabla de pagos ────────────────────────────────────────
+const pags = pagos || [];
+document.getElementById('pagos-count').textContent = pags.length;
+if (pags.length > 0) {
+  document.getElementById('tbody-pagos').innerHTML = pags.map(p => `
+    <tr>
+      <td style="font-size:.82rem">${formatFecha(p.fecha_pago)}</td>
+      <td class="td-num" style="font-weight:700;color:var(--cobrika-success)">${formatMoney(p.monto)}</td>
+      <td style="font-size:.82rem;text-transform:capitalize">${p.metodo}</td>
+      <td style="font-size:.78rem;color:var(--gray-500)">${p.referencia || '—'}</td>
+      <td><span class="badge ${p.estado === 'confirmado' ? 'badge-success' : p.estado === 'anulado' ? 'badge-danger' : 'badge-warning'}">${p.estado}</span></td>
+    </tr>`).join('');
+}
+
+// Mostrar contenido
+document.getElementById('loading').style.display   = 'none';
+document.getElementById('contenido').style.display = '';
+</script>
+</body>
+</html>
