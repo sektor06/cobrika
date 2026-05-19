@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vouchers — Cobrika</title>
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/admin.css">
+</head>
+<body>
+<div class="admin-layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="sidebar-logo-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75"/></svg></div>
+      <div><div class="sidebar-logo-text">Cobrika</div><div class="sidebar-logo-sub">Panel administrativo</div></div>
+    </div>
+    <div class="sidebar-tenant"><div class="sidebar-tenant-label">Negocio</div><div class="sidebar-tenant-name" id="admin-tenant">—</div></div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Principal</div>
+      <a href="../dashboard/index.html" class="nav-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z"/></svg>Dashboard</a>
+      <a href="../clientes/index.html" class="nav-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"/></svg>Clientes</a>
+      <a href="../prestamos/index.html" class="nav-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Préstamos</a>
+      <a href="index.html" class="nav-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z"/></svg>Pagos</a>
+      <div class="nav-section-label">Operaciones</div>
+      <a href="vouchers.html" class="nav-item active"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/></svg>Vouchers <span class="badge-nav" id="badge-pend" style="display:none">0</span></a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user" id="logout-btn">
+        <div class="avatar" id="admin-avatar">A</div>
+        <div class="sidebar-user-info"><div class="sidebar-user-name" id="admin-nombre">Andy Polanco</div><div class="sidebar-user-role">Administrador</div></div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  <main class="admin-main">
+    <div class="topbar">
+      <div class="topbar-left">
+        <button class="sidebar-toggle" id="sidebar-toggle"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg></button>
+        <div>
+          <div class="topbar-title">Vouchers de pago</div>
+          <div class="topbar-breadcrumb">Comprobantes de transferencia</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-content">
+
+      <!-- Tabs de estado -->
+      <div style="display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap">
+        <button class="tab-voucher active" data-estado="pendiente">
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--cobrika-warning);display:inline-block;margin-right:6px"></span>
+          Pendientes <span class="tab-count" id="cnt-pend">0</span>
+        </button>
+        <button class="tab-voucher" data-estado="aprobado">
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--cobrika-success);display:inline-block;margin-right:6px"></span>
+          Aprobados <span class="tab-count" id="cnt-apro">0</span>
+        </button>
+        <button class="tab-voucher" data-estado="rechazado">
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--cobrika-danger);display:inline-block;margin-right:6px"></span>
+          Rechazados <span class="tab-count" id="cnt-rech">0</span>
+        </button>
+      </div>
+
+      <!-- Grid de vouchers -->
+      <div id="grid-vouchers" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px"></div>
+
+      <!-- Empty state -->
+      <div id="empty-state" style="display:none;text-align:center;padding:60px 20px;color:var(--gray-400)">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:48px;height:48px;margin:0 auto 12px;opacity:.3;display:block"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/></svg>
+        <p id="empty-texto">Sin vouchers pendientes</p>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<!-- Modal ver imagen ampliada -->
+<div id="modal-imagen" class="modal-overlay" style="display:none;background:rgba(0,0,0,.85)" onclick="this.style.display='none'">
+  <img id="img-ampliada" src="" style="max-width:90vw;max-height:90vh;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.5)" onclick="event.stopPropagation()">
+</div>
+
+<!-- Modal rechazar -->
+<div id="modal-rechazo" class="modal-overlay" style="display:none">
+  <div class="modal" style="max-width:400px">
+    <div class="modal-header"><h3 style="font-size:1rem">Motivo del rechazo</h3></div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">¿Por qué se rechaza este voucher?</label>
+        <select class="form-control" id="motivo-select">
+          <option value="monto_incorrecto">Monto incorrecto</option>
+          <option value="imagen_borrosa">Imagen borrosa o ilegible</option>
+          <option value="referencia_invalida">Referencia bancaria inválida</option>
+          <option value="duplicado">Voucher duplicado</option>
+          <option value="otro">Otro</option>
+        </select>
+      </div>
+      <div class="form-group" style="margin-top:12px">
+        <label class="form-label">Nota adicional (opcional)</label>
+        <textarea class="form-control" id="motivo-nota" rows="3" placeholder="Explica al cliente por qué fue rechazado..."></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="document.getElementById('modal-rechazo').style.display='none'">Cancelar</button>
+      <button class="btn btn-danger" id="btn-confirmar-rechazo">Rechazar voucher</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast-container"></div>
+
+<style>
+.tab-voucher { display:inline-flex;align-items:center;padding:7px 16px;border-radius:100px;border:1.5px solid var(--gray-200);background:#fff;font-size:.82rem;font-weight:500;color:var(--gray-600);cursor:pointer;transition:all .15s; }
+.tab-voucher.active { border-color:var(--cobrika-primary);background:var(--cobrika-primary-light);color:var(--cobrika-primary-dark); }
+.tab-count { background:var(--gray-100);color:var(--gray-600);border-radius:100px;padding:1px 7px;font-size:.72rem;font-weight:700;margin-left:4px; }
+.tab-voucher.active .tab-count { background:var(--cobrika-primary);color:#fff; }
+
+.voucher-card { background:#fff;border-radius:var(--radius-lg);border:1.5px solid var(--gray-200);overflow:hidden;transition:box-shadow .2s; }
+.voucher-card:hover { box-shadow:var(--shadow); }
+.voucher-img-wrap { position:relative;height:200px;background:var(--gray-100);overflow:hidden;cursor:zoom-in; }
+.voucher-img-wrap img { width:100%;height:100%;object-fit:cover; }
+.voucher-img-placeholder { display:flex;align-items:center;justify-content:center;height:100%;color:var(--gray-300); }
+.ocr-badge { position:absolute;top:8px;right:8px;background:rgba(0,0,0,.7);color:#fff;font-size:.7rem;padding:3px 8px;border-radius:100px;display:flex;align-items:center;gap:4px; }
+.voucher-body { padding:16px; }
+.voucher-cliente { font-weight:700;font-size:.95rem;color:var(--gray-900);margin-bottom:2px; }
+.voucher-prestamo { font-size:.78rem;color:var(--cobrika-primary);margin-bottom:12px; }
+.voucher-datos { display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px; }
+.voucher-dato { background:var(--gray-50);border-radius:8px;padding:8px 10px; }
+.voucher-dato-label { font-size:.68rem;color:var(--gray-400);text-transform:uppercase;letter-spacing:.04em; }
+.voucher-dato-val { font-size:.875rem;font-weight:600;color:var(--gray-800);margin-top:2px; }
+.voucher-dato-val.ocr { color:var(--cobrika-primary); }
+.voucher-comentario { font-size:.82rem;color:var(--gray-600);font-style:italic;margin-bottom:12px;padding:8px;background:var(--cobrika-primary-light);border-radius:6px; }
+.voucher-acciones { display:flex;gap:8px; }
+.voucher-tiempo { font-size:.72rem;color:var(--gray-400);margin-bottom:10px; }
+</style>
+
+<script type="module">
+import { requireAdmin, logout } from '../../shared/auth.js';
+import { supabase }             from '../../shared/supabase-client.js';
+import { formatMoney, formatFecha, toast, confirmar } from '../../shared/helpers.js';
+
+const usuario  = await requireAdmin();
+if (!usuario) throw new Error('No auth');
+const tenantId = usuario.perfil.tenant_id;
+
+const sidebar = document.getElementById('sidebar');
+const overlay = document.getElementById('sidebar-overlay');
+document.getElementById('sidebar-toggle').addEventListener('click', () => { sidebar.classList.toggle('open'); overlay.classList.toggle('open'); });
+overlay.addEventListener('click', () => { sidebar.classList.remove('open'); overlay.classList.remove('open'); });
+document.getElementById('logout-btn').addEventListener('click', async () => { if (await confirmar('¿Cerrar sesión?')) logout(); });
+
+let todos = [], estadoActivo = 'pendiente', voucherRechazarId = null;
+
+async function cargar() {
+  const { data } = await supabase
+    .from('vouchers')
+    .select('*, clientes(nombre,telefono), prestamos(numero,monto_capital,saldo_total)')
+    .eq('tenant_id', tenantId)
+    .order('created_at', { ascending: false });
+
+  todos = data || [];
+
+  const pend = todos.filter(v => v.estado === 'pendiente').length;
+  const apro = todos.filter(v => v.estado === 'aprobado').length;
+  const rech = todos.filter(v => v.estado === 'rechazado').length;
+
+  document.getElementById('cnt-pend').textContent = pend;
+  document.getElementById('cnt-apro').textContent = apro;
+  document.getElementById('cnt-rech').textContent = rech;
+
+  if (pend > 0) {
+    document.getElementById('badge-pend').textContent    = pend;
+    document.getElementById('badge-pend').style.display = 'inline';
+  }
+
+  renderGrid();
+}
+
+function renderGrid() {
+  const lista = todos.filter(v => v.estado === estadoActivo);
+  const grid  = document.getElementById('grid-vouchers');
+  const empty = document.getElementById('empty-state');
+
+  if (!lista.length) {
+    grid.innerHTML = '';
+    empty.style.display = '';
+    document.getElementById('empty-texto').textContent =
+      estadoActivo === 'pendiente' ? 'Sin vouchers pendientes — todo al día ✓' :
+      estadoActivo === 'aprobado'  ? 'Sin vouchers aprobados aún' :
+      'Sin vouchers rechazados';
+    return;
+  }
+
+  empty.style.display = 'none';
+
+  grid.innerHTML = lista.map(v => {
+    const monto   = v.ocr_monto || v.monto_declarado;
+    const ref     = v.ocr_referencia || v.referencia;
+    const banco   = v.ocr_banco || v.banco;
+    const fecha   = v.ocr_fecha || v.fecha_transaccion;
+    const tieneOCR = v.ocr_procesado && (v.ocr_monto || v.ocr_referencia);
+    const hace    = tiempoRelativo(v.created_at);
+
+    return `
+    <div class="voucher-card" id="vc-${v.id}">
+      <div class="voucher-img-wrap" onclick="ampliarImagen('${v.imagen_url}')">
+        ${v.imagen_url
+          ? `<img src="${v.imagen_url}" alt="Voucher" loading="lazy">`
+          : `<div class="voucher-img-placeholder"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:48px;height:48px"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/></svg></div>`
+        }
+        ${tieneOCR ? `<div class="ocr-badge">🤖 OCR ${v.ocr_confianza ? Math.round(v.ocr_confianza*100)+'%' : ''}</div>` : ''}
+      </div>
+      <div class="voucher-body">
+        <div class="voucher-cliente">${v.clientes?.nombre || '—'}</div>
+        <div class="voucher-prestamo">
+          <a href="../prestamos/detalle.html?id=${v.prestamo_id}" style="color:var(--cobrika-primary)">
+            Préstamo #${v.prestamos?.numero||'—'} · Saldo: ${formatMoney(v.prestamos?.saldo_total||0)}
+          </a>
+        </div>
+        <div class="voucher-tiempo">Enviado ${hace}</div>
+
+        <div class="voucher-datos">
+          <div class="voucher-dato">
+            <div class="voucher-dato-label">Monto</div>
+            <div class="voucher-dato-val ${tieneOCR&&v.ocr_monto?'ocr':''}">${monto ? formatMoney(monto) : '—'}</div>
+          </div>
+          <div class="voucher-dato">
+            <div class="voucher-dato-label">Banco</div>
+            <div class="voucher-dato-val">${banco || '—'}</div>
+          </div>
+          <div class="voucher-dato">
+            <div class="voucher-dato-label">Referencia</div>
+            <div class="voucher-dato-val ${tieneOCR&&v.ocr_referencia?'ocr':''}" style="font-size:.78rem">${ref || '—'}</div>
+          </div>
+          <div class="voucher-dato">
+            <div class="voucher-dato-label">Fecha transf.</div>
+            <div class="voucher-dato-val" style="font-size:.78rem">${fecha ? formatFecha(fecha) : '—'}</div>
+          </div>
+        </div>
+
+        ${v.comentario ? `<div class="voucher-comentario">"${v.comentario}"</div>` : ''}
+
+        ${v.motivo_rechazo ? `<div style="padding:8px;background:var(--cobrika-danger-bg);border-radius:6px;font-size:.8rem;color:var(--cobrika-danger);margin-bottom:12px">Rechazado: ${v.motivo_rechazo}</div>` : ''}
+
+        ${estadoActivo === 'pendiente' ? `
+        <div class="voucher-acciones">
+          <button class="btn btn-success" style="flex:1;font-size:.85rem" onclick="aprobar('${v.id}','${monto||0}',this)">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:15px;height:15px"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+            Aprobar
+          </button>
+          <button class="btn btn-danger" style="flex:1;font-size:.85rem" onclick="iniciarRechazo('${v.id}')">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:15px;height:15px"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+            Rechazar
+          </button>
+        </div>` : `
+        <div style="display:flex;gap:8px">
+          <a href="../prestamos/detalle.html?id=${v.prestamo_id}" class="btn btn-secondary btn-sm btn-full">Ver préstamo</a>
+        </div>`}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ── Aprobar voucher ───────────────────────────────────────
+window.aprobar = async (id, montoStr, btn) => {
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner" style="border-color:rgba(255,255,255,.3);border-top-color:#fff"></span>';
+
+  const voucher = todos.find(v => v.id === id);
+  const monto   = parseFloat(montoStr) || voucher?.monto_declarado || 0;
+
+  try {
+    // 1. Marcar voucher como aprobado
+    await supabase.from('vouchers').update({
+      estado:         'aprobado',
+      revisado_por:   usuario.id,
+      fecha_revision: new Date().toISOString(),
+    }).eq('id', id);
+
+    // 2. Crear pago automáticamente si hay monto
+    if (monto > 0 && voucher) {
+      await supabase.from('pagos').insert({
+        tenant_id:     tenantId,
+        prestamo_id:   voucher.prestamo_id,
+        cliente_id:    voucher.cliente_id,
+        monto,
+        monto_capital: monto * 0.7,
+        monto_interes: monto * 0.3,
+        monto_mora:    0,
+        metodo:        'transferencia',
+        referencia:    voucher.ocr_referencia || voucher.referencia,
+        fecha_pago:    voucher.ocr_fecha || new Date().toISOString().split('T')[0],
+        estado:        'confirmado',
+        registrado_por: usuario.id,
+      });
+    }
+
+    toast('Voucher aprobado y pago registrado', 'success');
+    document.getElementById(`vc-${id}`)?.remove();
+    await cargar();
+  } catch (err) {
+    toast('Error: ' + err.message, 'error');
+    btn.disabled = false;
+  }
+};
+
+// ── Rechazar voucher ──────────────────────────────────────
+window.iniciarRechazo = (id) => {
+  voucherRechazarId = id;
+  document.getElementById('motivo-nota').value   = '';
+  document.getElementById('modal-rechazo').style.display = 'flex';
+};
+
+document.getElementById('btn-confirmar-rechazo').addEventListener('click', async () => {
+  if (!voucherRechazarId) return;
+  const motivo = document.getElementById('motivo-select').value;
+  const nota   = document.getElementById('motivo-nota').value.trim();
+  const texto  = nota ? `${motivo}: ${nota}` : motivo;
+
+  const { error } = await supabase.from('vouchers').update({
+    estado:         'rechazado',
+    revisado_por:   usuario.id,
+    fecha_revision: new Date().toISOString(),
+    motivo_rechazo: texto,
+  }).eq('id', voucherRechazarId);
+
+  document.getElementById('modal-rechazo').style.display = 'none';
+
+  if (!error) {
+    toast('Voucher rechazado', 'info');
+    await cargar();
+  } else {
+    toast('Error: ' + error.message, 'error');
+  }
+});
+
+// ── Ver imagen ampliada ───────────────────────────────────
+window.ampliarImagen = (url) => {
+  if (!url) return;
+  document.getElementById('img-ampliada').src        = url;
+  document.getElementById('modal-imagen').style.display = 'flex';
+};
+
+// ── Tabs ──────────────────────────────────────────────────
+document.querySelectorAll('.tab-voucher').forEach(tab => {
+  tab.addEventListener('click', () => {
+    estadoActivo = tab.dataset.estado;
+    document.querySelectorAll('.tab-voucher').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    renderGrid();
+  });
+});
+
+// ── Tiempo relativo ───────────────────────────────────────
+function tiempoRelativo(fecha) {
+  const diff = Date.now() - new Date(fecha).getTime();
+  const mins = Math.floor(diff / 60000);
+  if (mins < 1)  return 'hace un momento';
+  if (mins < 60) return `hace ${mins} min`;
+  const hrs = Math.floor(mins / 60);
+  if (hrs < 24)  return `hace ${hrs} hora${hrs>1?'s':''}`;
+  const dias = Math.floor(hrs / 24);
+  return `hace ${dias} día${dias>1?'s':''}`;
+}
+
+// ── Realtime: nuevos vouchers ─────────────────────────────
+supabase.channel('vouchers-admin')
+  .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'vouchers', filter: `tenant_id=eq.${tenantId}` },
+    () => { toast('Nuevo voucher recibido', 'info'); cargar(); })
+  .subscribe();
+
+await cargar();
+</script>
+</body>
+</html>

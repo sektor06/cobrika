@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pagos — Cobrika</title>
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/admin.css">
+</head>
+<body>
+<div class="admin-layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="sidebar-logo-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75"/></svg></div>
+      <div><div class="sidebar-logo-text">Cobrika</div><div class="sidebar-logo-sub">Panel administrativo</div></div>
+    </div>
+    <div class="sidebar-tenant"><div class="sidebar-tenant-label">Negocio</div><div class="sidebar-tenant-name" id="admin-tenant">—</div></div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Principal</div>
+      <a href="../dashboard/index.html" class="nav-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z"/></svg>Dashboard</a>
+      <a href="../clientes/index.html" class="nav-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"/></svg>Clientes</a>
+      <a href="../prestamos/index.html" class="nav-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Préstamos</a>
+      <a href="index.html" class="nav-item active"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z"/></svg>Pagos</a>
+      <div class="nav-section-label">Operaciones</div>
+      <a href="vouchers.html" class="nav-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/></svg>Vouchers</a>
+      <div class="nav-section-label">Reportes</div>
+      <a href="../reportes/index.html" class="nav-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"/></svg>Reportes</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user" id="logout-btn">
+        <div class="avatar" id="admin-avatar">A</div>
+        <div class="sidebar-user-info"><div class="sidebar-user-name" id="admin-nombre">Andy Polanco</div><div class="sidebar-user-role">Administrador</div></div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  <main class="admin-main">
+    <div class="topbar">
+      <div class="topbar-left">
+        <button class="sidebar-toggle" id="sidebar-toggle"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg></button>
+        <div>
+          <div class="topbar-title">Pagos</div>
+          <div class="topbar-breadcrumb">Historial de cobros</div>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <a href="vouchers.html" class="btn btn-secondary btn-sm">Ver vouchers</a>
+      </div>
+    </div>
+
+    <div class="page-content">
+
+      <!-- KPIs del día -->
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px">
+        <div class="card" style="border-top:3px solid var(--cobrika-success)">
+          <div class="card-body" style="padding:16px">
+            <div style="font-size:.72rem;color:var(--gray-500);margin-bottom:4px">Cobrado hoy</div>
+            <div id="kpi-hoy" style="font-size:1.3rem;font-weight:800;color:var(--cobrika-success)">—</div>
+            <div id="kpi-hoy-cant" style="font-size:.75rem;color:var(--gray-400);margin-top:2px">0 pagos</div>
+          </div>
+        </div>
+        <div class="card" style="border-top:3px solid var(--cobrika-primary)">
+          <div class="card-body" style="padding:16px">
+            <div style="font-size:.72rem;color:var(--gray-500);margin-bottom:4px">Este mes</div>
+            <div id="kpi-mes" style="font-size:1.3rem;font-weight:800;color:var(--cobrika-primary)">—</div>
+            <div id="kpi-mes-cant" style="font-size:.75rem;color:var(--gray-400);margin-top:2px">0 pagos</div>
+          </div>
+        </div>
+        <div class="card" style="border-top:3px solid var(--cobrika-warning)">
+          <div class="card-body" style="padding:16px">
+            <div style="font-size:.72rem;color:var(--gray-500);margin-bottom:4px">Transferencias</div>
+            <div id="kpi-transf" style="font-size:1.3rem;font-weight:800;color:var(--cobrika-warning)">—</div>
+            <div style="font-size:.75rem;color:var(--gray-400);margin-top:2px">Este mes</div>
+          </div>
+        </div>
+        <div class="card" style="border-top:3px solid var(--cobrika-accent)">
+          <div class="card-body" style="padding:16px">
+            <div style="font-size:.72rem;color:var(--gray-500);margin-bottom:4px">Mora cobrada</div>
+            <div id="kpi-mora" style="font-size:1.3rem;font-weight:800;color:var(--cobrika-accent)">—</div>
+            <div style="font-size:.75rem;color:var(--gray-400);margin-top:2px">Este mes</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Filtros -->
+      <div class="card" style="margin-bottom:16px">
+        <div class="card-body" style="padding:14px 16px">
+          <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+            <div style="position:relative;flex:1;min-width:200px">
+              <svg style="position:absolute;left:12px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--gray-400);pointer-events:none" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
+              <input class="form-control" type="search" id="buscar" placeholder="Buscar cliente..." style="padding-left:36px">
+            </div>
+            <select class="form-control" id="filtro-metodo" style="width:auto;min-width:140px">
+              <option value="">Todos los métodos</option>
+              <option value="efectivo">Efectivo</option>
+              <option value="transferencia">Transferencia</option>
+              <option value="cheque">Cheque</option>
+            </select>
+            <input class="form-control" type="date" id="filtro-desde" style="width:auto" title="Desde">
+            <input class="form-control" type="date" id="filtro-hasta" style="width:auto" title="Hasta">
+            <button class="btn btn-secondary btn-sm" id="btn-hoy">Hoy</button>
+            <button class="btn btn-secondary btn-sm" id="btn-mes">Este mes</button>
+            <button class="btn btn-secondary btn-sm" id="btn-limpiar">Limpiar</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabla -->
+      <div class="card">
+        <div class="card-header">
+          <h4 style="font-size:.95rem">Historial de pagos</h4>
+          <span id="total-label" style="font-size:.82rem;color:var(--gray-500)">0 pagos</span>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>Cliente</th>
+                <th>Préstamo</th>
+                <th>Monto</th>
+                <th>Capital</th>
+                <th>Interés</th>
+                <th>Mora</th>
+                <th>Método</th>
+                <th>Referencia</th>
+                <th>Estado</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="tbody-pagos">
+              <tr><td colspan="11" style="text-align:center;padding:40px;color:var(--gray-400)">Cargando pagos...</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card-footer" style="display:flex;align-items:center;justify-content:space-between">
+          <div style="display:flex;gap:16px">
+            <span id="pag-info" style="font-size:.82rem;color:var(--gray-500)">—</span>
+            <span id="total-monto" style="font-size:.82rem;font-weight:700;color:var(--cobrika-success)"></span>
+          </div>
+          <div style="display:flex;gap:6px">
+            <button class="btn btn-secondary btn-sm" id="btn-ant" disabled>← Anterior</button>
+            <button class="btn btn-secondary btn-sm" id="btn-sig" disabled>Siguiente →</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+<div id="toast-container"></div>
+
+<script type="module">
+import { requireAdmin, logout } from '../../shared/auth.js';
+import { supabase }             from '../../shared/supabase-client.js';
+import { formatMoney, formatFecha, debounce, toast, confirmar } from '../../shared/helpers.js';
+
+const usuario  = await requireAdmin();
+if (!usuario) throw new Error('No auth');
+const tenantId = usuario.perfil.tenant_id;
+
+const sidebar = document.getElementById('sidebar');
+const overlay = document.getElementById('sidebar-overlay');
+document.getElementById('sidebar-toggle').addEventListener('click', () => { sidebar.classList.toggle('open'); overlay.classList.toggle('open'); });
+overlay.addEventListener('click', () => { sidebar.classList.remove('open'); overlay.classList.remove('open'); });
+document.getElementById('logout-btn').addEventListener('click', async () => { if (await confirmar('¿Cerrar sesión?')) logout(); });
+
+let todos = [], filtrados = [], pagina = 0;
+const POR_PAG = 25;
+let busqueda = '', metodo = '', desde = '', hasta = '';
+
+// Fechas rápidas
+const hoy = new Date().toISOString().split('T')[0];
+const mesInicio = new Date(); mesInicio.setDate(1);
+const mesInicioStr = mesInicio.toISOString().split('T')[0];
+
+document.getElementById('btn-hoy').addEventListener('click', () => {
+  document.getElementById('filtro-desde').value = hoy;
+  document.getElementById('filtro-hasta').value = hoy;
+  desde = hasta = hoy; aplicarFiltros();
+});
+document.getElementById('btn-mes').addEventListener('click', () => {
+  document.getElementById('filtro-desde').value = mesInicioStr;
+  document.getElementById('filtro-hasta').value = hoy;
+  desde = mesInicioStr; hasta = hoy; aplicarFiltros();
+});
+document.getElementById('btn-limpiar').addEventListener('click', () => {
+  document.getElementById('buscar').value = '';
+  document.getElementById('filtro-metodo').value = '';
+  document.getElementById('filtro-desde').value = '';
+  document.getElementById('filtro-hasta').value = '';
+  busqueda = metodo = desde = hasta = ''; aplicarFiltros();
+});
+
+async function cargar() {
+  const { data } = await supabase
+    .from('pagos')
+    .select('*, clientes(nombre), prestamos(numero)')
+    .eq('tenant_id', tenantId)
+    .order('fecha_pago', { ascending: false })
+    .order('created_at', { ascending: false });
+
+  todos = data || [];
+
+  // KPIs
+  const pagosHoy  = todos.filter(p => p.fecha_pago === hoy && p.estado === 'confirmado');
+  const pagosMes  = todos.filter(p => p.fecha_pago >= mesInicioStr && p.estado === 'confirmado');
+  const transf    = pagosMes.filter(p => p.metodo === 'transferencia');
+  const mora      = pagosMes.reduce((s,p) => s + Number(p.monto_mora||0), 0);
+
+  document.getElementById('kpi-hoy').textContent      = formatMoney(pagosHoy.reduce((s,p)=>s+Number(p.monto),0));
+  document.getElementById('kpi-hoy-cant').textContent = `${pagosHoy.length} pago${pagosHoy.length!==1?'s':''}`;
+  document.getElementById('kpi-mes').textContent      = formatMoney(pagosMes.reduce((s,p)=>s+Number(p.monto),0));
+  document.getElementById('kpi-mes-cant').textContent = `${pagosMes.length} pago${pagosMes.length!==1?'s':''}`;
+  document.getElementById('kpi-transf').textContent   = formatMoney(transf.reduce((s,p)=>s+Number(p.monto),0));
+  document.getElementById('kpi-mora').textContent     = formatMoney(mora);
+
+  aplicarFiltros();
+}
+
+function aplicarFiltros() {
+  filtrados = todos.filter(p => {
+    const nombre = p.clientes?.nombre?.toLowerCase() || '';
+    const mB = !busqueda || nombre.includes(busqueda);
+    const mM = !metodo   || p.metodo === metodo;
+    const mD = !desde    || p.fecha_pago >= desde;
+    const mH = !hasta    || p.fecha_pago <= hasta;
+    return mB && mM && mD && mH;
+  });
+  pagina = 0;
+  const total = filtrados.filter(p=>p.estado==='confirmado').reduce((s,p)=>s+Number(p.monto),0);
+  document.getElementById('total-label').textContent = `${filtrados.length} pago${filtrados.length!==1?'s':''}`;
+  document.getElementById('total-monto').textContent = filtrados.length ? `Total: ${formatMoney(total)}` : '';
+  render();
+}
+
+function render() {
+  const inicio = pagina * POR_PAG;
+  const fin    = inicio + POR_PAG;
+  const pag    = filtrados.slice(inicio, fin);
+  const total  = filtrados.length;
+
+  document.getElementById('pag-info').textContent = total===0 ? 'Sin resultados' : `${inicio+1}–${Math.min(fin,total)} de ${total}`;
+  document.getElementById('btn-ant').disabled = pagina===0;
+  document.getElementById('btn-sig').disabled = fin>=total;
+
+  if (!pag.length) {
+    document.getElementById('tbody-pagos').innerHTML = `<tr><td colspan="11" style="text-align:center;padding:40px;color:var(--gray-400)">Sin pagos en el período seleccionado</td></tr>`;
+    return;
+  }
+
+  document.getElementById('tbody-pagos').innerHTML = pag.map(p => {
+    const anulado = p.estado === 'anulado';
+    const style   = anulado ? 'opacity:.5;text-decoration:line-through' : '';
+    return `<tr style="${style}">
+      <td style="font-size:.82rem;white-space:nowrap">${formatFecha(p.fecha_pago)}</td>
+      <td>
+        <a href="../clientes/perfil.html?id=${p.cliente_id}" style="font-weight:600;font-size:.875rem;color:var(--cobrika-primary)">${p.clientes?.nombre||'—'}</a>
+      </td>
+      <td style="font-size:.78rem;color:var(--gray-400)">
+        <a href="../prestamos/detalle.html?id=${p.prestamo_id}" style="color:var(--cobrika-primary)">#${p.prestamos?.numero||'—'}</a>
+      </td>
+      <td class="td-num" style="font-weight:700;color:${anulado?'var(--gray-400)':'var(--cobrika-success)'}">${formatMoney(p.monto)}</td>
+      <td class="td-num" style="font-size:.8rem">${formatMoney(p.monto_capital)}</td>
+      <td class="td-num" style="font-size:.8rem">${formatMoney(p.monto_interes)}</td>
+      <td class="td-num" style="font-size:.8rem;color:${p.monto_mora>0?'var(--cobrika-danger)':'var(--gray-400)'}">${formatMoney(p.monto_mora)}</td>
+      <td><span style="font-size:.78rem;text-transform:capitalize;background:var(--gray-100);padding:3px 8px;border-radius:100px">${p.metodo}</span></td>
+      <td style="font-size:.78rem;color:var(--gray-500)">${p.referencia||'—'}</td>
+      <td>
+        ${anulado
+          ? `<span class="badge badge-danger">Anulado</span>`
+          : `<span class="badge badge-success">Confirmado</span>`}
+      </td>
+      <td>
+        <a href="../prestamos/detalle.html?id=${p.prestamo_id}" class="btn btn-secondary btn-sm">Ver</a>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+document.getElementById('buscar').addEventListener('input', debounce(e => { busqueda = e.target.value.toLowerCase(); aplicarFiltros(); }, 250));
+document.getElementById('filtro-metodo').addEventListener('change', e => { metodo = e.target.value; aplicarFiltros(); });
+document.getElementById('filtro-desde').addEventListener('change', e => { desde = e.target.value; aplicarFiltros(); });
+document.getElementById('filtro-hasta').addEventListener('change', e => { hasta = e.target.value; aplicarFiltros(); });
+document.getElementById('btn-ant').addEventListener('click', () => { pagina--; render(); window.scrollTo(0,0); });
+document.getElementById('btn-sig').addEventListener('click', () => { pagina++; render(); window.scrollTo(0,0); });
+
+// Realtime
+supabase.channel('pagos-live')
+  .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'pagos', filter: `tenant_id=eq.${tenantId}` },
+    () => cargar())
+  .subscribe();
+
+await cargar();
+</script>
+</body>
+</html>
