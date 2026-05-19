@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalle préstamo — Cobrika</title>
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/admin.css">
+</head>
+<body>
+<div class="admin-layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="sidebar-logo-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75"/></svg></div>
+      <div><div class="sidebar-logo-text">Cobrika</div><div class="sidebar-logo-sub">Panel administrativo</div></div>
+    </div>
+    <div class="sidebar-tenant"><div class="sidebar-tenant-label">Negocio</div><div class="sidebar-tenant-name" id="admin-tenant">—</div></div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Principal</div>
+      <a href="../dashboard/index.html" class="nav-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z"/></svg>Dashboard</a>
+      <a href="../clientes/index.html" class="nav-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"/></svg>Clientes</a>
+      <a href="index.html" class="nav-item active"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Préstamos</a>
+      <a href="../pagos/index.html" class="nav-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z"/></svg>Pagos</a>
+      <div class="nav-section-label">Operaciones</div>
+      <a href="../pagos/vouchers.html" class="nav-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/></svg>Vouchers</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user" id="logout-btn">
+        <div class="avatar" id="admin-avatar">A</div>
+        <div class="sidebar-user-info"><div class="sidebar-user-name" id="admin-nombre">Andy Polanco</div><div class="sidebar-user-role">Administrador</div></div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  <main class="admin-main">
+    <div class="topbar">
+      <div class="topbar-left">
+        <button class="sidebar-toggle" id="sidebar-toggle"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg></button>
+        <div>
+          <div class="topbar-title" id="topbar-titulo">Detalle del préstamo</div>
+          <div class="topbar-breadcrumb"><a href="index.html" style="color:var(--cobrika-primary)">Préstamos</a> / <span id="topbar-sub">—</span></div>
+        </div>
+      </div>
+      <div class="topbar-right" id="topbar-acciones"></div>
+    </div>
+
+    <!-- Loading -->
+    <div id="loading" style="display:flex;align-items:center;justify-content:center;height:60vh;flex-direction:column;gap:14px;color:var(--gray-400)">
+      <div class="spinner spinner-dark" style="width:36px;height:36px;border-width:3px"></div>
+      <p>Cargando préstamo...</p>
+    </div>
+
+    <div class="page-content" id="contenido" style="display:none">
+
+      <!-- Resumen top -->
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:20px" id="kpis-detalle"></div>
+
+      <!-- Barra de progreso -->
+      <div class="card" style="margin-bottom:20px">
+        <div class="card-body" style="padding:18px 24px">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+            <span style="font-size:.85rem;font-weight:600;color:var(--gray-700)">Progreso del préstamo</span>
+            <span id="progreso-pct" style="font-size:.85rem;font-weight:700;color:var(--cobrika-primary)">0%</span>
+          </div>
+          <div style="height:10px;background:var(--gray-200);border-radius:5px;overflow:hidden">
+            <div id="progreso-bar" style="height:100%;border-radius:5px;background:linear-gradient(90deg,var(--cobrika-primary),var(--cobrika-accent));transition:width .5s"></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;margin-top:6px;font-size:.75rem;color:var(--gray-400)">
+            <span id="progreso-pagado">Pagado: RD$ 0</span>
+            <span id="progreso-total">Total: RD$ 0</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 340px;gap:20px;align-items:start">
+
+        <!-- Tabla de cuotas -->
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div class="card">
+            <div class="card-header">
+              <h4 style="font-size:.95rem">Plan de cuotas</h4>
+              <div style="display:flex;gap:8px;align-items:center">
+                <select class="form-control" id="filtro-cuotas" style="width:auto;font-size:.8rem;padding:6px 10px">
+                  <option value="">Todas</option>
+                  <option value="pendiente">Pendientes</option>
+                  <option value="pagada">Pagadas</option>
+                  <option value="vencida">Vencidas</option>
+                </select>
+                <button class="btn btn-primary btn-sm" id="btn-registrar-pago">
+                  + Registrar pago
+                </button>
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Vence</th>
+                    <th>Capital</th>
+                    <th>Interés</th>
+                    <th>Mora</th>
+                    <th>Total</th>
+                    <th>Pagado</th>
+                    <th>Saldo</th>
+                    <th>Estado</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="tbody-cuotas"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Historial de pagos -->
+          <div class="card">
+            <div class="card-header">
+              <h4 style="font-size:.95rem">Historial de pagos</h4>
+              <span id="pagos-badge" class="badge badge-gray">0</span>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Fecha</th>
+                    <th>Monto</th>
+                    <th>Capital</th>
+                    <th>Interés</th>
+                    <th>Mora</th>
+                    <th>Método</th>
+                    <th>Referencia</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="tbody-pagos"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Columna lateral -->
+        <div style="display:flex;flex-direction:column;gap:16px">
+
+          <!-- Info del préstamo -->
+          <div class="card">
+            <div class="card-header"><h4 style="font-size:.9rem">Información del préstamo</h4></div>
+            <div class="card-body" style="padding-top:10px">
+              <div id="info-prestamo" style="display:flex;flex-direction:column;gap:8px"></div>
+            </div>
+          </div>
+
+          <!-- Cliente -->
+          <div class="card">
+            <div class="card-header"><h4 style="font-size:.9rem">Cliente</h4></div>
+            <div class="card-body">
+              <div id="info-cliente"></div>
+            </div>
+          </div>
+
+          <!-- Garantía -->
+          <div class="card" id="card-garantia" style="display:none">
+            <div class="card-header"><h4 style="font-size:.9rem">Garantía</h4></div>
+            <div class="card-body">
+              <div id="info-garantia" style="font-size:.85rem;color:var(--gray-700)"></div>
+            </div>
+          </div>
+
+          <!-- Acciones rápidas -->
+          <div class="card">
+            <div class="card-header"><h4 style="font-size:.9rem">Acciones</h4></div>
+            <div class="card-body" style="display:flex;flex-direction:column;gap:8px">
+              <button class="btn btn-primary btn-full" id="btn-pago-rapido">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" style="width:16px;height:16px"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+                Registrar pago
+              </button>
+              <button class="btn btn-secondary btn-full" id="btn-whatsapp-recordatorio">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="width:15px;height:15px;color:#16a34a"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                Recordatorio WhatsApp
+              </button>
+              <button class="btn btn-secondary btn-full" id="btn-imprimir">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" style="width:15px;height:15px"><path stroke-linecap="round" stroke-linejoin="round" d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0110.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0l.229 2.523a1.125 1.125 0 01-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0021 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 00-1.913-.247M6.34 18H5.25A2.25 2.25 0 013 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 011.913-.247m10.5 0a48.536 48.536 0 00-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5zm-3 0h.008v.008H15V10.5z"/></svg>
+                Imprimir estado de cuenta
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Modal registrar pago -->
+<div id="modal-pago" class="modal-overlay" style="display:none">
+  <div class="modal" style="max-width:480px">
+    <div class="modal-header">
+      <h3 style="font-size:1.1rem">Registrar pago</h3>
+      <button onclick="document.getElementById('modal-pago').style.display='none'" style="background:none;border:none;cursor:pointer;color:var(--gray-400)">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:20px;height:20px"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div class="form-group">
+          <label class="form-label">Monto pagado <span class="required">*</span></label>
+          <div style="position:relative">
+            <span style="position:absolute;left:12px;top:50%;transform:translateY(-50%);font-weight:600;color:var(--gray-500);font-size:.85rem">RD$</span>
+            <input class="form-control" type="number" id="pago-monto" min="1" placeholder="0.00" style="padding-left:44px">
+          </div>
+          <div class="form-hint" id="pago-hint">Próxima cuota: —</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Fecha del pago</label>
+          <input class="form-control" type="date" id="pago-fecha">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Método de pago</label>
+          <select class="form-control" id="pago-metodo">
+            <option value="efectivo">Efectivo</option>
+            <option value="transferencia">Transferencia</option>
+            <option value="cheque">Cheque</option>
+            <option value="otro">Otro</option>
+          </select>
+        </div>
+        <div class="form-group" id="grupo-referencia" style="display:none">
+          <label class="form-label">Número de referencia</label>
+          <input class="form-control" type="text" id="pago-referencia" placeholder="Ej: 123456789">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Notas (opcional)</label>
+          <input class="form-control" type="text" id="pago-notas" placeholder="Observaciones del pago">
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="document.getElementById('modal-pago').style.display='none'">Cancelar</button>
+      <button class="btn btn-primary" id="btn-confirmar-pago">
+        <span id="pago-btn-text">Confirmar pago</span>
+        <span id="pago-spinner" class="spinner" style="display:none"></span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div id="toast-container"></div>
+
+<style>
+.cuota-row-vencida { background: #fff7f7; }
+.cuota-row-pagada  { background: #f0fdf4; opacity:.85; }
+.dias-atraso { display:inline-block; padding:2px 7px; border-radius:100px; font-size:.7rem; font-weight:600; background:var(--cobrika-danger-bg); color:var(--cobrika-danger); }
+@media(max-width:900px){
+  .page-content > div:last-child > div { grid-template-columns:1fr !important; }
+}
+</style>
+
+<script type="module">
+import { requireAdmin, logout }   from '../../shared/auth.js';
+import { supabase }               from '../../shared/supabase-client.js';
+import { calcularMora, diasAtraso } from '../../shared/calculadora-core.js';
+import { formatMoney, formatFecha, badgePrestamo, linkWhatsApp, toast, confirmar } from '../../shared/helpers.js';
+
+const usuario  = await requireAdmin();
+if (!usuario) throw new Error('No auth');
+const tenantId = usuario.perfil.tenant_id;
+
+const sidebar = document.getElementById('sidebar');
+const overlay = document.getElementById('sidebar-overlay');
+document.getElementById('sidebar-toggle').addEventListener('click', () => { sidebar.classList.toggle('open'); overlay.classList.toggle('open'); });
+overlay.addEventListener('click', () => { sidebar.classList.remove('open'); overlay.classList.remove('open'); });
+document.getElementById('logout-btn').addEventListener('click', async () => { if (await confirmar('¿Cerrar sesión?')) logout(); });
+
+const params    = new URLSearchParams(location.search);
+const prestamoId = params.get('id');
+if (!prestamoId) window.location.href = 'index.html';
+
+// Fecha de hoy por defecto en modal
+document.getElementById('pago-fecha').value = new Date().toISOString().split('T')[0];
+document.getElementById('pago-metodo').addEventListener('change', e => {
+  document.getElementById('grupo-referencia').style.display =
+    e.target.value === 'transferencia' ? '' : 'none';
+});
+
+let prestamo, cuotas, pagosData, cliente;
+
+// ── Cargar datos ──────────────────────────────────────────
+async function cargarTodo() {
+  const [{ data: p }, { data: c }, { data: pg }] = await Promise.all([
+    supabase.from('prestamos').select('*, clientes(*)').eq('id', prestamoId).eq('tenant_id', tenantId).single(),
+    supabase.from('cuotas').select('*').eq('prestamo_id', prestamoId).order('numero'),
+    supabase.from('pagos').select('*').eq('prestamo_id', prestamoId).order('fecha_pago', { ascending: false }),
+  ]);
+
+  if (!p) { toast('Préstamo no encontrado', 'error'); setTimeout(() => window.location.href = 'index.html', 1500); return; }
+
+  prestamo  = p;
+  cuotas    = c || [];
+  pagosData = pg || [];
+  cliente   = p.clientes;
+
+  renderTodo();
+  document.getElementById('loading').style.display   = 'none';
+  document.getElementById('contenido').style.display = '';
+}
+
+function renderTodo() {
+  const frecLabel = { diario:'Diaria', semanal:'Semanal', quincenal:'Quincenal', mensual:'Mensual' };
+
+  // Topbar
+  document.getElementById('topbar-titulo').textContent = `Préstamo #${prestamo.numero || '—'}`;
+  document.getElementById('topbar-sub').textContent    = cliente?.nombre || '—';
+  document.getElementById('topbar-acciones').innerHTML = `
+    <div style="display:flex;gap:8px">
+      ${badgePrestamo(prestamo.estado)}
+      <a href="index.html" class="btn btn-secondary btn-sm">← Volver</a>
+    </div>`;
+
+  // KPIs
+  const pct = prestamo.monto_total > 0 ? Math.round((prestamo.total_pagado / prestamo.monto_total) * 100) : 0;
+  document.getElementById('kpis-detalle').innerHTML = `
+    ${kpi('Capital', formatMoney(prestamo.monto_capital), 'var(--cobrika-primary)')}
+    ${kpi('Total a pagar', formatMoney(prestamo.monto_total), 'var(--gray-800)')}
+    ${kpi('Total pagado', formatMoney(prestamo.total_pagado), 'var(--cobrika-success)')}
+    ${kpi('Saldo pendiente', formatMoney(prestamo.saldo_total || 0), 'var(--cobrika-warning)')}
+    ${kpi('Cuotas', `${prestamo.cuotas_pagadas||0} / ${prestamo.num_cuotas}`, 'var(--cobrika-primary)')}`;
+
+  // Progreso
+  document.getElementById('progreso-bar').style.width   = pct + '%';
+  document.getElementById('progreso-pct').textContent   = pct + '%';
+  document.getElementById('progreso-pagado').textContent = `Pagado: ${formatMoney(prestamo.total_pagado)}`;
+  document.getElementById('progreso-total').textContent  = `Total: ${formatMoney(prestamo.monto_total)}`;
+
+  // Info préstamo
+  document.getElementById('info-prestamo').innerHTML = [
+    infoRow('Tipo interés', prestamo.tipo_interes === 'fijo' ? 'Fijo' : 'Saldo reducido'),
+    infoRow('Tasa mensual', (Number(prestamo.tasa_interes)*100).toFixed(1) + '%'),
+    infoRow('Frecuencia', frecLabel[prestamo.frecuencia_pago] || prestamo.frecuencia_pago),
+    infoRow('Cuota', formatMoney(prestamo.monto_cuota)),
+    infoRow('Primer pago', formatFecha(prestamo.fecha_primer_pago)),
+    infoRow('Vencimiento', formatFecha(prestamo.fecha_vencimiento)),
+    infoRow('Mora mensual', (Number(prestamo.tasa_mora)*100).toFixed(1) + '%'),
+    infoRow('Días gracia', prestamo.dias_gracia),
+    infoRow('Aprobado', formatFecha(prestamo.fecha_aprobacion)),
+  ].join('');
+
+  // Info cliente
+  if (cliente) {
+    document.getElementById('info-cliente').innerHTML = `
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+        <div style="width:40px;height:40px;border-radius:50%;background:var(--cobrika-primary-light);color:var(--cobrika-primary);display:flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0">
+          ${cliente.nombre.split(' ').slice(0,2).map(p=>p[0]).join('').toUpperCase()}
+        </div>
+        <div>
+          <div style="font-weight:600;font-size:.875rem">${cliente.nombre}</div>
+          <div style="font-size:.75rem;color:var(--gray-400)">${cliente.cedula||''}</div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        ${cliente.telefono ? `<div style="font-size:.82rem;color:var(--gray-600)">📞 ${cliente.telefono}</div>` : ''}
+        ${cliente.direccion ? `<div style="font-size:.82rem;color:var(--gray-600)">📍 ${cliente.direccion}</div>` : ''}
+      </div>
+      <div style="margin-top:10px">
+        <a href="../clientes/perfil.html?id=${cliente.id}" class="btn btn-secondary btn-sm btn-full">Ver perfil completo</a>
+      </div>`;
+  }
+
+  // Garantía
+  if (prestamo.garantia_tipo) {
+    document.getElementById('card-garantia').style.display = '';
+    document.getElementById('info-garantia').innerHTML = `
+      <div style="margin-bottom:6px"><strong>Tipo:</strong> ${prestamo.garantia_tipo}</div>
+      ${prestamo.garantia_descripcion ? `<div style="margin-bottom:6px">${prestamo.garantia_descripcion}</div>` : ''}
+      ${prestamo.garantia_valor ? `<div><strong>Valor:</strong> ${formatMoney(prestamo.garantia_valor)}</div>` : ''}`;
+  }
+
+  // Cuotas
+  renderCuotas();
+
+  // Pagos
+  document.getElementById('pagos-badge').textContent = pagosData.length;
+  if (pagosData.length) {
+    document.getElementById('tbody-pagos').innerHTML = pagosData.map(pg => `
+      <tr>
+        <td style="font-size:.82rem">${formatFecha(pg.fecha_pago)}</td>
+        <td class="td-num" style="color:var(--cobrika-success);font-weight:700">${formatMoney(pg.monto)}</td>
+        <td class="td-num" style="font-size:.8rem">${formatMoney(pg.monto_capital)}</td>
+        <td class="td-num" style="font-size:.8rem">${formatMoney(pg.monto_interes)}</td>
+        <td class="td-num" style="font-size:.8rem;color:${pg.monto_mora>0?'var(--cobrika-danger)':'var(--gray-400)'}">${formatMoney(pg.monto_mora)}</td>
+        <td style="font-size:.82rem;text-transform:capitalize">${pg.metodo}</td>
+        <td style="font-size:.78rem;color:var(--gray-400)">${pg.referencia||'—'}</td>
+        <td>
+          ${pg.estado === 'confirmado'
+            ? `<span class="badge badge-success">Confirmado</span>`
+            : `<button onclick="anularPago('${pg.id}')" class="btn btn-secondary btn-sm" style="font-size:.72rem">Anular</button>`}
+        </td>
+      </tr>`).join('');
+  } else {
+    document.getElementById('tbody-pagos').innerHTML = `<tr><td colspan="8" style="text-align:center;padding:24px;color:var(--gray-400)">Sin pagos registrados</td></tr>`;
+  }
+
+  // WhatsApp recordatorio
+  if (cliente?.telefono) {
+    const saldo = Number(prestamo.saldo_total || 0);
+    const proxCuota = cuotas.find(c => ['pendiente','vencida','parcial'].includes(c.estado));
+    const msg = `Hola ${cliente.nombre}, le recordamos que tiene un saldo pendiente de ${formatMoney(saldo)} en su préstamo con nosotros.${proxCuota ? ` Su próxima cuota de ${formatMoney(proxCuota.monto_total)} vence el ${formatFecha(proxCuota.fecha_vence)}.` : ''} Gracias — Cobrika`;
+    document.getElementById('btn-whatsapp-recordatorio').onclick = () => window.open(linkWhatsApp(cliente.telefono, msg), '_blank');
+  }
+
+  // Imprimir
+  document.getElementById('btn-imprimir').onclick = () => window.print();
+
+  // Hint de próxima cuota en modal
+  const proxima = cuotas.find(c => ['pendiente','vencida','parcial'].includes(c.estado));
+  if (proxima) {
+    const mora = calcularMora(proxima.monto_total - proxima.monto_pagado, diasAtraso(proxima.fecha_vence), prestamo.tasa_mora);
+    const totalCuota = proxima.monto_total - proxima.monto_pagado + mora;
+    document.getElementById('pago-hint').textContent = `Próxima cuota: ${formatMoney(totalCuota)}${mora > 0 ? ` (incluye mora: ${formatMoney(mora)})` : ''}`;
+    document.getElementById('pago-monto').value = totalCuota.toFixed(2);
+  }
+}
+
+function renderCuotas(filtro = '') {
+  const hoy = new Date(); hoy.setHours(0,0,0,0);
+  const lista = filtro ? cuotas.filter(c => c.estado === filtro) : cuotas;
+
+  if (!lista.length) {
+    document.getElementById('tbody-cuotas').innerHTML = `<tr><td colspan="10" style="text-align:center;padding:24px;color:var(--gray-400)">Sin cuotas</td></tr>`;
+    return;
+  }
+
+  document.getElementById('tbody-cuotas').innerHTML = lista.map(c => {
+    const dias     = diasAtraso(c.fecha_vence);
+    const mora     = c.estado !== 'pagada' ? calcularMora(c.monto_total - c.monto_pagado, Math.max(0, dias - (prestamo.dias_gracia||0)), prestamo.tasa_mora) : c.monto_mora;
+    const saldo    = Math.max(0, c.monto_total + mora - c.monto_pagado);
+    const rowClass = c.estado === 'pagada' ? 'cuota-row-pagada' : dias > 0 && c.estado !== 'pagada' ? 'cuota-row-vencida' : '';
+
+    const estadoBadge = c.estado === 'pagada'
+      ? `<span class="badge badge-success">Pagada</span>`
+      : c.estado === 'parcial'
+      ? `<span class="badge badge-warning">Parcial</span>`
+      : dias > (prestamo.dias_gracia||0)
+      ? `<span class="badge badge-mora">Vencida</span>`
+      : dias > 0
+      ? `<span class="badge badge-warning">Gracia</span>`
+      : `<span class="badge badge-gray">Pendiente</span>`;
+
+    return `<tr class="${rowClass}">
+      <td style="font-weight:600;font-size:.82rem">${c.numero}</td>
+      <td style="font-size:.82rem">
+        ${formatFecha(c.fecha_vence)}
+        ${dias > 0 && c.estado !== 'pagada' ? `<div class="dias-atraso">${dias}d</div>` : ''}
+      </td>
+      <td class="td-num" style="font-size:.8rem">${formatMoney(c.monto_capital)}</td>
+      <td class="td-num" style="font-size:.8rem">${formatMoney(c.monto_interes)}</td>
+      <td class="td-num" style="font-size:.8rem;color:${mora>0?'var(--cobrika-danger)':'var(--gray-400)'}">${formatMoney(mora)}</td>
+      <td class="td-num" style="font-weight:600">${formatMoney(c.monto_total)}</td>
+      <td class="td-num" style="font-size:.8rem;color:var(--cobrika-success)">${formatMoney(c.monto_pagado)}</td>
+      <td class="td-num" style="font-weight:700;color:${saldo>0?'var(--cobrika-warning)':'var(--cobrika-success)'}">${formatMoney(saldo)}</td>
+      <td>${estadoBadge}</td>
+      <td>
+        ${c.estado !== 'pagada' ? `<button class="btn btn-secondary btn-sm" onclick="abrirModalPago('${c.id}',${c.monto_total},${c.monto_pagado},${mora})">Pagar</button>` : ''}
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+document.getElementById('filtro-cuotas').addEventListener('change', e => renderCuotas(e.target.value));
+
+// KPI helper
+function kpi(label, value, color) {
+  return `<div class="card"><div class="card-body" style="padding:16px">
+    <div style="font-size:.72rem;color:var(--gray-400);margin-bottom:4px">${label}</div>
+    <div style="font-size:1.1rem;font-weight:800;color:${color}">${value}</div>
+  </div></div>`;
+}
+
+function infoRow(label, value) {
+  return `<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--gray-100);font-size:.82rem">
+    <span style="color:var(--gray-500)">${label}</span>
+    <span style="font-weight:500;color:var(--gray-800)">${value}</span>
+  </div>`;
+}
+
+// ── Modal pago ────────────────────────────────────────────
+let cuotaIdActual = null;
+
+window.abrirModalPago = (cuotaId, montoTotal, montoPagado, mora) => {
+  cuotaIdActual = cuotaId;
+  const saldo   = Math.max(0, montoTotal - montoPagado + mora);
+  document.getElementById('pago-monto').value = saldo.toFixed(2);
+  document.getElementById('modal-pago').style.display = 'flex';
+  document.getElementById('pago-monto').focus();
+};
+
+['btn-registrar-pago','btn-pago-rapido'].forEach(id => {
+  document.getElementById(id).addEventListener('click', () => {
+    cuotaIdActual = null;
+    document.getElementById('modal-pago').style.display = 'flex';
+    document.getElementById('pago-monto').focus();
+  });
+});
+
+document.getElementById('btn-confirmar-pago').addEventListener('click', async () => {
+  const monto = parseFloat(document.getElementById('pago-monto').value);
+  if (!monto || monto <= 0) { toast('Ingresa un monto válido', 'error'); return; }
+
+  const btn = document.getElementById('btn-confirmar-pago');
+  btn.disabled = true;
+  document.getElementById('pago-btn-text').style.display  = 'none';
+  document.getElementById('pago-spinner').style.display   = 'inline-block';
+
+  try {
+    // Determinar distribución del pago
+    const cuota = cuotaIdActual ? cuotas.find(c => c.id === cuotaIdActual) : cuotas.find(c => ['pendiente','vencida','parcial'].includes(c.estado));
+    const dias   = cuota ? diasAtraso(cuota.fecha_vence) : 0;
+    const mora   = cuota ? calcularMora(cuota.monto_total - cuota.monto_pagado, Math.max(0, dias - (prestamo.dias_gracia||0)), prestamo.tasa_mora) : 0;
+
+    let montoMora     = Math.min(mora, monto);
+    let montoInteres  = cuota ? Math.min(cuota.monto_interes, monto - montoMora) : 0;
+    let montoCapital  = Math.max(0, monto - montoMora - montoInteres);
+
+    const { data: nuevoPago, error } = await supabase.from('pagos').insert({
+      tenant_id:     tenantId,
+      prestamo_id:   prestamoId,
+      cuota_id:      cuotaIdActual,
+      cliente_id:    prestamo.cliente_id,
+      monto,
+      monto_capital: montoCapital,
+      monto_interes: montoInteres,
+      monto_mora:    montoMora,
+      metodo:        document.getElementById('pago-metodo').value,
+      referencia:    document.getElementById('pago-referencia').value.trim() || null,
+      fecha_pago:    document.getElementById('pago-fecha').value,
+      notas:         document.getElementById('pago-notas').value.trim() || null,
+      estado:        'confirmado',
+      registrado_por: usuario.id,
+    }).select().single();
+
+    if (error) throw error;
+
+    // Actualizar cuota si aplica
+    if (cuota) {
+      const nuevoPagado = cuota.monto_pagado + monto;
+      const nuevoEstado = nuevoPagado >= (cuota.monto_total + mora) ? 'pagada' : 'parcial';
+      await supabase.from('cuotas').update({
+        monto_pagado: nuevoPagado,
+        monto_mora:   mora,
+        estado:       nuevoEstado,
+        fecha_pago:   nuevoEstado === 'pagada' ? document.getElementById('pago-fecha').value : null,
+      }).eq('id', cuota.id);
+    }
+
+    toast('Pago registrado exitosamente', 'success');
+    document.getElementById('modal-pago').style.display = 'none';
+
+    // Limpiar modal
+    document.getElementById('pago-monto').value     = '';
+    document.getElementById('pago-referencia').value = '';
+    document.getElementById('pago-notas').value      = '';
+
+    await cargarTodo();
+
+  } catch (err) {
+    toast('Error: ' + err.message, 'error');
+  }
+
+  btn.disabled = false;
+  document.getElementById('pago-btn-text').style.display  = 'inline';
+  document.getElementById('pago-spinner').style.display   = 'none';
+});
+
+// ── Anular pago ───────────────────────────────────────────
+window.anularPago = async (pagoId) => {
+  if (!await confirmar('¿Anular este pago? El saldo del préstamo se ajustará.', 'Anular pago')) return;
+  const { error } = await supabase.from('pagos').update({ estado: 'anulado' }).eq('id', pagoId);
+  if (!error) { toast('Pago anulado', 'info'); await cargarTodo(); }
+  else toast('Error al anular', 'error');
+};
+
+// ── Realtime ──────────────────────────────────────────────
+supabase.channel(`prestamo-${prestamoId}`)
+  .on('postgres_changes', { event: '*', schema: 'public', table: 'pagos', filter: `prestamo_id=eq.${prestamoId}` },
+    () => cargarTodo())
+  .subscribe();
+
+await cargarTodo();
+</script>
+</body>
+</html>
