@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#1a56db">
+  <title>Solicitar préstamo — Cobrika</title>
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/app.css">
+</head>
+<body>
+
+  <header class="app-header">
+    <a href="../index.html" style="color:#fff;display:flex;align-items:center;gap:6px;font-size:.9rem">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:18px;height:18px"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"/></svg>
+    </a>
+    <div class="app-header-logo">Solicitar préstamo</div>
+    <div style="width:40px"></div>
+  </header>
+
+  <div class="app-content" id="contenido-form" style="display:none">
+    <div class="app-form">
+
+      <!-- Estado de solicitudes anteriores -->
+      <div id="solicitudes-previas"></div>
+
+      <div class="app-form-title">Nueva solicitud</div>
+      <div class="app-form-sub">Completa los datos y tu prestamista revisará la solicitud</div>
+
+      <!-- Monto -->
+      <div class="form-group">
+        <label class="form-label">Monto que necesitas (RD$) <span class="required">*</span></label>
+        <div style="position:relative">
+          <span style="position:absolute;left:14px;top:50%;transform:translateY(-50%);font-weight:700;color:var(--gray-500)">RD$</span>
+          <input class="form-control" type="number" id="monto" min="1000" step="500"
+                 placeholder="0" style="padding-left:52px;font-size:18px;font-weight:700" required>
+        </div>
+        <div class="form-hint">Monto mínimo: RD$ 1,000</div>
+      </div>
+
+      <!-- Plazo -->
+      <div class="form-group">
+        <label class="form-label">¿En cuántas cuotas quieres pagar? <span class="required">*</span></label>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px" id="cuotas-grid">
+          <button type="button" class="cuota-opcion" data-val="4">4</button>
+          <button type="button" class="cuota-opcion" data-val="6">6</button>
+          <button type="button" class="cuota-opcion" data-val="8">8</button>
+          <button type="button" class="cuota-opcion" data-val="12">12</button>
+          <button type="button" class="cuota-opcion" data-val="18">18</button>
+          <button type="button" class="cuota-opcion" data-val="24">24</button>
+          <button type="button" class="cuota-opcion" data-val="36">36</button>
+          <button type="button" class="cuota-opcion otro" data-val="otro">Otro</button>
+        </div>
+        <input type="number" class="form-control" id="cuotas-custom" placeholder="Número de cuotas" min="1" max="360"
+               style="display:none;margin-top:8px;font-size:16px">
+        <input type="hidden" id="num-cuotas">
+      </div>
+
+      <!-- Frecuencia -->
+      <div class="form-group">
+        <label class="form-label">Frecuencia de pago preferida <span class="required">*</span></label>
+        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px">
+          <button type="button" class="frec-opcion" data-val="semanal">
+            <span style="font-size:1.1rem">📅</span> Semanal
+          </button>
+          <button type="button" class="frec-opcion" data-val="quincenal">
+            <span style="font-size:1.1rem">📆</span> Quincenal
+          </button>
+          <button type="button" class="frec-opcion" data-val="mensual">
+            <span style="font-size:1.1rem">🗓</span> Mensual
+          </button>
+          <button type="button" class="frec-opcion" data-val="diario">
+            <span style="font-size:1.1rem">📌</span> Diario
+          </button>
+        </div>
+        <input type="hidden" id="frecuencia">
+      </div>
+
+      <!-- Propósito -->
+      <div class="form-group">
+        <label class="form-label">¿Para qué necesitas el dinero?</label>
+        <select class="form-control" id="proposito" style="font-size:16px">
+          <option value="">Selecciona...</option>
+          <option>Negocio / Comercio</option>
+          <option>Gastos médicos</option>
+          <option>Educación</option>
+          <option>Hogar / Remodelación</option>
+          <option>Vehículo</option>
+          <option>Deudas</option>
+          <option>Emergencia</option>
+          <option>Otro</option>
+        </select>
+      </div>
+
+      <!-- Documentos -->
+      <div class="form-group">
+        <label class="form-label">Documentos de soporte (opcional)</label>
+        <div class="upload-area" id="docs-area" onclick="document.getElementById('docs-input').click()">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M18.375 12.739l-7.693 7.693a4.5 4.5 0 01-6.364-6.364l10.94-10.94A3 3 0 1119.5 7.372L8.552 18.32m.009-.01l-.01.01m5.699-9.941l-7.81 7.81a1.5 1.5 0 002.112 2.13"/>
+          </svg>
+          <p><strong>Adjuntar documentos</strong></p>
+          <p style="font-size:.75rem;margin-top:4px">Cédula, recibo, comprobante de ingresos</p>
+        </div>
+        <input type="file" id="docs-input" accept="image/*,application/pdf" multiple style="display:none">
+        <div id="docs-preview" style="margin-top:8px;display:flex;flex-wrap:wrap;gap:8px"></div>
+      </div>
+
+      <!-- Observaciones -->
+      <div class="form-group">
+        <label class="form-label">Información adicional</label>
+        <textarea class="form-control" id="observaciones" rows="3"
+                  placeholder="Cuéntanos algo más sobre tu solicitud..." style="font-size:16px"></textarea>
+      </div>
+
+      <!-- Resumen estimado -->
+      <div id="resumen-estimado" style="display:none;background:var(--cobrika-primary-light);border:1.5px solid #bfdbfe;border-radius:14px;padding:16px;margin-bottom:16px">
+        <div style="font-size:.78rem;font-weight:700;color:var(--cobrika-primary-dark);margin-bottom:10px">
+          📊 Estimado (sujeto a aprobación)
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <div style="background:#fff;border-radius:8px;padding:10px">
+            <div style="font-size:.68rem;color:var(--gray-400)">Cuota estimada</div>
+            <div id="est-cuota" style="font-size:1rem;font-weight:800;color:var(--cobrika-primary)">—</div>
+          </div>
+          <div style="background:#fff;border-radius:8px;padding:10px">
+            <div style="font-size:.68rem;color:var(--gray-400)">Total a pagar</div>
+            <div id="est-total" style="font-size:1rem;font-weight:800;color:var(--gray-800)">—</div>
+          </div>
+        </div>
+        <p style="font-size:.72rem;color:var(--gray-400);margin-top:8px">* Basado en una tasa referencial del 10% mensual</p>
+      </div>
+
+      <button class="btn btn-primary btn-lg btn-full" id="btn-solicitar" disabled>
+        <span id="btn-text">Enviar solicitud</span>
+        <span id="btn-spinner" class="spinner" style="display:none"></span>
+      </button>
+      <p style="font-size:.75rem;color:var(--gray-400);text-align:center;margin-top:10px">
+        Tu prestamista revisará la solicitud y te contactará pronto.
+      </p>
+    </div>
+  </div>
+
+  <!-- Loading -->
+  <div class="app-loading" id="loading">
+    <div class="spinner spinner-dark" style="width:28px;height:28px;border-width:2.5px"></div>
+  </div>
+
+  <!-- Nav inferior -->
+  <nav class="app-nav">
+    <a href="../index.html" class="nav-tab">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></svg>
+      <span>Inicio</span>
+    </a>
+    <a href="../pagos/index.html" class="nav-tab">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z"/></svg>
+      <span>Pagos</span>
+    </a>
+    <a href="../voucher/index.html" class="nav-tab">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"/></svg>
+      <span>Voucher</span>
+    </a>
+    <a href="index.html" class="nav-tab active">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+      <span>Solicitar</span>
+    </a>
+  </nav>
+
+<div id="toast-container"></div>
+
+<style>
+.cuota-opcion, .frec-opcion {
+  padding: 12px 8px;
+  border-radius: 10px;
+  border: 1.5px solid var(--gray-200);
+  background: #fff;
+  font-size: .9rem;
+  font-weight: 600;
+  color: var(--gray-700);
+  cursor: pointer;
+  transition: all .15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.cuota-opcion:active, .frec-opcion:active { transform: scale(.95); }
+.cuota-opcion.active, .frec-opcion.active {
+  border-color: var(--cobrika-primary);
+  background: var(--cobrika-primary-light);
+  color: var(--cobrika-primary-dark);
+}
+</style>
+
+<script type="module">
+import { supabase }   from '../../shared/supabase-client.js';
+import { formatMoney, toast } from '../../shared/helpers.js';
+
+const { data: { session } } = await supabase.auth.getSession();
+if (!session) { window.location.href = '../login.html'; }
+const clienteId = session.user.user_metadata?.cliente_id;
+if (!clienteId) { window.location.href = '../login.html'; }
+
+// ── Cargar solicitudes previas ────────────────────────────
+const { data: solicitudes } = await supabase
+  .from('prestamos')
+  .select('id, monto_capital, estado, created_at')
+  .eq('cliente_id', clienteId)
+  .in('estado', ['solicitado','en_revision'])
+  .order('created_at', { ascending: false });
+
+if (solicitudes?.length) {
+  const estadoColor = { solicitado:'var(--cobrika-warning)', en_revision:'var(--cobrika-primary)' };
+  const estadoLabel = { solicitado:'Pendiente de revisión', en_revision:'En revisión' };
+  document.getElementById('solicitudes-previas').innerHTML = `
+    <div style="background:#fffbeb;border:1.5px solid #fcd34d;border-radius:14px;padding:14px;margin-bottom:20px">
+      <div style="font-size:.82rem;font-weight:700;color:#92400e;margin-bottom:8px">⏳ Tienes solicitudes en proceso</div>
+      ${solicitudes.map(s => `
+        <div style="display:flex;justify-content:space-between;align-items:center;font-size:.82rem;padding:4px 0;border-bottom:1px solid #fef3c7">
+          <span style="color:var(--gray-700)">${formatMoney(s.monto_capital)}</span>
+          <span style="color:${estadoColor[s.estado]};font-weight:600">${estadoLabel[s.estado]}</span>
+        </div>`).join('')}
+    </div>`;
+}
+
+document.getElementById('loading').style.display       = 'none';
+document.getElementById('contenido-form').style.display = '';
+
+// ── Selección de cuotas ───────────────────────────────────
+let cuotasSeleccionadas = null, frecuenciaSeleccionada = null;
+let archivosSeleccionados = [];
+
+document.querySelectorAll('.cuota-opcion').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.cuota-opcion').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    if (btn.dataset.val === 'otro') {
+      document.getElementById('cuotas-custom').style.display = '';
+      document.getElementById('cuotas-custom').focus();
+      cuotasSeleccionadas = null;
+    } else {
+      document.getElementById('cuotas-custom').style.display = 'none';
+      cuotasSeleccionadas = parseInt(btn.dataset.val);
+      document.getElementById('num-cuotas').value = cuotasSeleccionadas;
+    }
+    actualizarResumen();
+    verificarFormulario();
+  });
+});
+
+document.getElementById('cuotas-custom').addEventListener('input', e => {
+  cuotasSeleccionadas = parseInt(e.target.value) || null;
+  document.getElementById('num-cuotas').value = cuotasSeleccionadas || '';
+  actualizarResumen();
+  verificarFormulario();
+});
+
+// ── Selección de frecuencia ───────────────────────────────
+document.querySelectorAll('.frec-opcion').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.frec-opcion').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    frecuenciaSeleccionada = btn.dataset.val;
+    document.getElementById('frecuencia').value = frecuenciaSeleccionada;
+    actualizarResumen();
+    verificarFormulario();
+  });
+});
+
+// ── Resumen estimado ──────────────────────────────────────
+document.getElementById('monto').addEventListener('input', () => {
+  actualizarResumen();
+  verificarFormulario();
+});
+
+function actualizarResumen() {
+  const monto  = parseFloat(document.getElementById('monto').value);
+  const cuotas = cuotasSeleccionadas;
+  if (!monto || !cuotas) { document.getElementById('resumen-estimado').style.display = 'none'; return; }
+
+  const tasa       = 0.10; // referencial
+  const cuotaEst   = (monto / cuotas) + (monto * tasa);
+  const totalEst   = cuotaEst * cuotas;
+
+  document.getElementById('est-cuota').textContent = formatMoney(cuotaEst);
+  document.getElementById('est-total').textContent = formatMoney(totalEst);
+  document.getElementById('resumen-estimado').style.display = '';
+}
+
+function verificarFormulario() {
+  const monto = parseFloat(document.getElementById('monto').value);
+  document.getElementById('btn-solicitar').disabled = !(monto >= 1000 && cuotasSeleccionadas && frecuenciaSeleccionada);
+}
+
+// ── Documentos adjuntos ───────────────────────────────────
+document.getElementById('docs-input').addEventListener('change', e => {
+  archivosSeleccionados = Array.from(e.target.files);
+  const preview = document.getElementById('docs-preview');
+  preview.innerHTML = archivosSeleccionados.map((f,i) => `
+    <div style="background:var(--gray-100);border-radius:8px;padding:6px 10px;font-size:.75rem;display:flex;align-items:center;gap:6px">
+      📎 ${f.name.length > 20 ? f.name.slice(0,20)+'...' : f.name}
+      <button type="button" onclick="quitarDoc(${i})" style="background:none;border:none;color:var(--gray-400);cursor:pointer;font-size:.9rem">✕</button>
+    </div>`).join('');
+});
+
+window.quitarDoc = (i) => {
+  archivosSeleccionados.splice(i,1);
+  document.getElementById('docs-input').dispatchEvent(new Event('change'));
+};
+
+// ── Enviar solicitud ──────────────────────────────────────
+document.getElementById('btn-solicitar').addEventListener('click', async () => {
+  const monto = parseFloat(document.getElementById('monto').value);
+  if (monto < 1000) { toast('El monto mínimo es RD$ 1,000', 'error'); return; }
+  if (!cuotasSeleccionadas) { toast('Selecciona el número de cuotas', 'error'); return; }
+  if (!frecuenciaSeleccionada) { toast('Selecciona la frecuencia de pago', 'error'); return; }
+
+  const btn = document.getElementById('btn-solicitar');
+  btn.disabled = true;
+  document.getElementById('btn-text').style.display    = 'none';
+  document.getElementById('btn-spinner').style.display = 'inline-block';
+
+  try {
+    // Obtener tenant_id del cliente
+    const { data: cliente } = await supabase
+      .from('clientes').select('tenant_id').eq('id', clienteId).single();
+
+    // Subir documentos si hay
+    const docsUrls = [];
+    for (const archivo of archivosSeleccionados) {
+      const ext  = archivo.name.split('.').pop();
+      const path = `solicitudes/${clienteId}/${Date.now()}_${Math.random().toString(36).slice(2)}.${ext}`;
+      await supabase.storage.from('cobrika').upload(path, archivo);
+      const { data: u } = supabase.storage.from('cobrika').getPublicUrl(path);
+      docsUrls.push(u.publicUrl);
+    }
+
+    // Crear solicitud de préstamo
+    const { error } = await supabase.from('prestamos').insert({
+      tenant_id:       cliente.tenant_id,
+      cliente_id:      clienteId,
+      monto_capital:   monto,
+      tasa_interes:    0.10,
+      tipo_interes:    'fijo',
+      frecuencia_pago: frecuenciaSeleccionada,
+      num_cuotas:      cuotasSeleccionadas,
+      estado:          'solicitado',
+      observaciones:   [
+        document.getElementById('proposito').value,
+        document.getElementById('observaciones').value
+      ].filter(Boolean).join(' — ') || null,
+      documentos_urls: docsUrls.length ? docsUrls : null,
+    });
+
+    if (error) throw error;
+
+    // Pantalla de éxito
+    document.getElementById('contenido-form').innerHTML = `
+      <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60vh;padding:32px;text-align:center">
+        <div style="width:80px;height:80px;background:#f0fdf4;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:20px">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#057a55" style="width:40px;height:40px"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+        </div>
+        <h2 style="font-size:1.3rem;font-weight:800;color:var(--gray-900);margin-bottom:8px">¡Solicitud enviada!</h2>
+        <p style="color:var(--gray-500);font-size:.875rem;margin-bottom:28px">Tu prestamista revisará tu solicitud de <strong>${formatMoney(monto)}</strong> y te contactará pronto.</p>
+        <a href="../index.html" class="btn btn-primary btn-lg" style="min-width:200px">Volver al inicio</a>
+      </div>`;
+
+  } catch (err) {
+    toast('Error al enviar: ' + err.message, 'error');
+    btn.disabled = false;
+    document.getElementById('btn-text').style.display    = 'inline';
+    document.getElementById('btn-spinner').style.display = 'none';
+  }
+});
+</script>
+</body>
+</html>
