@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clientes — Cobrika</title>
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/admin.css">
+</head>
+<body>
+<div class="admin-layout">
+
+  <!-- ══ SIDEBAR ══ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="sidebar-logo-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75"/></svg>
+      </div>
+      <div>
+        <div class="sidebar-logo-text">Cobrika</div>
+        <div class="sidebar-logo-sub">Panel administrativo</div>
+      </div>
+    </div>
+    <div class="sidebar-tenant">
+      <div class="sidebar-tenant-label">Negocio</div>
+      <div class="sidebar-tenant-name" id="admin-tenant">—</div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Principal</div>
+      <a href="../dashboard/index.html" class="nav-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z"/></svg>Dashboard</a>
+      <a href="index.html" class="nav-item active"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"/></svg>Clientes</a>
+      <a href="../prestamos/index.html" class="nav-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Préstamos</a>
+      <a href="../pagos/index.html" class="nav-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z"/></svg>Pagos</a>
+      <div class="nav-section-label">Operaciones</div>
+      <a href="../pagos/vouchers.html" class="nav-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/></svg>Vouchers</a>
+      <a href="../prestamos/solicitudes.html" class="nav-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z"/></svg>Solicitudes</a>
+      <div class="nav-section-label">Reportes</div>
+      <a href="../reportes/index.html" class="nav-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"/></svg>Reportes</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user" id="logout-btn">
+        <div class="avatar" id="admin-avatar">A</div>
+        <div class="sidebar-user-info">
+          <div class="sidebar-user-name" id="admin-nombre">Andy Polanco</div>
+          <div class="sidebar-user-role">Administrador</div>
+        </div>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" style="width:16px;height:16px;color:rgba(255,255,255,.3)"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"/></svg>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  <!-- ══ MAIN ══ -->
+  <main class="admin-main">
+    <div class="topbar">
+      <div class="topbar-left">
+        <button class="sidebar-toggle" id="sidebar-toggle">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
+        </button>
+        <div>
+          <div class="topbar-title">Clientes</div>
+          <div class="topbar-breadcrumb">Gestión de clientes</div>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <a href="nuevo.html" class="btn btn-primary btn-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:14px;height:14px"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+          Nuevo cliente
+        </a>
+      </div>
+    </div>
+
+    <div class="page-content">
+
+      <!-- Filtros y búsqueda -->
+      <div class="card" style="margin-bottom:20px">
+        <div class="card-body" style="padding:16px">
+          <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+            <div class="input-icon" style="flex:1;min-width:220px">
+              <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" style="width:18px;height:18px;position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--gray-400);pointer-events:none"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
+              <input class="form-control" type="search" id="buscar" placeholder="Buscar por nombre, cédula o teléfono..." style="padding-left:40px">
+            </div>
+            <select class="form-control" id="filtro-estado" style="width:auto;min-width:140px">
+              <option value="">Todos los estados</option>
+              <option value="activo">Activo</option>
+              <option value="moroso">Moroso</option>
+              <option value="bloqueado">Bloqueado</option>
+              <option value="inactivo">Inactivo</option>
+            </select>
+            <select class="form-control" id="filtro-orden" style="width:auto;min-width:160px">
+              <option value="nombre">Ordenar por nombre</option>
+              <option value="fecha">Más recientes</option>
+              <option value="score">Mayor score</option>
+            </select>
+            <span id="total-clientes" style="font-size:.85rem;color:var(--gray-500);white-space:nowrap">0 clientes</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabs de estado rápido -->
+      <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap">
+        <button class="tab-estado active" data-estado="">
+          <span class="tab-dot" style="background:var(--gray-400)"></span>Todos <span class="tab-count" id="cnt-todos">0</span>
+        </button>
+        <button class="tab-estado" data-estado="activo">
+          <span class="tab-dot" style="background:var(--cobrika-success)"></span>Activos <span class="tab-count" id="cnt-activos">0</span>
+        </button>
+        <button class="tab-estado" data-estado="moroso">
+          <span class="tab-dot" style="background:var(--cobrika-mora)"></span>Morosos <span class="tab-count" id="cnt-morosos">0</span>
+        </button>
+        <button class="tab-estado" data-estado="bloqueado">
+          <span class="tab-dot" style="background:var(--cobrika-danger)"></span>Bloqueados <span class="tab-count" id="cnt-bloqueados">0</span>
+        </button>
+      </div>
+
+      <!-- Tabla -->
+      <div class="card">
+        <div class="table-wrap" id="tabla-wrap">
+          <table id="tabla-clientes">
+            <thead>
+              <tr>
+                <th>Cliente</th>
+                <th>Cédula</th>
+                <th>Teléfono</th>
+                <th>Préstamos</th>
+                <th>Score</th>
+                <th>Estado</th>
+                <th>Registrado</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="tbody-clientes">
+              <tr><td colspan="8" style="text-align:center;padding:40px;color:var(--gray-400)">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:36px;height:36px;opacity:.3"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"/></svg>
+                  Cargando clientes...
+                </div>
+              </td></tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- Paginación -->
+        <div class="card-footer" style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+          <span id="pag-info" style="font-size:.82rem;color:var(--gray-500)">—</span>
+          <div style="display:flex;gap:6px">
+            <button class="btn btn-secondary btn-sm" id="btn-anterior" disabled>← Anterior</button>
+            <button class="btn btn-secondary btn-sm" id="btn-siguiente" disabled>Siguiente →</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+<div id="toast-container"></div>
+
+<style>
+.tab-estado {
+  display:inline-flex; align-items:center; gap:6px;
+  padding:6px 14px; border-radius:100px;
+  border:1.5px solid var(--gray-200);
+  background:#fff; font-size:.82rem; font-weight:500;
+  color:var(--gray-600); cursor:pointer; transition:all .15s;
+}
+.tab-estado:hover { border-color:var(--gray-300); background:var(--gray-50); }
+.tab-estado.active { border-color:var(--cobrika-primary); background:var(--cobrika-primary-light); color:var(--cobrika-primary-dark); }
+.tab-dot { width:7px; height:7px; border-radius:50%; display:inline-block; }
+.tab-count { background:var(--gray-100); color:var(--gray-600); border-radius:100px; padding:1px 7px; font-size:.72rem; font-weight:700; }
+.tab-estado.active .tab-count { background:var(--cobrika-primary); color:#fff; }
+
+.score-bar { height:6px; border-radius:3px; background:var(--gray-200); overflow:hidden; width:60px; }
+.score-fill { height:100%; border-radius:3px; transition:width .3s; }
+
+.btn-accion {
+  width:30px; height:30px; border-radius:7px; border:none;
+  display:inline-flex; align-items:center; justify-content:center;
+  cursor:pointer; transition:background .15s;
+}
+.btn-accion svg { width:15px; height:15px; }
+.btn-ver     { background:var(--cobrika-primary-light); color:var(--cobrika-primary); }
+.btn-ver:hover { background:#bfdbfe; }
+.btn-editar  { background:var(--cobrika-warning-bg); color:var(--cobrika-warning); }
+.btn-editar:hover { background:#fcd34d; }
+.btn-eliminar{ background:var(--cobrika-danger-bg); color:var(--cobrika-danger); }
+.btn-eliminar:hover { background:#fca5a5; }
+
+.cliente-avatar {
+  width:36px; height:36px; border-radius:50%; object-fit:cover;
+  background:var(--cobrika-primary-light);
+  display:flex; align-items:center; justify-content:center;
+  font-size:.8rem; font-weight:700; color:var(--cobrika-primary);
+  flex-shrink:0;
+}
+</style>
+
+<script type="module">
+import { requireAdmin, logout } from '../../shared/auth.js';
+import { supabase }             from '../../shared/supabase-client.js';
+import { formatFecha, badgeCliente, iniciales, formatTel, debounce, toast, confirmar } from '../../shared/helpers.js';
+
+const usuario  = await requireAdmin();
+if (!usuario) throw new Error('No auth');
+const tenantId = usuario.perfil.tenant_id;
+
+// Mobile sidebar
+const sidebar = document.getElementById('sidebar');
+const overlay = document.getElementById('sidebar-overlay');
+document.getElementById('sidebar-toggle').addEventListener('click', () => { sidebar.classList.toggle('open'); overlay.classList.toggle('open'); });
+overlay.addEventListener('click', () => { sidebar.classList.remove('open'); overlay.classList.remove('open'); });
+document.getElementById('logout-btn').addEventListener('click', async () => { if (await confirmar('¿Cerrar sesión?')) logout(); });
+
+// Estado
+let todos      = [];
+let filtrados  = [];
+let pagina     = 0;
+const POR_PAG  = 20;
+let busqueda   = '';
+let estadoFiltro = '';
+
+// ── Cargar todos los clientes ─────────────────────────────
+async function cargarClientes() {
+  const { data, error } = await supabase
+    .from('clientes')
+    .select(`
+      id, nombre, cedula, telefono, foto_url, estado, score, created_at,
+      prestamos(id, estado)
+    `)
+    .eq('tenant_id', tenantId)
+    .order('nombre');
+
+  if (error) { toast('Error al cargar clientes', 'error'); return; }
+  todos = data || [];
+  actualizarContadores();
+  aplicarFiltros();
+}
+
+// ── Contadores de tabs ────────────────────────────────────
+function actualizarContadores() {
+  document.getElementById('cnt-todos').textContent     = todos.length;
+  document.getElementById('cnt-activos').textContent   = todos.filter(c => c.estado === 'activo').length;
+  document.getElementById('cnt-morosos').textContent   = todos.filter(c => c.estado === 'moroso').length;
+  document.getElementById('cnt-bloqueados').textContent= todos.filter(c => c.estado === 'bloqueado').length;
+}
+
+// ── Filtrar y ordenar ─────────────────────────────────────
+function aplicarFiltros() {
+  const orden = document.getElementById('filtro-orden').value;
+  filtrados = todos.filter(c => {
+    const matchEstado  = !estadoFiltro || c.estado === estadoFiltro;
+    const matchBusqueda = !busqueda ||
+      c.nombre?.toLowerCase().includes(busqueda) ||
+      c.cedula?.includes(busqueda) ||
+      c.telefono?.includes(busqueda);
+    return matchEstado && matchBusqueda;
+  });
+
+  if (orden === 'fecha')  filtrados.sort((a,b) => new Date(b.created_at) - new Date(a.created_at));
+  if (orden === 'score')  filtrados.sort((a,b) => (b.score||0) - (a.score||0));
+  if (orden === 'nombre') filtrados.sort((a,b) => a.nombre.localeCompare(b.nombre));
+
+  pagina = 0;
+  document.getElementById('total-clientes').textContent = `${filtrados.length} cliente${filtrados.length !== 1 ? 's' : ''}`;
+  renderTabla();
+}
+
+// ── Renderizar tabla ──────────────────────────────────────
+function renderTabla() {
+  const inicio = pagina * POR_PAG;
+  const fin    = inicio + POR_PAG;
+  const pag    = filtrados.slice(inicio, fin);
+
+  const total = filtrados.length;
+  document.getElementById('pag-info').textContent =
+    total === 0 ? 'Sin resultados' :
+    `Mostrando ${inicio + 1}–${Math.min(fin, total)} de ${total}`;
+  document.getElementById('btn-anterior').disabled = pagina === 0;
+  document.getElementById('btn-siguiente').disabled = fin >= total;
+
+  if (pag.length === 0) {
+    document.getElementById('tbody-clientes').innerHTML = `
+      <tr><td colspan="8" style="text-align:center;padding:48px 20px;color:var(--gray-400)">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:36px;height:36px;margin:0 auto 10px;opacity:.3;display:block"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
+        No se encontraron clientes
+      </td></tr>`;
+    return;
+  }
+
+  document.getElementById('tbody-clientes').innerHTML = pag.map(c => {
+    const prestamosActivos = (c.prestamos||[]).filter(p =>
+      ['activo','al_dia','atrasado','en_mora'].includes(p.estado)).length;
+    const score = c.score || 50;
+    const scoreColor = score >= 70 ? '#10b981' : score >= 40 ? '#f59e0b' : '#ef4444';
+
+    return `
+    <tr>
+      <td>
+        <div style="display:flex;align-items:center;gap:10px">
+          ${c.foto_url
+            ? `<img src="${c.foto_url}" style="width:36px;height:36px;border-radius:50%;object-fit:cover;flex-shrink:0" onerror="this.style.display='none'">`
+            : `<div class="cliente-avatar">${iniciales(c.nombre)}</div>`
+          }
+          <div>
+            <div style="font-weight:600;font-size:.875rem;color:var(--gray-900)">${c.nombre}</div>
+            <div style="font-size:.75rem;color:var(--gray-400)">${c.email || ''}</div>
+          </div>
+        </div>
+      </td>
+      <td style="font-size:.85rem;color:var(--gray-600)">${c.cedula || '—'}</td>
+      <td style="font-size:.85rem;color:var(--gray-600)">${formatTel(c.telefono)}</td>
+      <td style="text-align:center">
+        <span style="font-weight:600;color:${prestamosActivos > 0 ? 'var(--cobrika-primary)' : 'var(--gray-400)'}">${prestamosActivos}</span>
+      </td>
+      <td>
+        <div style="display:flex;flex-direction:column;gap:3px">
+          <span style="font-size:.78rem;font-weight:600;color:${scoreColor}">${score}/100</span>
+          <div class="score-bar"><div class="score-fill" style="width:${score}%;background:${scoreColor}"></div></div>
+        </div>
+      </td>
+      <td>${badgeCliente(c.estado)}</td>
+      <td style="font-size:.8rem;color:var(--gray-500)">${formatFecha(c.created_at?.split('T')[0])}</td>
+      <td>
+        <div style="display:flex;gap:4px;justify-content:flex-end">
+          <button class="btn-accion btn-ver"     onclick="verCliente('${c.id}')"     title="Ver perfil">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          </button>
+          <button class="btn-accion btn-editar"  onclick="editarCliente('${c.id}')"  title="Editar">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></svg>
+          </button>
+          <button class="btn-accion btn-eliminar" onclick="eliminarCliente('${c.id}','${c.nombre.replace(/'/g,"\\'")}',this)" title="Eliminar">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"/></svg>
+          </button>
+        </div>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+// ── Acciones ──────────────────────────────────────────────
+window.verCliente     = id => window.location.href = `perfil.html?id=${id}`;
+window.editarCliente  = id => window.location.href = `nuevo.html?id=${id}`;
+
+window.eliminarCliente = async (id, nombre, btn) => {
+  if (!await confirmar(`¿Eliminar a ${nombre}? Esta acción no se puede deshacer.`, '¿Eliminar cliente?')) return;
+  btn.disabled = true;
+  const { error } = await supabase.from('clientes').delete().eq('id', id).eq('tenant_id', tenantId);
+  if (error) {
+    toast(error.message.includes('foreign key') ? 'No se puede eliminar — tiene préstamos asociados.' : 'Error al eliminar.', 'error');
+    btn.disabled = false;
+  } else {
+    toast(`${nombre} eliminado`, 'success');
+    todos = todos.filter(c => c.id !== id);
+    actualizarContadores();
+    aplicarFiltros();
+  }
+};
+
+// ── Eventos de filtros ────────────────────────────────────
+document.getElementById('buscar').addEventListener('input', debounce(e => {
+  busqueda = e.target.value.toLowerCase().trim();
+  aplicarFiltros();
+}, 250));
+
+document.getElementById('filtro-estado').addEventListener('change', e => {
+  estadoFiltro = e.target.value;
+  // Sincronizar tabs
+  document.querySelectorAll('.tab-estado').forEach(t => {
+    t.classList.toggle('active', t.dataset.estado === estadoFiltro);
+  });
+  aplicarFiltros();
+});
+
+document.getElementById('filtro-orden').addEventListener('change', aplicarFiltros);
+
+document.querySelectorAll('.tab-estado').forEach(tab => {
+  tab.addEventListener('click', () => {
+    estadoFiltro = tab.dataset.estado;
+    document.getElementById('filtro-estado').value = estadoFiltro;
+    document.querySelectorAll('.tab-estado').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    aplicarFiltros();
+  });
+});
+
+document.getElementById('btn-anterior').addEventListener('click', () => { pagina--; renderTabla(); window.scrollTo(0,0); });
+document.getElementById('btn-siguiente').addEventListener('click', () => { pagina++; renderTabla(); window.scrollTo(0,0); });
+
+// ── Iniciar ───────────────────────────────────────────────
+await cargarClientes();
+</script>
+</body>
+</html>
