@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#1a56db">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Cobrika — Mi cuenta</title>
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <link rel="stylesheet" href="../assets/css/app.css">
+  <link rel="manifest" href="../manifest.json">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="app-header">
+    <div class="app-header-logo">Cobrika</div>
+    <div class="app-header-right">
+      <div class="app-avatar" id="cliente-avatar">?</div>
+    </div>
+  </header>
+
+  <!-- Contenido -->
+  <div class="app-content" id="contenido" style="display:none">
+
+    <!-- Balance principal -->
+    <div class="balance-card" id="balance-card">
+      <div class="balance-label">Saldo pendiente total</div>
+      <div class="balance-monto" id="balance-monto">RD$ 0.00</div>
+      <div class="balance-grid">
+        <div class="balance-item">
+          <div class="balance-item-label">Capital</div>
+          <div class="balance-item-val" id="bal-capital">—</div>
+        </div>
+        <div class="balance-item">
+          <div class="balance-item-label">Interés</div>
+          <div class="balance-item-val" id="bal-interes">—</div>
+        </div>
+        <div class="balance-item">
+          <div class="balance-item-label">Préstamos</div>
+          <div class="balance-item-val" id="bal-prestamos">—</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Próxima cuota -->
+    <div id="proxima-wrap"></div>
+
+    <!-- Acciones rápidas -->
+    <div class="acciones-grid">
+      <a href="voucher/index.html" class="accion-btn">
+        <div class="accion-btn-icon" style="background:#eff6ff">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="#1a56db"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"/></svg>
+        </div>
+        <span class="accion-btn-label">Subir voucher</span>
+      </a>
+      <a href="solicitud/index.html" class="accion-btn">
+        <div class="accion-btn-icon" style="background:#f0fdf4">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="#057a55"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+        <span class="accion-btn-label">Solicitar préstamo</span>
+      </a>
+      <a href="pagos/index.html" class="accion-btn">
+        <div class="accion-btn-icon" style="background:#fff7ed">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="#c27803"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z"/></svg>
+        </div>
+        <span class="accion-btn-label">Mis pagos</span>
+      </a>
+    </div>
+
+    <!-- Mis préstamos activos -->
+    <div class="mov-list">
+      <div class="mov-list-title">Mis préstamos</div>
+      <div id="lista-prestamos"></div>
+    </div>
+
+    <!-- Últimos movimientos -->
+    <div class="mov-list">
+      <div class="mov-list-title">Últimos movimientos</div>
+      <div id="lista-movimientos"></div>
+    </div>
+
+  </div>
+
+  <!-- Loading -->
+  <div class="app-loading" id="loading">
+    <div class="spinner spinner-dark" style="width:32px;height:32px;border-width:3px"></div>
+    <p style="font-size:.85rem">Cargando tu cuenta...</p>
+  </div>
+
+  <!-- Nav inferior -->
+  <nav class="app-nav">
+    <a href="index.html" class="nav-tab active">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></svg>
+      <span>Inicio</span>
+    </a>
+    <a href="pagos/index.html" class="nav-tab">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z"/></svg>
+      <span>Pagos</span>
+    </a>
+    <a href="voucher/index.html" class="nav-tab">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"/></svg>
+      <span>Voucher</span>
+    </a>
+    <a href="solicitud/index.html" class="nav-tab">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+      <span>Solicitar</span>
+    </a>
+  </nav>
+
+<div id="toast-container"></div>
+
+<script type="module">
+import { supabase }   from '../shared/supabase-client.js';
+import { formatMoney, formatFecha, iniciales, toast } from '../shared/helpers.js';
+
+// ── Verificar sesión del cliente ──────────────────────────
+const { data: { session } } = await supabase.auth.getSession();
+if (!session) { window.location.href = 'login.html'; }
+
+const clienteId = session?.user?.user_metadata?.cliente_id;
+if (!clienteId) { window.location.href = 'login.html'; }
+
+// Avatar
+const nombre = session?.user?.user_metadata?.nombre || 'Cliente';
+document.getElementById('cliente-avatar').textContent = iniciales(nombre);
+
+// ── Cargar datos ──────────────────────────────────────────
+const { data: prestamos } = await supabase
+  .from('prestamos').select('*')
+  .eq('cliente_id', clienteId)
+  .in('estado', ['activo','al_dia','atrasado','en_mora'])
+  .order('created_at', { ascending: false });
+
+const { data: pagos } = await supabase
+  .from('pagos').select('*')
+  .eq('cliente_id', clienteId)
+  .eq('estado','confirmado')
+  .order('fecha_pago', { ascending: false })
+  .limit(10);
+
+// Cuotas solo si hay préstamos activos
+let cuotas = [];
+if (prestamos?.length) {
+  const { data: c } = await supabase
+    .from('cuotas').select('*, prestamos(frecuencia_pago)')
+    .in('prestamo_id', prestamos.map(p => p.id))
+    .in('estado', ['pendiente','vencida','parcial'])
+    .order('fecha_vence').limit(20);
+  cuotas = c || [];
+}
+
+const prests = prestamos || [];
+const pags   = pagos     || [];
+const cuots  = cuotas    || [];
+
+// Mostrar contenido aunque no haya datos
+document.getElementById('loading').style.display   = 'none';
+document.getElementById('contenido').style.display = '';
+
+// ── Balance ───────────────────────────────────────────────
+const saldoTotal   = prests.reduce((s,p) => s + Number(p.saldo_total||0), 0);
+const capitalTotal = prests.reduce((s,p) => s + Number(p.saldo_capital||0), 0);
+const interesTotal = saldoTotal - capitalTotal;
+
+document.getElementById('balance-monto').textContent  = formatMoney(saldoTotal);
+document.getElementById('bal-capital').textContent    = formatMoney(capitalTotal);
+document.getElementById('bal-interes').textContent    = formatMoney(Math.max(0, interesTotal));
+document.getElementById('bal-prestamos').textContent  = prests.length;
+
+// ── Próxima cuota ─────────────────────────────────────────
+const proxima = cuots[0];
+if (proxima) {
+  const hoy   = new Date(); hoy.setHours(0,0,0,0);
+  const vence = new Date(proxima.fecha_vence + 'T00:00:00');
+  const dias  = Math.floor((vence - hoy) / 86400000);
+  const saldo = Number(proxima.monto_total) - Number(proxima.monto_pagado);
+
+  let clase = '', titulo = '', subtitulo = '', iconColor = '#1a56db', iconBg = '#eff6ff';
+
+  if (dias < 0) {
+    clase = 'vencida'; titulo = `Cuota vencida hace ${Math.abs(dias)} día${Math.abs(dias)>1?'s':''}`;
+    subtitulo = 'Por favor contáctanos para regularizar';
+    iconColor = '#c81e1e'; iconBg = '#fde8e8';
+  } else if (dias === 0) {
+    clase = 'hoy'; titulo = 'Cuota vence HOY';
+    subtitulo = 'Realiza tu pago antes de que termine el día';
+    iconColor = '#c27803'; iconBg = '#fdf6b2';
+  } else if (dias <= 5) {
+    titulo = `Cuota vence en ${dias} día${dias>1?'s':''}`;
+    subtitulo = `${formatFecha(proxima.fecha_vence)}`;
+  } else {
+    titulo = `Próxima cuota`;
+    subtitulo = formatFecha(proxima.fecha_vence);
+  }
+
+  document.getElementById('proxima-wrap').innerHTML = `
+    <div class="proxima-cuota ${clase}">
+      <div class="proxima-icon" style="background:${iconBg}">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="${iconColor}"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"/></svg>
+      </div>
+      <div style="flex:1">
+        <div style="font-weight:700;font-size:.875rem;color:var(--gray-900)">${titulo}</div>
+        <div style="font-size:.78rem;color:var(--gray-500);margin-top:2px">${subtitulo}</div>
+      </div>
+      <div style="text-align:right;flex-shrink:0">
+        <div style="font-size:1.05rem;font-weight:800;color:${iconColor}">${formatMoney(saldo)}</div>
+        <a href="voucher/index.html" style="font-size:.72rem;color:var(--app-primary);font-weight:600">Pagar →</a>
+      </div>
+    </div>`;
+}
+
+// ── Lista de préstamos ────────────────────────────────────
+if (prests.length) {
+  const frecLabel = { diario:'Diaria', semanal:'Semanal', quincenal:'Quincenal', mensual:'Mensual' };
+  document.getElementById('lista-prestamos').innerHTML = prests.map(p => `
+    <div class="mov-item">
+      <div class="mov-ico" style="background:#eff6ff">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="#1a56db"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      </div>
+      <div class="mov-desc">
+        <div class="mov-desc-titulo">Préstamo #${p.numero||'—'}</div>
+        <div class="mov-desc-sub">${p.cuotas_pagadas||0}/${p.num_cuotas} cuotas · ${frecLabel[p.frecuencia_pago]||''}</div>
+      </div>
+      <div style="text-align:right">
+        <div class="mov-monto-app cobro">${formatMoney(p.saldo_total||0)}</div>
+        <div style="font-size:.7rem;color:var(--gray-400)">pendiente</div>
+      </div>
+    </div>`).join('');
+} else {
+  document.getElementById('lista-prestamos').innerHTML = `
+    <div style="text-align:center;padding:24px;color:var(--gray-400);font-size:.85rem;background:#fff;border-radius:12px">
+      No tienes préstamos activos
+    </div>`;
+}
+
+// ── Últimos movimientos ───────────────────────────────────
+if (pags.length) {
+  document.getElementById('lista-movimientos').innerHTML = pags.slice(0,5).map(p => `
+    <div class="mov-item">
+      <div class="mov-ico" style="background:#f0fdf4">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="#057a55"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+      </div>
+      <div class="mov-desc">
+        <div class="mov-desc-titulo">Pago registrado</div>
+        <div class="mov-desc-sub">${formatFecha(p.fecha_pago)} · ${p.metodo}</div>
+      </div>
+      <div class="mov-monto-app pago">${formatMoney(p.monto)}</div>
+    </div>`).join('');
+} else {
+  document.getElementById('lista-movimientos').innerHTML = `
+    <div style="text-align:center;padding:24px;color:var(--gray-400);font-size:.85rem;background:#fff;border-radius:12px">
+      Sin movimientos registrados
+    </div>`;
+}
+
+</script>
+</body>
+</html>
