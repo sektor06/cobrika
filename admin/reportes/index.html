@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reportes — Cobrika</title>
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/admin.css">
+</head>
+<body>
+<div class="admin-layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="sidebar-logo-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75"/></svg></div>
+      <div><div class="sidebar-logo-text">Cobrika</div><div class="sidebar-logo-sub">Panel administrativo</div></div>
+    </div>
+    <div class="sidebar-tenant"><div class="sidebar-tenant-label">Negocio</div><div class="sidebar-tenant-name" id="admin-tenant">—</div></div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Principal</div>
+      <a href="../dashboard/index.html" class="nav-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z"/></svg>Dashboard</a>
+      <a href="../clientes/index.html" class="nav-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"/></svg>Clientes</a>
+      <a href="../prestamos/index.html" class="nav-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Préstamos</a>
+      <a href="../pagos/index.html" class="nav-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z"/></svg>Pagos</a>
+      <div class="nav-section-label">Reportes</div>
+      <a href="index.html" class="nav-item active"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"/></svg>Reportes</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user" id="logout-btn">
+        <div class="avatar" id="admin-avatar">A</div>
+        <div class="sidebar-user-info"><div class="sidebar-user-name" id="admin-nombre">Andy Polanco</div><div class="sidebar-user-role">Administrador</div></div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  <main class="admin-main">
+    <div class="topbar">
+      <div class="topbar-left">
+        <button class="sidebar-toggle" id="sidebar-toggle"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg></button>
+        <div>
+          <div class="topbar-title">Reportes</div>
+          <div class="topbar-breadcrumb">Genera y descarga reportes en PDF</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-content">
+
+      <!-- Tarjetas de reportes disponibles -->
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;margin-bottom:28px">
+
+        <!-- Estado de cuenta por cliente -->
+        <div class="card">
+          <div class="card-body">
+            <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px">
+              <div style="width:48px;height:48px;background:#eff6ff;border-radius:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="#1a56db" style="width:24px;height:24px"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>
+              </div>
+              <div>
+                <h4 style="font-size:.95rem">Estado de cuenta</h4>
+                <p style="font-size:.8rem;color:var(--gray-500);margin-top:2px">Historial completo de un cliente</p>
+              </div>
+            </div>
+            <div class="form-group" style="margin-bottom:14px">
+              <label class="form-label">Seleccionar cliente</label>
+              <select class="form-control" id="sel-cliente-estado">
+                <option value="">Cargando clientes...</option>
+              </select>
+            </div>
+            <button class="btn btn-primary btn-full" onclick="generarEstadoCuenta()">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" style="width:16px;height:16px"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
+              Generar PDF
+            </button>
+          </div>
+        </div>
+
+        <!-- Reporte de préstamo -->
+        <div class="card">
+          <div class="card-body">
+            <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px">
+              <div style="width:48px;height:48px;background:#f0fdf4;border-radius:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="#057a55" style="width:24px;height:24px"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              </div>
+              <div>
+                <h4 style="font-size:.95rem">Plan de cuotas</h4>
+                <p style="font-size:.8rem;color:var(--gray-500);margin-top:2px">Detalle completo de un préstamo</p>
+              </div>
+            </div>
+            <div class="form-group" style="margin-bottom:14px">
+              <label class="form-label">Seleccionar préstamo</label>
+              <select class="form-control" id="sel-prestamo-plan">
+                <option value="">Cargando préstamos...</option>
+              </select>
+            </div>
+            <button class="btn btn-success btn-full" onclick="generarPlanCuotas()">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" style="width:16px;height:16px"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
+              Generar PDF
+            </button>
+          </div>
+        </div>
+
+        <!-- Reporte de cobros del período -->
+        <div class="card">
+          <div class="card-body">
+            <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px">
+              <div style="width:48px;height:48px;background:#fff7ed;border-radius:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="#c27803" style="width:24px;height:24px"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"/></svg>
+              </div>
+              <div>
+                <h4 style="font-size:.95rem">Reporte de cobros</h4>
+                <p style="font-size:.8rem;color:var(--gray-500);margin-top:2px">Todos los pagos del período</p>
+              </div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px">
+              <div class="form-group">
+                <label class="form-label">Desde</label>
+                <input class="form-control" type="date" id="cobros-desde">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Hasta</label>
+                <input class="form-control" type="date" id="cobros-hasta">
+              </div>
+            </div>
+            <button class="btn btn-full" style="background:#fff7ed;color:#c27803;border:1.5px solid #fcd34d;font-weight:600" onclick="generarReporteCobros()">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" style="width:16px;height:16px"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
+              Generar PDF
+            </button>
+          </div>
+        </div>
+
+        <!-- Reporte de morosos -->
+        <div class="card">
+          <div class="card-body">
+            <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px">
+              <div style="width:48px;height:48px;background:#fde8e8;border-radius:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="#c81e1e" style="width:24px;height:24px"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/></svg>
+              </div>
+              <div>
+                <h4 style="font-size:.95rem">Lista de morosos</h4>
+                <p style="font-size:.8rem;color:var(--gray-500);margin-top:2px">Clientes con pagos atrasados</p>
+              </div>
+            </div>
+            <p style="font-size:.82rem;color:var(--gray-500);margin-bottom:14px">
+              Genera la lista completa de clientes con cuotas vencidas y montos de mora acumulada.
+            </p>
+            <button class="btn btn-danger btn-full" onclick="generarReporteMorosos()">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" style="width:16px;height:16px"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
+              Generar PDF
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Vista previa del último reporte generado -->
+      <div class="card" id="preview-card" style="display:none">
+        <div class="card-header">
+          <h4 style="font-size:.95rem" id="preview-titulo">Vista previa</h4>
+          <div style="display:flex;gap:8px">
+            <button class="btn btn-primary btn-sm" id="btn-descargar">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" style="width:14px;height:14px"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
+              Descargar PDF
+            </button>
+            <button class="btn btn-secondary btn-sm" onclick="window.print()">Imprimir</button>
+          </div>
+        </div>
+        <div class="card-body" id="preview-content" style="padding:0"></div>
+      </div>
+
+    </div>
+  </main>
+</div>
+<div id="toast-container"></div>
+
+<style>
+@media print {
+  .sidebar, .topbar, .sidebar-overlay, #toast-container,
+  .card:not(#preview-card), .page-header { display: none !important; }
+  .admin-main { margin-left: 0 !important; }
+  .page-content { padding: 0 !important; }
+  #preview-card { box-shadow: none !important; border: none !important; }
+  .card-header { display: none !important; }
+}
+.reporte-html { padding: 32px; font-family: 'Inter', sans-serif; font-size: 13px; color: #1f2937; }
+.reporte-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 28px; padding-bottom: 20px; border-bottom: 2px solid #1a56db; }
+.reporte-logo { font-size: 1.5rem; font-weight: 800; color: #1a56db; }
+.reporte-info { text-align: right; font-size: 12px; color: #6b7280; }
+.reporte-titulo { font-size: 1.1rem; font-weight: 700; color: #111827; margin-bottom: 16px; }
+.reporte-section { margin-bottom: 20px; }
+.reporte-section-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: #6b7280; margin-bottom: 8px; }
+.reporte-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px; }
+.reporte-kpi { background: #f9fafb; border-radius: 8px; padding: 10px 12px; }
+.reporte-kpi-label { font-size: 11px; color: #9ca3af; }
+.reporte-kpi-val { font-size: 1rem; font-weight: 800; color: #111827; margin-top: 2px; }
+.reporte-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.reporte-table th { background: #f3f4f6; padding: 8px 10px; text-align: left; font-size: 10px; text-transform: uppercase; letter-spacing: .05em; color: #6b7280; border-bottom: 1px solid #e5e7eb; }
+.reporte-table td { padding: 8px 10px; border-bottom: 1px solid #f3f4f6; }
+.reporte-table tr:last-child td { border-bottom: none; }
+.reporte-footer { margin-top: 28px; padding-top: 16px; border-top: 1px solid #e5e7eb; font-size: 11px; color: #9ca3af; text-align: center; }
+.badge-pagada  { background: #def7ec; color: #057a55; padding: 2px 8px; border-radius: 100px; font-size: 10px; font-weight: 600; }
+.badge-pendiente { background: #e5e7eb; color: #374151; padding: 2px 8px; border-radius: 100px; font-size: 10px; font-weight: 600; }
+.badge-vencida { background: #fde8e8; color: #c81e1e; padding: 2px 8px; border-radius: 100px; font-size: 10px; font-weight: 600; }
+</style>
+
+<script type="module">
+import { requireAdmin, logout } from '../../shared/auth.js';
+import { supabase }             from '../../shared/supabase-client.js';
+import { formatMoney, formatFecha, confirmar, toast } from '../../shared/helpers.js';
+
+const usuario  = await requireAdmin();
+if (!usuario) throw new Error('No auth');
+const tenantId = usuario.perfil.tenant_id;
+const negocio  = usuario.perfil.tenants?.nombre || 'Cobrika';
+
+// Sidebar mobile
+const sidebar = document.getElementById('sidebar');
+const overlay = document.getElementById('sidebar-overlay');
+document.getElementById('sidebar-toggle').addEventListener('click', () => { sidebar.classList.toggle('open'); overlay.classList.toggle('open'); });
+overlay.addEventListener('click', () => { sidebar.classList.remove('open'); overlay.classList.remove('open'); });
+document.getElementById('logout-btn').addEventListener('click', async () => { if (await confirmar('¿Cerrar sesión?')) logout(); });
+
+// Fechas por defecto (mes actual)
+const hoy = new Date();
+const mesInicio = new Date(hoy.getFullYear(), hoy.getMonth(), 1);
+document.getElementById('cobros-desde').value = mesInicio.toISOString().split('T')[0];
+document.getElementById('cobros-hasta').value = hoy.toISOString().split('T')[0];
+
+// ── Cargar selects ────────────────────────────────────────
+const { data: clientes } = await supabase
+  .from('clientes').select('id, nombre').eq('tenant_id', tenantId).order('nombre');
+
+const { data: prestamos } = await supabase
+  .from('prestamos').select('id, numero, monto_capital, estado, clientes(nombre)')
+  .eq('tenant_id', tenantId)
+  .in('estado', ['activo','al_dia','atrasado','en_mora','saldado'])
+  .order('created_at', { ascending: false });
+
+const selCliente = document.getElementById('sel-cliente-estado');
+selCliente.innerHTML = '<option value="">Selecciona un cliente...</option>';
+(clientes||[]).forEach(c => {
+  const o = document.createElement('option');
+  o.value = c.id; o.textContent = c.nombre;
+  selCliente.appendChild(o);
+});
+
+const selPrestamo = document.getElementById('sel-prestamo-plan');
+selPrestamo.innerHTML = '<option value="">Selecciona un préstamo...</option>';
+(prestamos||[]).forEach(p => {
+  const o = document.createElement('option');
+  o.value = p.id;
+  o.textContent = `#${p.numero||'—'} — ${p.clientes?.nombre} — ${formatMoney(p.monto_capital)}`;
+  selPrestamo.appendChild(o);
+});
+
+// ── Helper: mostrar reporte ───────────────────────────────
+function mostrarReporte(titulo, html) {
+  document.getElementById('preview-titulo').textContent = titulo;
+  document.getElementById('preview-content').innerHTML = html;
+  document.getElementById('preview-card').style.display = '';
+  document.getElementById('preview-card').scrollIntoView({ behavior: 'smooth' });
+}
+
+// ── Descargar PDF con html2pdf ────────────────────────────
+document.getElementById('btn-descargar').addEventListener('click', async () => {
+  const btn = document.getElementById('btn-descargar');
+  btn.disabled = true;
+  btn.textContent = 'Generando...';
+
+  // Cargar html2pdf dinámicamente
+  if (!window.html2pdf) {
+    await new Promise((resolve, reject) => {
+      const s = document.createElement('script');
+      s.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js';
+      s.onload = resolve; s.onerror = reject;
+      document.head.appendChild(s);
+    });
+  }
+
+  const element = document.getElementById('preview-content');
+  const titulo  = document.getElementById('preview-titulo').textContent;
+  const filename = titulo.replace(/\s+/g, '_').toLowerCase() + '_' + new Date().toISOString().split('T')[0] + '.pdf';
+
+  await html2pdf().set({
+    margin:      [10, 10, 10, 10],
+    filename,
+    image:       { type: 'jpeg', quality: 0.98 },
+    html2canvas: { scale: 2, useCORS: true },
+    jsPDF:       { unit: 'mm', format: 'a4', orientation: 'portrait' },
+  }).from(element).save();
+
+  btn.disabled = false;
+  btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" style="width:14px;height:14px"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg> Descargar PDF';
+});
+
+// ── REPORTE 1: Estado de cuenta ───────────────────────────
+window.generarEstadoCuenta = async () => {
+  const clienteId = document.getElementById('sel-cliente-estado').value;
+  if (!clienteId) { toast('Selecciona un cliente', 'error'); return; }
+
+  toast('Generando estado de cuenta...', 'info', 2000);
+
+  const [{ data: cliente }, { data: prests }, { data: pags }] = await Promise.all([
+    supabase.from('clientes').select('*').eq('id', clienteId).single(),
+    supabase.from('prestamos').select('*, cuotas(*)').eq('cliente_id', clienteId).eq('tenant_id', tenantId).order('created_at', { ascending: false }),
+    supabase.from('pagos').select('*').eq('cliente_id', clienteId).eq('tenant_id', tenantId).eq('estado','confirmado').order('fecha_pago', { ascending: false }),
+  ]);
+
+  const totalPrestado  = (prests||[]).reduce((s,p) => s + Number(p.monto_capital||0), 0);
+  const totalPagado    = (prests||[]).reduce((s,p) => s + Number(p.total_pagado||0), 0);
+  const saldoPendiente = (prests||[]).reduce((s,p) => s + Number(p.saldo_total||0), 0);
+
+  const html = `
+  <div class="reporte-html">
+    <div class="reporte-header">
+      <div>
+        <div class="reporte-logo">💰 ${negocio}</div>
+        <div style="font-size:12px;color:#6b7280;margin-top:4px">Estado de cuenta del cliente</div>
+      </div>
+      <div class="reporte-info">
+        <div style="font-weight:700;color:#111827">${cliente.nombre}</div>
+        ${cliente.cedula ? `<div>Cédula: ${cliente.cedula}</div>` : ''}
+        ${cliente.telefono ? `<div>Tel: ${cliente.telefono}</div>` : ''}
+        <div style="margin-top:4px">Fecha: ${formatFecha(new Date().toISOString().split('T')[0])}</div>
+      </div>
+    </div>
+
+    <div class="reporte-section">
+      <div class="reporte-section-title">Resumen financiero</div>
+      <div class="reporte-grid">
+        <div class="reporte-kpi">
+          <div class="reporte-kpi-label">Total prestado</div>
+          <div class="reporte-kpi-val" style="color:#1a56db">${formatMoney(totalPrestado)}</div>
+        </div>
+        <div class="reporte-kpi">
+          <div class="reporte-kpi-label">Total pagado</div>
+          <div class="reporte-kpi-val" style="color:#057a55">${formatMoney(totalPagado)}</div>
+        </div>
+        <div class="reporte-kpi">
+          <div class="reporte-kpi-label">Saldo pendiente</div>
+          <div class="reporte-kpi-val" style="color:#c27803">${formatMoney(saldoPendiente)}</div>
+        </div>
+      </div>
+    </div>
+
+    ${(prests||[]).map(p => `
+    <div class="reporte-section">
+      <div class="reporte-section-title">Préstamo #${p.numero||'—'} — ${formatMoney(p.monto_capital)} — ${p.estado.toUpperCase()}</div>
+      <table class="reporte-table">
+        <thead><tr><th>#</th><th>Vence</th><th>Capital</th><th>Interés</th><th>Total</th><th>Pagado</th><th>Estado</th></tr></thead>
+        <tbody>
+          ${(p.cuotas||[]).map(c => `
+          <tr>
+            <td>${c.numero}</td>
+            <td>${formatFecha(c.fecha_vence)}</td>
+            <td>${formatMoney(c.monto_capital)}</td>
+            <td>${formatMoney(c.monto_interes)}</td>
+            <td style="font-weight:600">${formatMoney(c.monto_total)}</td>
+            <td style="color:#057a55">${formatMoney(c.monto_pagado)}</td>
+            <td><span class="badge-${c.estado}">${c.estado}</span></td>
+          </tr>`).join('')}
+        </tbody>
+      </table>
+    </div>`).join('')}
+
+    <div class="reporte-section">
+      <div class="reporte-section-title">Historial de pagos (${(pags||[]).length} pagos)</div>
+      <table class="reporte-table">
+        <thead><tr><th>Fecha</th><th>Monto</th><th>Capital</th><th>Interés</th><th>Mora</th><th>Método</th><th>Referencia</th></tr></thead>
+        <tbody>
+          ${(pags||[]).map(p => `
+          <tr>
+            <td>${formatFecha(p.fecha_pago)}</td>
+            <td style="font-weight:700;color:#057a55">${formatMoney(p.monto)}</td>
+            <td>${formatMoney(p.monto_capital)}</td>
+            <td>${formatMoney(p.monto_interes)}</td>
+            <td style="color:${p.monto_mora>0?'#c81e1e':'#9ca3af'}">${formatMoney(p.monto_mora)}</td>
+            <td style="text-transform:capitalize">${p.metodo}</td>
+            <td style="color:#9ca3af">${p.referencia||'—'}</td>
+          </tr>`).join('')}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="reporte-footer">
+      Generado por ${negocio} · ${new Date().toLocaleString('es-DO')} · Cobrika Sistema de Préstamos
+    </div>
+  </div>`;
+
+  mostrarReporte(`Estado de cuenta — ${cliente.nombre}`, html);
+};
+
+// ── REPORTE 2: Plan de cuotas ─────────────────────────────
+window.generarPlanCuotas = async () => {
+  const prestamoId = document.getElementById('sel-prestamo-plan').value;
+  if (!prestamoId) { toast('Selecciona un préstamo', 'error'); return; }
+
+  toast('Generando plan de cuotas...', 'info', 2000);
+
+  const { data: p } = await supabase
+    .from('prestamos').select('*, clientes(*), cuotas(*)')
+    .eq('id', prestamoId).single();
+
+  if (!p) { toast('Préstamo no encontrado', 'error'); return; }
+
+  const frecLabel = { diario:'Diaria', semanal:'Semanal', quincenal:'Quincenal', mensual:'Mensual' };
+  const cuotas = (p.cuotas||[]).sort((a,b) => a.numero - b.numero);
+  const pct = p.monto_total > 0 ? Math.round((p.total_pagado / p.monto_total) * 100) : 0;
+
+  const html = `
+  <div class="reporte-html">
+    <div class="reporte-header">
+      <div>
+        <div class="reporte-logo">💰 ${negocio}</div>
+        <div style="font-size:12px;color:#6b7280;margin-top:4px">Plan de cuotas — Préstamo #${p.numero||'—'}</div>
+      </div>
+      <div class="reporte-info">
+        <div style="font-weight:700;color:#111827">${p.clientes?.nombre}</div>
+        ${p.clientes?.cedula ? `<div>Cédula: ${p.clientes.cedula}</div>` : ''}
+        ${p.clientes?.telefono ? `<div>Tel: ${p.clientes.telefono}</div>` : ''}
+        <div style="margin-top:4px">Fecha: ${formatFecha(new Date().toISOString().split('T')[0])}</div>
+      </div>
+    </div>
+
+    <div class="reporte-grid" style="margin-bottom:20px">
+      <div class="reporte-kpi"><div class="reporte-kpi-label">Capital</div><div class="reporte-kpi-val" style="color:#1a56db">${formatMoney(p.monto_capital)}</div></div>
+      <div class="reporte-kpi"><div class="reporte-kpi-label">Interés (${(Number(p.tasa_interes)*100).toFixed(0)}% ${p.tipo_interes})</div><div class="reporte-kpi-val">${formatMoney(p.total_interes)}</div></div>
+      <div class="reporte-kpi"><div class="reporte-kpi-label">Total a pagar</div><div class="reporte-kpi-val">${formatMoney(p.monto_total)}</div></div>
+      <div class="reporte-kpi"><div class="reporte-kpi-label">Cuota ${frecLabel[p.frecuencia_pago]||''}</div><div class="reporte-kpi-val" style="color:#057a55">${formatMoney(p.monto_cuota)}</div></div>
+      <div class="reporte-kpi"><div class="reporte-kpi-label">Total pagado</div><div class="reporte-kpi-val" style="color:#057a55">${formatMoney(p.total_pagado)}</div></div>
+      <div class="reporte-kpi"><div class="reporte-kpi-label">Saldo pendiente</div><div class="reporte-kpi-val" style="color:#c27803">${formatMoney(p.saldo_total||0)}</div></div>
+    </div>
+
+    <div style="background:#f9fafb;border-radius:8px;padding:8px 12px;margin-bottom:16px;font-size:12px">
+      <strong>Progreso:</strong> ${p.cuotas_pagadas||0} de ${p.num_cuotas} cuotas pagadas (${pct}%) ·
+      Vencimiento: ${formatFecha(p.fecha_vencimiento)}
+    </div>
+
+    <table class="reporte-table">
+      <thead>
+        <tr><th>#</th><th>Fecha vence</th><th>Capital</th><th>Interés</th><th>Mora</th><th>Total</th><th>Pagado</th><th>Saldo</th><th>Estado</th></tr>
+      </thead>
+      <tbody>
+        ${cuotas.map(c => {
+          const saldo = Math.max(0, c.monto_total + (c.monto_mora||0) - c.monto_pagado);
+          return `<tr style="${c.estado==='pagada'?'opacity:.7':''}">
+            <td style="font-weight:600">${c.numero}</td>
+            <td>${formatFecha(c.fecha_vence)}</td>
+            <td>${formatMoney(c.monto_capital)}</td>
+            <td>${formatMoney(c.monto_interes)}</td>
+            <td style="color:${c.monto_mora>0?'#c81e1e':'#9ca3af'}">${formatMoney(c.monto_mora)}</td>
+            <td style="font-weight:600">${formatMoney(c.monto_total)}</td>
+            <td style="color:#057a55">${formatMoney(c.monto_pagado)}</td>
+            <td style="font-weight:700;color:${saldo>0?'#c27803':'#057a55'}">${formatMoney(saldo)}</td>
+            <td><span class="badge-${c.estado}">${c.estado}</span></td>
+          </tr>`;
+        }).join('')}
+      </tbody>
+    </table>
+
+    <div class="reporte-footer">
+      ${negocio} · Generado el ${new Date().toLocaleString('es-DO')} · Cobrika Sistema de Préstamos
+    </div>
+  </div>`;
+
+  mostrarReporte(`Plan de cuotas — #${p.numero} ${p.clientes?.nombre}`, html);
+};
+
+// ── REPORTE 3: Cobros del período ─────────────────────────
+window.generarReporteCobros = async () => {
+  const desde = document.getElementById('cobros-desde').value;
+  const hasta = document.getElementById('cobros-hasta').value;
+  if (!desde || !hasta) { toast('Selecciona el período', 'error'); return; }
+
+  toast('Generando reporte de cobros...', 'info', 2000);
+
+  const { data: pagos } = await supabase
+    .from('pagos')
+    .select('*, clientes(nombre), prestamos(numero)')
+    .eq('tenant_id', tenantId)
+    .eq('estado', 'confirmado')
+    .gte('fecha_pago', desde)
+    .lte('fecha_pago', hasta)
+    .order('fecha_pago', { ascending: false });
+
+  const pags = pagos || [];
+  const totalCobrado  = pags.reduce((s,p) => s + Number(p.monto), 0);
+  const totalCapital  = pags.reduce((s,p) => s + Number(p.monto_capital||0), 0);
+  const totalInteres  = pags.reduce((s,p) => s + Number(p.monto_interes||0), 0);
+  const totalMora     = pags.reduce((s,p) => s + Number(p.monto_mora||0), 0);
+
+  const html = `
+  <div class="reporte-html">
+    <div class="reporte-header">
+      <div>
+        <div class="reporte-logo">💰 ${negocio}</div>
+        <div style="font-size:12px;color:#6b7280;margin-top:4px">Reporte de cobros del período</div>
+      </div>
+      <div class="reporte-info">
+        <div style="font-weight:700">Período: ${formatFecha(desde)} — ${formatFecha(hasta)}</div>
+        <div>${pags.length} pagos registrados</div>
+        <div style="margin-top:4px">Generado: ${formatFecha(new Date().toISOString().split('T')[0])}</div>
+      </div>
+    </div>
+
+    <div class="reporte-grid" style="margin-bottom:20px">
+      <div class="reporte-kpi"><div class="reporte-kpi-label">Total cobrado</div><div class="reporte-kpi-val" style="color:#057a55">${formatMoney(totalCobrado)}</div></div>
+      <div class="reporte-kpi"><div class="reporte-kpi-label">Capital cobrado</div><div class="reporte-kpi-val">${formatMoney(totalCapital)}</div></div>
+      <div class="reporte-kpi"><div class="reporte-kpi-label">Interés cobrado</div><div class="reporte-kpi-val">${formatMoney(totalInteres)}</div></div>
+      <div class="reporte-kpi"><div class="reporte-kpi-label">Mora cobrada</div><div class="reporte-kpi-val" style="color:#c81e1e">${formatMoney(totalMora)}</div></div>
+      <div class="reporte-kpi"><div class="reporte-kpi-label">En efectivo</div><div class="reporte-kpi-val">${formatMoney(pags.filter(p=>p.metodo==='efectivo').reduce((s,p)=>s+Number(p.monto),0))}</div></div>
+      <div class="reporte-kpi"><div class="reporte-kpi-label">Transferencias</div><div class="reporte-kpi-val">${formatMoney(pags.filter(p=>p.metodo==='transferencia').reduce((s,p)=>s+Number(p.monto),0))}</div></div>
+    </div>
+
+    <table class="reporte-table">
+      <thead><tr><th>Fecha</th><th>Cliente</th><th>Préstamo</th><th>Monto</th><th>Capital</th><th>Interés</th><th>Mora</th><th>Método</th></tr></thead>
+      <tbody>
+        ${pags.map(p => `
+        <tr>
+          <td>${formatFecha(p.fecha_pago)}</td>
+          <td style="font-weight:500">${p.clientes?.nombre||'—'}</td>
+          <td style="color:#6b7280">#${p.prestamos?.numero||'—'}</td>
+          <td style="font-weight:700;color:#057a55">${formatMoney(p.monto)}</td>
+          <td>${formatMoney(p.monto_capital)}</td>
+          <td>${formatMoney(p.monto_interes)}</td>
+          <td style="color:${p.monto_mora>0?'#c81e1e':'#9ca3af'}">${formatMoney(p.monto_mora)}</td>
+          <td style="text-transform:capitalize">${p.metodo}</td>
+        </tr>`).join('')}
+        <tr style="font-weight:700;background:#f9fafb;border-top:2px solid #e5e7eb">
+          <td colspan="3">TOTAL</td>
+          <td style="color:#057a55">${formatMoney(totalCobrado)}</td>
+          <td>${formatMoney(totalCapital)}</td>
+          <td>${formatMoney(totalInteres)}</td>
+          <td style="color:#c81e1e">${formatMoney(totalMora)}</td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="reporte-footer">${negocio} · Cobrika Sistema de Préstamos</div>
+  </div>`;
+
+  mostrarReporte(`Cobros ${formatFecha(desde)} — ${formatFecha(hasta)}`, html);
+};
+
+// ── REPORTE 4: Morosos ────────────────────────────────────
+window.generarReporteMorosos = async () => {
+  toast('Generando lista de morosos...', 'info', 2000);
+
+  const hoy = new Date().toISOString().split('T')[0];
+
+  const { data: cuotas } = await supabase
+    .from('cuotas')
+    .select('*, prestamos(id, numero, tasa_mora, dias_gracia, clientes(nombre, telefono, cedula))')
+    .eq('tenant_id', tenantId)
+    .in('estado', ['pendiente','vencida','parcial'])
+    .lt('fecha_vence', hoy)
+    .order('fecha_vence');
+
+  const morosos = {};
+  (cuotas||[]).forEach(c => {
+    const clienteNombre = c.prestamos?.clientes?.nombre || '—';
+    const key = c.prestamos?.clientes?.nombre + c.prestamo_id;
+    const dias = Math.floor((new Date() - new Date(c.fecha_vence + 'T00:00:00')) / 86400000);
+    const diasGracia = c.prestamos?.dias_gracia || 3;
+    if (dias <= diasGracia) return;
+
+    if (!morosos[key]) {
+      morosos[key] = {
+        nombre:   clienteNombre,
+        cedula:   c.prestamos?.clientes?.cedula || '—',
+        telefono: c.prestamos?.clientes?.telefono || '—',
+        prestamo: c.prestamos?.numero || '—',
+        cuotas:   0,
+        diasMax:  0,
+        monto:    0,
+      };
+    }
+    morosos[key].cuotas++;
+    morosos[key].diasMax = Math.max(morosos[key].diasMax, dias);
+    morosos[key].monto  += Number(c.monto_total) - Number(c.monto_pagado);
+  });
+
+  const lista = Object.values(morosos).sort((a,b) => b.diasMax - a.diasMax);
+  const totalMora = lista.reduce((s,m) => s + m.monto, 0);
+
+  const html = `
+  <div class="reporte-html">
+    <div class="reporte-header">
+      <div>
+        <div class="reporte-logo">💰 ${negocio}</div>
+        <div style="font-size:12px;color:#6b7280;margin-top:4px">Lista de clientes morosos</div>
+      </div>
+      <div class="reporte-info">
+        <div style="font-weight:700;color:#c81e1e">${lista.length} clientes en mora</div>
+        <div>Monto total: ${formatMoney(totalMora)}</div>
+        <div style="margin-top:4px">${formatFecha(hoy)}</div>
+      </div>
+    </div>
+
+    <div class="reporte-grid" style="margin-bottom:20px">
+      <div class="reporte-kpi"><div class="reporte-kpi-label">Clientes morosos</div><div class="reporte-kpi-val" style="color:#c81e1e">${lista.length}</div></div>
+      <div class="reporte-kpi"><div class="reporte-kpi-label">Total adeudado</div><div class="reporte-kpi-val" style="color:#c81e1e">${formatMoney(totalMora)}</div></div>
+      <div class="reporte-kpi"><div class="reporte-kpi-label">Cuotas vencidas</div><div class="reporte-kpi-val">${lista.reduce((s,m)=>s+m.cuotas,0)}</div></div>
+    </div>
+
+    <table class="reporte-table">
+      <thead><tr><th>Cliente</th><th>Cédula</th><th>Teléfono</th><th>Préstamo</th><th>Cuotas vencidas</th><th>Días atraso</th><th>Monto adeudado</th></tr></thead>
+      <tbody>
+        ${lista.map(m => `
+        <tr>
+          <td style="font-weight:600">${m.nombre}</td>
+          <td style="color:#6b7280">${m.cedula}</td>
+          <td>${m.telefono}</td>
+          <td style="color:#6b7280">#${m.prestamo}</td>
+          <td style="text-align:center;color:#c81e1e;font-weight:700">${m.cuotas}</td>
+          <td style="text-align:center"><span style="background:#fde8e8;color:#c81e1e;padding:2px 8px;border-radius:100px;font-size:11px;font-weight:700">${m.diasMax}d</span></td>
+          <td style="font-weight:700;color:#c81e1e">${formatMoney(m.monto)}</td>
+        </tr>`).join('')}
+      </tbody>
+    </table>
+    <div class="reporte-footer">${negocio} · Cobrika Sistema de Préstamos · ${new Date().toLocaleString('es-DO')}</div>
+  </div>`;
+
+  mostrarReporte(`Lista de morosos — ${formatFecha(hoy)}`, html);
+};
+</script>
+</body>
+</html>
