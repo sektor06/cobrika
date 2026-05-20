@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Superadmin — Cobrika</title>
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <style>
+    body { background: #0f172a; min-height: 100vh; }
+    .sa-layout { display: flex; min-height: 100vh; }
+
+    .sa-sidebar {
+      width: 240px; background: #1e293b; flex-shrink: 0;
+      display: flex; flex-direction: column;
+      position: fixed; top: 0; left: 0; bottom: 0;
+    }
+    .sa-logo {
+      padding: 20px; border-bottom: 1px solid rgba(255,255,255,.08);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .sa-logo-icon { width: 36px; height: 36px; background: #f59e0b; border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+    .sa-logo-icon svg { width: 20px; height: 20px; color: #fff; }
+    .sa-logo-text { font-size: 1.1rem; font-weight: 800; color: #fff; }
+    .sa-logo-sub  { font-size: .65rem; color: #f59e0b; font-weight: 600; }
+
+    .sa-nav { padding: 12px 10px; flex: 1; }
+    .sa-nav-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 9px 12px; border-radius: 8px;
+      color: rgba(255,255,255,.5); font-size: .875rem; font-weight: 500;
+      cursor: pointer; transition: all .15s; text-decoration: none;
+      margin-bottom: 2px;
+    }
+    .sa-nav-item svg { width: 18px; height: 18px; }
+    .sa-nav-item:hover { background: rgba(255,255,255,.07); color: rgba(255,255,255,.9); }
+    .sa-nav-item.active { background: #f59e0b; color: #fff; }
+
+    .sa-main { margin-left: 240px; flex: 1; }
+    .sa-topbar {
+      background: #1e293b; border-bottom: 1px solid rgba(255,255,255,.08);
+      padding: 0 28px; height: 60px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .sa-topbar-title { font-size: 1rem; font-weight: 700; color: #fff; }
+    .sa-content { padding: 28px; }
+
+    .sa-kpi-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; margin-bottom: 24px; }
+    .sa-kpi {
+      background: #1e293b; border-radius: 14px; padding: 20px;
+      border: 1px solid rgba(255,255,255,.08);
+    }
+    .sa-kpi-label { font-size: .72rem; color: #64748b; margin-bottom: 6px; text-transform: uppercase; letter-spacing: .05em; }
+    .sa-kpi-val   { font-size: 1.6rem; font-weight: 800; color: #fff; }
+
+    .sa-card { background: #1e293b; border-radius: 14px; border: 1px solid rgba(255,255,255,.08); overflow: hidden; }
+    .sa-card-header { padding: 16px 20px; border-bottom: 1px solid rgba(255,255,255,.06); display: flex; align-items: center; justify-content: space-between; }
+    .sa-card-title { font-size: .9rem; font-weight: 700; color: #fff; }
+
+    table { width: 100%; border-collapse: collapse; }
+    thead th {
+      background: rgba(255,255,255,.04); padding: 10px 16px;
+      text-align: left; font-size: .7rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: .06em; color: #64748b;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    tbody td { padding: 14px 16px; border-bottom: 1px solid rgba(255,255,255,.04); color: #cbd5e1; font-size: .875rem; }
+    tbody tr:last-child td { border-bottom: none; }
+    tbody tr:hover { background: rgba(255,255,255,.03); }
+
+    .plan-badge { padding: 3px 10px; border-radius: 100px; font-size: .72rem; font-weight: 700; }
+    .plan-basico       { background: rgba(100,116,139,.2); color: #94a3b8; }
+    .plan-profesional  { background: rgba(26,86,219,.2);   color: #60a5fa; }
+    .plan-empresarial  { background: rgba(245,158,11,.2);  color: #fbbf24; }
+
+    .estado-badge { padding: 3px 10px; border-radius: 100px; font-size: .72rem; font-weight: 700; }
+    .estado-activo   { background: rgba(5,122,85,.2);   color: #34d399; }
+    .estado-inactivo { background: rgba(200,30,30,.2);  color: #f87171; }
+    .estado-prueba   { background: rgba(245,158,11,.2); color: #fbbf24; }
+
+    .btn-sa { padding: 5px 12px; border-radius: 6px; font-size: .75rem; font-weight: 600; border: none; cursor: pointer; transition: all .15s; }
+    .btn-sa-green  { background: rgba(5,122,85,.2);   color: #34d399; }
+    .btn-sa-red    { background: rgba(200,30,30,.2);  color: #f87171; }
+    .btn-sa-yellow { background: rgba(245,158,11,.2); color: #fbbf24; }
+    .btn-sa-blue   { background: rgba(26,86,219,.2);  color: #60a5fa; }
+
+    .search-sa {
+      background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1);
+      border-radius: 8px; padding: 8px 14px; color: #fff; font-size: .875rem;
+      outline: none; width: 240px;
+    }
+    .search-sa::placeholder { color: #64748b; }
+    .search-sa:focus { border-color: #f59e0b; }
+  </style>
+</head>
+<body>
+<div class="sa-layout">
+
+  <!-- Sidebar -->
+  <aside class="sa-sidebar">
+    <div class="sa-logo">
+      <div class="sa-logo-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+      </div>
+      <div>
+        <div class="sa-logo-text">Cobrika</div>
+        <div class="sa-logo-sub">SUPERADMIN</div>
+      </div>
+    </div>
+    <nav class="sa-nav">
+      <a href="index.html" class="sa-nav-item active">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z"/></svg>
+        Dashboard
+      </a>
+      <a href="tenants.html" class="sa-nav-item">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z"/></svg>
+        Prestamistas
+      </a>
+      <a href="#" class="sa-nav-item" id="btn-logout-sa">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"/></svg>
+        Cerrar sesión
+      </a>
+    </nav>
+  </aside>
+
+  <!-- Main -->
+  <main class="sa-main">
+    <div class="sa-topbar">
+      <div class="sa-topbar-title">Dashboard Superadmin</div>
+      <div style="display:flex;align-items:center;gap:10px">
+        <span style="font-size:.82rem;color:#64748b" id="sa-fecha"></span>
+        <div style="width:32px;height:32px;background:#f59e0b;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;font-size:.8rem">A</div>
+      </div>
+    </div>
+
+    <div class="sa-content">
+
+      <!-- KPIs -->
+      <div class="sa-kpi-grid">
+        <div class="sa-kpi">
+          <div class="sa-kpi-label">Total prestamistas</div>
+          <div class="sa-kpi-val" id="kpi-total-tenants">—</div>
+        </div>
+        <div class="sa-kpi">
+          <div class="sa-kpi-label">Activos</div>
+          <div class="sa-kpi-val" style="color:#34d399" id="kpi-activos">—</div>
+        </div>
+        <div class="sa-kpi">
+          <div class="sa-kpi-label">En prueba</div>
+          <div class="sa-kpi-val" style="color:#fbbf24" id="kpi-prueba">—</div>
+        </div>
+        <div class="sa-kpi">
+          <div class="sa-kpi-label">Ingresos est. mensual</div>
+          <div class="sa-kpi-val" style="color:#60a5fa" id="kpi-ingresos">—</div>
+        </div>
+      </div>
+
+      <!-- Tabla de tenants -->
+      <div class="sa-card">
+        <div class="sa-card-header">
+          <div class="sa-card-title">Todos los prestamistas</div>
+          <input type="search" class="search-sa" id="sa-buscar" placeholder="Buscar negocio...">
+        </div>
+        <div style="overflow-x:auto">
+          <table>
+            <thead>
+              <tr>
+                <th>Negocio</th>
+                <th>Email</th>
+                <th>Teléfono</th>
+                <th>Plan</th>
+                <th>Estado</th>
+                <th>Vence</th>
+                <th>Registrado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="sa-tbody">
+              <tr><td colspan="8" style="text-align:center;padding:40px;color:#64748b">Cargando...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<!-- Modal cambiar plan -->
+<div id="modal-plan" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;display:none;align-items:center;justify-content:center">
+  <div style="background:#1e293b;border-radius:16px;padding:28px;width:360px;border:1px solid rgba(255,255,255,.1)">
+    <h3 style="color:#fff;margin-bottom:16px;font-size:1rem">Cambiar plan y fecha</h3>
+    <input type="hidden" id="modal-tenant-id">
+    <div class="form-group" style="margin-bottom:14px">
+      <label class="form-label" style="color:#94a3b8">Plan</label>
+      <select class="form-control" id="modal-plan-sel" style="background:#0f172a;color:#fff;border-color:rgba(255,255,255,.1)">
+        <option value="basico">Básico — RD$500/mes</option>
+        <option value="profesional">Profesional — RD$1,200/mes</option>
+        <option value="empresarial">Empresarial — RD$2,500/mes</option>
+      </select>
+    </div>
+    <div class="form-group" style="margin-bottom:20px">
+      <label class="form-label" style="color:#94a3b8">Fecha de vencimiento</label>
+      <input class="form-control" type="date" id="modal-vence" style="background:#0f172a;color:#fff;border-color:rgba(255,255,255,.1)">
+    </div>
+    <div style="display:flex;gap:10px">
+      <button class="btn btn-secondary btn-full" onclick="document.getElementById('modal-plan').style.display='none'">Cancelar</button>
+      <button class="btn btn-primary btn-full" onclick="guardarPlan()">Guardar</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast-container"></div>
+
+<script type="module">
+import { supabase } from '../shared/supabase-client.js';
+import { formatFecha, formatMoney, debounce, toast, confirmar } from '../shared/helpers.js';
+
+// ── Verificar que es superadmin ───────────────────────────
+const { data: { session } } = await supabase.auth.getSession();
+if (!session) { window.location.href = '../index.html'; }
+
+const { data: esSA } = await supabase
+  .from('superadmins').select('id').eq('id', session.user.id).single();
+
+if (!esSA) {
+  document.body.innerHTML = `<div style="display:flex;align-items:center;justify-content:center;height:100vh;color:#f87171;font-size:1.2rem;font-weight:700;background:#0f172a">
+    ⛔ Acceso denegado — No eres superadmin
+  </div>`;
+  throw new Error('No superadmin');
+}
+
+document.getElementById('sa-fecha').textContent = new Date().toLocaleDateString('es-DO', { weekday:'long', day:'numeric', month:'long' });
+
+document.getElementById('btn-logout-sa').addEventListener('click', async e => {
+  e.preventDefault();
+  await supabase.auth.signOut();
+  window.location.href = '../index.html';
+});
+
+// ── Cargar tenants ────────────────────────────────────────
+let todos = [];
+
+async function cargar() {
+  const { data } = await supabase
+    .from('tenants')
+    .select('*')
+    .order('created_at', { ascending: false });
+
+  todos = data || [];
+  const hoy = new Date().toISOString().split('T')[0];
+
+  // KPIs
+  const activos = todos.filter(t => t.activo && t.fecha_vencimiento >= hoy);
+  const prueba  = todos.filter(t => {
+    const dias = Math.floor((new Date(t.fecha_vencimiento) - new Date()) / 86400000);
+    return dias >= 0 && dias <= 30 && t.activo;
+  });
+  const precioMap = { basico: 60, profesional: 120, empresarial: 250 };
+  const ingresos = activos.reduce((s,t) => s + (precioMap[t.plan] || 0), 0);
+
+  document.getElementById('kpi-total-tenants').textContent = todos.length;
+  document.getElementById('kpi-activos').textContent = activos.length;
+  document.getElementById('kpi-prueba').textContent  = prueba.length;
+  document.getElementById('kpi-ingresos').textContent = formatMoney(ingresos);
+
+  renderTabla(todos);
+}
+
+function renderTabla(lista) {
+  const hoy = new Date().toISOString().split('T')[0];
+  if (!lista.length) {
+    document.getElementById('sa-tbody').innerHTML = `<tr><td colspan="8" style="text-align:center;padding:32px;color:#64748b">Sin prestamistas registrados</td></tr>`;
+    return;
+  }
+
+  document.getElementById('sa-tbody').innerHTML = lista.map(t => {
+    const diasVence = t.fecha_vencimiento ? Math.floor((new Date(t.fecha_vencimiento) - new Date()) / 86400000) : null;
+    const estadoLabel = !t.activo ? 'inactivo' : diasVence < 0 ? 'vencido' : diasVence <= 30 ? 'prueba' : 'activo';
+
+    return `<tr>
+      <td>
+        <div style="font-weight:600;color:#fff">${t.nombre}</div>
+        <div style="font-size:.72rem;color:#64748b">${t.id.slice(0,8)}...</div>
+      </td>
+      <td>${t.email}</td>
+      <td>${t.telefono || '—'}</td>
+      <td><span class="plan-badge plan-${t.plan}">${t.plan}</span></td>
+      <td>
+        <span class="estado-badge estado-${estadoLabel === 'vencido' ? 'inactivo' : estadoLabel}">
+          ${estadoLabel}
+        </span>
+      </td>
+      <td style="font-size:.82rem">
+        ${t.fecha_vencimiento ? `${formatFecha(t.fecha_vencimiento)}<br><span style="font-size:.7rem;color:${diasVence < 0 ? '#f87171' : diasVence <= 7 ? '#fbbf24' : '#64748b'}">${diasVence < 0 ? `Venció hace ${Math.abs(diasVence)}d` : `${diasVence}d restantes`}</span>` : '—'}
+      </td>
+      <td style="font-size:.78rem;color:#64748b">${formatFecha(t.created_at?.split('T')[0])}</td>
+      <td>
+        <div style="display:flex;gap:6px;flex-wrap:wrap">
+          <button class="btn-sa btn-sa-yellow" onclick="abrirModalPlan('${t.id}','${t.plan}','${t.fecha_vencimiento||''}')">Plan</button>
+          ${t.activo
+            ? `<button class="btn-sa btn-sa-red"   onclick="toggleActivo('${t.id}', false)">Desactivar</button>`
+            : `<button class="btn-sa btn-sa-green" onclick="toggleActivo('${t.id}', true)">Activar</button>`
+          }
+          <button class="btn-sa btn-sa-blue" onclick="renovar30('${t.id}')">+30d</button>
+        </div>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+// Buscar
+document.getElementById('sa-buscar').addEventListener('input', debounce(e => {
+  const q = e.target.value.toLowerCase();
+  renderTabla(todos.filter(t => t.nombre.toLowerCase().includes(q) || t.email.toLowerCase().includes(q)));
+}, 250));
+
+// ── Acciones ──────────────────────────────────────────────
+window.toggleActivo = async (id, estado) => {
+  const { error } = await supabase.from('tenants').update({ activo: estado }).eq('id', id);
+  if (!error) { toast(estado ? 'Cuenta activada' : 'Cuenta desactivada', estado ? 'success' : 'info'); cargar(); }
+  else toast('Error: ' + error.message, 'error');
+};
+
+window.renovar30 = async (id) => {
+  const { data: t } = await supabase.from('tenants').select('fecha_vencimiento').eq('id', id).single();
+  const base = t?.fecha_vencimiento && t.fecha_vencimiento >= new Date().toISOString().split('T')[0]
+    ? new Date(t.fecha_vencimiento)
+    : new Date();
+  base.setDate(base.getDate() + 30);
+  const nuevaFecha = base.toISOString().split('T')[0];
+  const { error } = await supabase.from('tenants').update({ activo: true, fecha_vencimiento: nuevaFecha }).eq('id', id);
+  if (!error) { toast('Renovado 30 días', 'success'); cargar(); }
+  else toast('Error: ' + error.message, 'error');
+};
+
+window.abrirModalPlan = (id, plan, vence) => {
+  document.getElementById('modal-tenant-id').value = id;
+  document.getElementById('modal-plan-sel').value  = plan;
+  document.getElementById('modal-vence').value     = vence;
+  document.getElementById('modal-plan').style.display = 'flex';
+};
+
+window.guardarPlan = async () => {
+  const id    = document.getElementById('modal-tenant-id').value;
+  const plan  = document.getElementById('modal-plan-sel').value;
+  const vence = document.getElementById('modal-vence').value;
+  const limites = { basico: 50, profesional: 200, empresarial: 999999 };
+
+  const { error } = await supabase.from('tenants').update({
+    plan, fecha_vencimiento: vence, max_clientes: limites[plan], activo: true,
+  }).eq('id', id);
+
+  document.getElementById('modal-plan').style.display = 'none';
+  if (!error) { toast('Plan actualizado', 'success'); cargar(); }
+  else toast('Error: ' + error.message, 'error');
+};
+
+await cargar();
+</script>
+</body>
+</html>
