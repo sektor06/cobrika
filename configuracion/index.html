@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Configuración — Cobrika</title>
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/admin.css">
+</head>
+<body>
+<div class="admin-layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="sidebar-logo-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75"/></svg></div>
+      <div><div class="sidebar-logo-text">Cobrika</div><div class="sidebar-logo-sub">Panel administrativo</div></div>
+    </div>
+    <div class="sidebar-tenant"><div class="sidebar-tenant-label">Negocio</div><div class="sidebar-tenant-name" id="admin-tenant">—</div></div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Principal</div>
+      <a href="../dashboard/index.html" class="nav-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z"/></svg>Dashboard</a>
+      <a href="../clientes/index.html" class="nav-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"/></svg>Clientes</a>
+      <a href="../prestamos/index.html" class="nav-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Préstamos</a>
+      <a href="../pagos/index.html" class="nav-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z"/></svg>Pagos</a>
+      <div class="nav-section-label">Operaciones</div>
+      <a href="../pagos/vouchers.html" class="nav-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/></svg>Vouchers</a>
+      <a href="../notificaciones/index.html" class="nav-item"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>WhatsApp</a>
+      <a href="../morosos/index.html" class="nav-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/></svg>Morosos</a>
+      <div class="nav-section-label">Reportes</div>
+      <a href="../reportes/index.html" class="nav-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"/></svg>Reportes</a>
+      <a href="index.html" class="nav-item active"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>Configuración</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user" id="logout-btn">
+        <div class="avatar" id="admin-avatar">A</div>
+        <div class="sidebar-user-info"><div class="sidebar-user-name" id="admin-nombre">Andy Polanco</div><div class="sidebar-user-role">Administrador</div></div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  <main class="admin-main">
+    <div class="topbar">
+      <div class="topbar-left">
+        <button class="sidebar-toggle" id="sidebar-toggle"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg></button>
+        <div>
+          <div class="topbar-title">Configuración</div>
+          <div class="topbar-breadcrumb">Ajustes del negocio</div>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <button class="btn btn-primary btn-sm" id="btn-guardar-top">Guardar cambios</button>
+      </div>
+    </div>
+
+    <div class="page-content">
+
+      <!-- Loading -->
+      <div id="loading" style="display:flex;align-items:center;justify-content:center;height:40vh;gap:12px;color:var(--gray-400)">
+        <div class="spinner spinner-dark"></div> Cargando configuración...
+      </div>
+
+      <form id="form-config" style="display:none">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start">
+
+          <!-- Columna izquierda -->
+          <div style="display:flex;flex-direction:column;gap:20px">
+
+            <!-- Info del negocio -->
+            <div class="card">
+              <div class="card-header"><h4 style="font-size:.95rem">Información del negocio</h4></div>
+              <div class="card-body">
+                <div style="display:flex;flex-direction:column;gap:16px">
+                  <div class="form-group">
+                    <label class="form-label">Nombre del negocio</label>
+                    <input class="form-control" type="text" id="nombre_negocio" placeholder="Mi empresa de préstamos">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Teléfono WhatsApp</label>
+                    <div style="position:relative">
+                      <span style="position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:.82rem;color:var(--gray-500)">+1</span>
+                      <input class="form-control" type="tel" id="telefono_whatsapp" placeholder="8090000000" style="padding-left:36px">
+                    </div>
+                    <div class="form-hint">Número al que los clientes pueden escribir por WhatsApp</div>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Moneda</label>
+                    <select class="form-control" id="moneda">
+                      <option value="DOP">DOP — Peso dominicano (RD$)</option>
+                      <option value="USD">USD — Dólar americano ($)</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Prefijo de recibos</label>
+                    <input class="form-control" type="text" id="prefijo_recibo" placeholder="REC" maxlength="5">
+                    <div class="form-hint">Ej: REC → REC-000001</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Valores por defecto -->
+            <div class="card">
+              <div class="card-header"><h4 style="font-size:.95rem">Valores por defecto para nuevos préstamos</h4></div>
+              <div class="card-body">
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+                  <div class="form-group">
+                    <label class="form-label">Tasa de interés mensual (%)</label>
+                    <input class="form-control" type="number" id="tasa_interes_default" min="0" max="100" step="0.5" placeholder="10">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Tipo de interés</label>
+                    <select class="form-control" id="tipo_interes_default">
+                      <option value="fijo">Fijo (sobre capital original)</option>
+                      <option value="reducido">Reducido (sobre saldo)</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Tasa de mora mensual (%)</label>
+                    <input class="form-control" type="number" id="tasa_mora_default" min="0" max="50" step="0.5" placeholder="2">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Días de gracia</label>
+                    <input class="form-control" type="number" id="dias_gracia_default" min="0" max="30" placeholder="3">
+                  </div>
+                  <div class="form-group" style="grid-column:1/-1">
+                    <label class="form-label">Frecuencia de pago por defecto</label>
+                    <select class="form-control" id="frecuencia_default">
+                      <option value="mensual">Mensual</option>
+                      <option value="quincenal">Quincenal</option>
+                      <option value="semanal">Semanal</option>
+                      <option value="diario">Diario</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Columna derecha -->
+          <div style="display:flex;flex-direction:column;gap:20px">
+
+            <!-- Mensajes de WhatsApp -->
+            <div class="card">
+              <div class="card-header"><h4 style="font-size:.95rem">Mensajes automáticos de WhatsApp</h4></div>
+              <div class="card-body">
+                <div style="background:var(--cobrika-primary-light);border-radius:8px;padding:10px 12px;margin-bottom:16px;font-size:.78rem;color:var(--cobrika-primary-dark)">
+                  Variables disponibles: <code>{nombre}</code> <code>{monto}</code> <code>{fecha}</code> <code>{dias}</code> <code>{saldo}</code>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:16px">
+                  <div class="form-group">
+                    <label class="form-label">Mensaje de recordatorio de pago</label>
+                    <textarea class="form-control" id="mensaje_recordatorio" rows="3"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Mensaje de aviso de mora</label>
+                    <textarea class="form-control" id="mensaje_mora" rows="3"></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Vista previa de mensajes -->
+            <div class="card">
+              <div class="card-header"><h4 style="font-size:.9rem">Vista previa de mensajes</h4></div>
+              <div class="card-body">
+                <div style="margin-bottom:12px">
+                  <div style="font-size:.72rem;font-weight:600;color:var(--gray-400);text-transform:uppercase;margin-bottom:6px">Recordatorio</div>
+                  <div id="preview-recordatorio" style="background:#f0fdf4;border-radius:8px;padding:10px;font-size:.82rem;color:var(--gray-700);line-height:1.6;white-space:pre-wrap"></div>
+                </div>
+                <div>
+                  <div style="font-size:.72rem;font-weight:600;color:var(--gray-400);text-transform:uppercase;margin-bottom:6px">Mora</div>
+                  <div id="preview-mora" style="background:#fde8e8;border-radius:8px;padding:10px;font-size:.82rem;color:var(--gray-700);line-height:1.6;white-space:pre-wrap"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Botón guardar -->
+            <button type="submit" class="btn btn-primary btn-lg btn-full" id="btn-guardar">
+              <span id="btn-texto">Guardar configuración</span>
+              <span id="btn-spinner" class="spinner" style="display:none"></span>
+            </button>
+
+          </div>
+        </div>
+      </form>
+    </div>
+  </main>
+</div>
+<div id="toast-container"></div>
+
+<style>
+@media(max-width:900px){
+  #form-config > div { grid-template-columns:1fr !important; }
+}
+</style>
+
+<script type="module">
+import { requireAdmin, logout } from '../../shared/auth.js';
+import { supabase }             from '../../shared/supabase-client.js';
+import { toast, confirmar }     from '../../shared/helpers.js';
+
+const usuario  = await requireAdmin();
+if (!usuario) throw new Error('No auth');
+const tenantId = usuario.perfil.tenant_id;
+
+const sidebar = document.getElementById('sidebar');
+const overlay = document.getElementById('sidebar-overlay');
+document.getElementById('sidebar-toggle').addEventListener('click', () => { sidebar.classList.toggle('open'); overlay.classList.toggle('open'); });
+overlay.addEventListener('click', () => { sidebar.classList.remove('open'); overlay.classList.remove('open'); });
+document.getElementById('logout-btn').addEventListener('click', async () => { if (await confirmar('¿Cerrar sesión?')) logout(); });
+
+// ── Cargar configuración ──────────────────────────────────
+const { data: config } = await supabase
+  .from('configuracion')
+  .select('*')
+  .eq('tenant_id', tenantId)
+  .single();
+
+const { data: tenant } = await supabase
+  .from('tenants')
+  .select('nombre, email, telefono')
+  .eq('id', tenantId)
+  .single();
+
+if (config) {
+  document.getElementById('nombre_negocio').value       = config.nombre_negocio    || tenant?.nombre || '';
+  document.getElementById('telefono_whatsapp').value    = config.telefono_whatsapp || '';
+  document.getElementById('moneda').value               = config.moneda            || 'DOP';
+  document.getElementById('prefijo_recibo').value       = config.prefijo_recibo    || 'REC';
+  document.getElementById('tasa_interes_default').value = (Number(config.tasa_interes_default||0.10)*100).toFixed(1);
+  document.getElementById('tipo_interes_default').value = config.tipo_interes_default || 'fijo';
+  document.getElementById('tasa_mora_default').value    = (Number(config.tasa_mora_default||0.02)*100).toFixed(1);
+  document.getElementById('dias_gracia_default').value  = config.dias_gracia_default || 3;
+  document.getElementById('frecuencia_default').value   = config.frecuencia_default  || 'mensual';
+  document.getElementById('mensaje_recordatorio').value = config.mensaje_recordatorio || '¡Hola {nombre}! Le recordamos que su cuota de RD${monto} vence el {fecha}. Por favor realice su pago a tiempo. Gracias 🙏';
+  document.getElementById('mensaje_mora').value         = config.mensaje_mora || '¡Hola {nombre}! Su préstamo tiene {dias} días de atraso. Monto pendiente: RD${monto}. Por favor contáctenos para regularizar. 📞';
+}
+
+// Actualizar previews en tiempo real
+function actualizarPreviews() {
+  const vars = { '{nombre}':'Juan Pérez', '{monto}':'5,000.00', '{fecha}':'25 jun 2025', '{dias}':'15', '{saldo}':'12,000.00' };
+  const reemplazar = txt => Object.entries(vars).reduce((s,[k,v]) => s.replaceAll(k,v), txt);
+  document.getElementById('preview-recordatorio').textContent = reemplazar(document.getElementById('mensaje_recordatorio').value);
+  document.getElementById('preview-mora').textContent         = reemplazar(document.getElementById('mensaje_mora').value);
+}
+
+document.getElementById('mensaje_recordatorio').addEventListener('input', actualizarPreviews);
+document.getElementById('mensaje_mora').addEventListener('input', actualizarPreviews);
+actualizarPreviews();
+
+document.getElementById('loading').style.display   = 'none';
+document.getElementById('form-config').style.display = '';
+
+// ── Guardar ───────────────────────────────────────────────
+async function guardar() {
+  const btn = document.getElementById('btn-guardar');
+  btn.disabled = true;
+  document.getElementById('btn-texto').style.display  = 'none';
+  document.getElementById('btn-spinner').style.display= 'inline-block';
+
+  const payload = {
+    tenant_id:              tenantId,
+    nombre_negocio:         document.getElementById('nombre_negocio').value.trim(),
+    telefono_whatsapp:      document.getElementById('telefono_whatsapp').value.trim() || null,
+    moneda:                 document.getElementById('moneda').value,
+    prefijo_recibo:         document.getElementById('prefijo_recibo').value.trim().toUpperCase() || 'REC',
+    tasa_interes_default:   parseFloat(document.getElementById('tasa_interes_default').value) / 100,
+    tipo_interes_default:   document.getElementById('tipo_interes_default').value,
+    tasa_mora_default:      parseFloat(document.getElementById('tasa_mora_default').value) / 100,
+    dias_gracia_default:    parseInt(document.getElementById('dias_gracia_default').value),
+    frecuencia_default:     document.getElementById('frecuencia_default').value,
+    mensaje_recordatorio:   document.getElementById('mensaje_recordatorio').value.trim(),
+    mensaje_mora:           document.getElementById('mensaje_mora').value.trim(),
+  };
+
+  // Upsert (crear si no existe, actualizar si existe)
+  const { error } = await supabase
+    .from('configuracion')
+    .upsert(payload, { onConflict: 'tenant_id' });
+
+  // También actualizar el nombre del tenant
+  await supabase.from('tenants').update({ nombre: payload.nombre_negocio }).eq('id', tenantId);
+
+  btn.disabled = false;
+  document.getElementById('btn-texto').style.display  = 'inline';
+  document.getElementById('btn-spinner').style.display= 'none';
+
+  if (error) {
+    toast('Error al guardar: ' + error.message, 'error');
+  } else {
+    toast('Configuración guardada correctamente', 'success');
+    // Actualizar el nombre en el sidebar
+    document.getElementById('admin-tenant').textContent = payload.nombre_negocio;
+  }
+}
+
+document.getElementById('form-config').addEventListener('submit', e => { e.preventDefault(); guardar(); });
+document.getElementById('btn-guardar-top').addEventListener('click', guardar);
+</script>
+</body>
+</html>
