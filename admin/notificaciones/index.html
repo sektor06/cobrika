@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WhatsApp — Cobrika</title>
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/admin.css">
+</head>
+<body>
+<div class="admin-layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="sidebar-logo-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75"/></svg></div>
+      <div><div class="sidebar-logo-text">Cobrika</div><div class="sidebar-logo-sub">Panel administrativo</div></div>
+    </div>
+    <div class="sidebar-tenant"><div class="sidebar-tenant-label">Negocio</div><div class="sidebar-tenant-name" id="admin-tenant">—</div></div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Principal</div>
+      <a href="../dashboard/index.html" class="nav-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z"/></svg>Dashboard</a>
+      <a href="../clientes/index.html" class="nav-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"/></svg>Clientes</a>
+      <a href="../prestamos/index.html" class="nav-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Préstamos</a>
+      <a href="../pagos/index.html" class="nav-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z"/></svg>Pagos</a>
+      <div class="nav-section-label">Operaciones</div>
+      <a href="../pagos/vouchers.html" class="nav-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/></svg>Vouchers</a>
+      <a href="index.html" class="nav-item active"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>WhatsApp</a>
+      <div class="nav-section-label">Reportes</div>
+      <a href="../reportes/index.html" class="nav-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"/></svg>Reportes</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user" id="logout-btn">
+        <div class="avatar" id="admin-avatar">A</div>
+        <div class="sidebar-user-info"><div class="sidebar-user-name" id="admin-nombre">Andy Polanco</div><div class="sidebar-user-role">Administrador</div></div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  <main class="admin-main">
+    <div class="topbar">
+      <div class="topbar-left">
+        <button class="sidebar-toggle" id="sidebar-toggle"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg></button>
+        <div>
+          <div class="topbar-title">Notificaciones WhatsApp</div>
+          <div class="topbar-breadcrumb">Recordatorios y mensajes masivos</div>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <span style="font-size:.8rem;background:#dcfce7;color:#166534;padding:5px 12px;border-radius:100px;font-weight:600">
+          ✓ Sin costo — usa wa.me
+        </span>
+      </div>
+    </div>
+
+    <div class="page-content">
+
+      <!-- Tabs -->
+      <div style="display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap">
+        <button class="tab-wa active" data-tab="hoy">Cobros de hoy</button>
+        <button class="tab-wa" data-tab="morosos">Morosos</button>
+        <button class="tab-wa" data-tab="proximos">Próximos 3 días</button>
+        <button class="tab-wa" data-tab="masivo">Mensaje masivo</button>
+        <button class="tab-wa" data-tab="plantillas">Plantillas</button>
+      </div>
+
+      <!-- TAB: Cobros de hoy -->
+      <div id="tab-hoy" class="tab-content">
+        <div class="card" style="margin-bottom:16px">
+          <div class="card-header">
+            <div>
+              <h4 style="font-size:.95rem">Cuotas que vencen hoy</h4>
+              <p style="font-size:.78rem;color:var(--gray-400);margin-top:2px">Envía recordatorios a todos los clientes con cobros pendientes hoy</p>
+            </div>
+            <button class="btn btn-primary btn-sm" id="btn-enviar-todos-hoy">
+              Enviar a todos
+            </button>
+          </div>
+          <div id="lista-hoy" class="card-body" style="padding-top:8px"></div>
+        </div>
+      </div>
+
+      <!-- TAB: Morosos -->
+      <div id="tab-morosos" class="tab-content" style="display:none">
+        <div class="card" style="margin-bottom:16px">
+          <div class="card-header">
+            <div>
+              <h4 style="font-size:.95rem">Clientes en mora</h4>
+              <p style="font-size:.78rem;color:var(--gray-400);margin-top:2px">Clientes con cuotas vencidas — envía mensajes de cobro</p>
+            </div>
+            <button class="btn btn-danger btn-sm" id="btn-enviar-todos-morosos">
+              Enviar a todos
+            </button>
+          </div>
+          <div id="lista-morosos" class="card-body" style="padding-top:8px"></div>
+        </div>
+      </div>
+
+      <!-- TAB: Próximos 3 días -->
+      <div id="tab-proximos" class="tab-content" style="display:none">
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h4 style="font-size:.95rem">Vencen en los próximos 3 días</h4>
+              <p style="font-size:.78rem;color:var(--gray-400);margin-top:2px">Envía recordatorios preventivos antes de que venzan</p>
+            </div>
+            <button class="btn btn-secondary btn-sm" id="btn-enviar-todos-proximos">
+              Enviar a todos
+            </button>
+          </div>
+          <div id="lista-proximos" class="card-body" style="padding-top:8px"></div>
+        </div>
+      </div>
+
+      <!-- TAB: Masivo -->
+      <div id="tab-masivo" class="tab-content" style="display:none">
+        <div style="display:grid;grid-template-columns:1fr 360px;gap:20px">
+          <div class="card">
+            <div class="card-header"><h4 style="font-size:.95rem">Mensaje personalizado masivo</h4></div>
+            <div class="card-body">
+              <div class="form-group" style="margin-bottom:16px">
+                <label class="form-label">Destinatarios</label>
+                <select class="form-control" id="masivo-filtro">
+                  <option value="todos">Todos los clientes activos</option>
+                  <option value="morosos">Solo morosos</option>
+                  <option value="al_dia">Solo al día</option>
+                  <option value="con_prestamo">Con préstamos activos</option>
+                </select>
+              </div>
+              <div class="form-group" style="margin-bottom:16px">
+                <label class="form-label">Mensaje</label>
+                <textarea class="form-control" id="masivo-mensaje" rows="5"
+                  placeholder="Hola {nombre}, le recordamos que...">Hola {nombre}, le contactamos de parte de su prestamista. Su saldo pendiente es de {saldo}. Para más información contáctenos. Gracias.</textarea>
+                <div class="form-hint">Variables: {nombre} {saldo} {cuota} {fecha_vence}</div>
+              </div>
+              <div style="background:var(--cobrika-primary-light);border-radius:10px;padding:12px;margin-bottom:16px;font-size:.82rem;color:var(--cobrika-primary-dark)">
+                <strong>Vista previa:</strong><br>
+                <span id="masivo-preview">—</span>
+              </div>
+              <button class="btn btn-primary btn-full" id="btn-preparar-masivo">
+                Preparar mensajes
+              </button>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header"><h4 style="font-size:.9rem">Cómo funciona</h4></div>
+            <div class="card-body">
+              <div style="display:flex;flex-direction:column;gap:14px">
+                <div style="display:flex;gap:10px;align-items:flex-start">
+                  <div style="width:28px;height:28px;background:#dcfce7;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.8rem;font-weight:700;color:#166534">1</div>
+                  <div style="font-size:.82rem;color:var(--gray-600)">Selecciona el grupo de clientes y escribe el mensaje</div>
+                </div>
+                <div style="display:flex;gap:10px;align-items:flex-start">
+                  <div style="width:28px;height:28px;background:#dcfce7;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.8rem;font-weight:700;color:#166534">2</div>
+                  <div style="font-size:.82rem;color:var(--gray-600)">Haz clic en "Preparar mensajes" — se genera un botón por cliente</div>
+                </div>
+                <div style="display:flex;gap:10px;align-items:flex-start">
+                  <div style="width:28px;height:28px;background:#dcfce7;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.8rem;font-weight:700;color:#166534">3</div>
+                  <div style="font-size:.82rem;color:var(--gray-600)">Haz clic en cada botón verde — se abre WhatsApp con el mensaje listo</div>
+                </div>
+                <div style="display:flex;gap:10px;align-items:flex-start">
+                  <div style="width:28px;height:28px;background:#dcfce7;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.8rem;font-weight:700;color:#166534">4</div>
+                  <div style="font-size:.82rem;color:var(--gray-600)">Solo das clic en "Enviar" en WhatsApp — sin costo, sin API</div>
+                </div>
+              </div>
+              <div style="margin-top:16px;padding:10px;background:#f0fdf4;border-radius:8px;font-size:.78rem;color:#166534">
+                ✓ Funciona con cualquier número de WhatsApp sin necesidad de API ni pagos mensuales.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="masivo-lista" style="margin-top:16px"></div>
+      </div>
+
+      <!-- TAB: Plantillas -->
+      <div id="tab-plantillas" class="tab-content" style="display:none">
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px">
+
+          <div class="card plantilla-card">
+            <div class="card-body">
+              <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+                <span style="font-size:1.5rem">📅</span>
+                <h4 style="font-size:.9rem">Recordatorio de cuota</h4>
+              </div>
+              <div class="plantilla-texto" style="background:var(--gray-50);border-radius:8px;padding:12px;font-size:.82rem;color:var(--gray-700);line-height:1.6;margin-bottom:12px">
+                Hola {nombre} 👋, le recordamos que su cuota de *{cuota}* vence el *{fecha_vence}*. Por favor realice su pago a tiempo. Gracias por su preferencia 🙏
+              </div>
+              <button class="btn btn-secondary btn-sm btn-full" onclick="usarPlantilla(this)">Usar plantilla</button>
+            </div>
+          </div>
+
+          <div class="card plantilla-card">
+            <div class="card-body">
+              <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+                <span style="font-size:1.5rem">⚠️</span>
+                <h4 style="font-size:.9rem">Aviso de mora</h4>
+              </div>
+              <div class="plantilla-texto" style="background:var(--gray-50);border-radius:8px;padding:12px;font-size:.82rem;color:var(--gray-700);line-height:1.6;margin-bottom:12px">
+                Hola {nombre}, le informamos que su cuenta tiene un saldo vencido de *{saldo}*. Para evitar cargos adicionales por mora, le pedimos regularizar su situación a la brevedad. Contáctenos para coordinar. 📞
+              </div>
+              <button class="btn btn-secondary btn-sm btn-full" onclick="usarPlantilla(this)">Usar plantilla</button>
+            </div>
+          </div>
+
+          <div class="card plantilla-card">
+            <div class="card-body">
+              <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+                <span style="font-size:1.5rem">✅</span>
+                <h4 style="font-size:.9rem">Confirmación de pago</h4>
+              </div>
+              <div class="plantilla-texto" style="background:var(--gray-50);border-radius:8px;padding:12px;font-size:.82rem;color:var(--gray-700);line-height:1.6;margin-bottom:12px">
+                Hola {nombre} ✅, hemos recibido su pago correctamente. Su saldo pendiente actualizado es *{saldo}*. Gracias por su puntualidad 🎉
+              </div>
+              <button class="btn btn-secondary btn-sm btn-full" onclick="usarPlantilla(this)">Usar plantilla</button>
+            </div>
+          </div>
+
+          <div class="card plantilla-card">
+            <div class="card-body">
+              <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+                <span style="font-size:1.5rem">🎊</span>
+                <h4 style="font-size:.9rem">Préstamo saldado</h4>
+              </div>
+              <div class="plantilla-texto" style="background:var(--gray-50);border-radius:8px;padding:12px;font-size:.82rem;color:var(--gray-700);line-height:1.6;margin-bottom:12px">
+                Felicitaciones {nombre} 🎊, ha saldado su préstamo completamente. Ha sido un placer trabajar con usted. Estamos disponibles cuando necesite un nuevo préstamo. ¡Gracias por su confianza!
+              </div>
+              <button class="btn btn-secondary btn-sm btn-full" onclick="usarPlantilla(this)">Usar plantilla</button>
+            </div>
+          </div>
+
+          <div class="card plantilla-card">
+            <div class="card-body">
+              <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+                <span style="font-size:1.5rem">📋</span>
+                <h4 style="font-size:.9rem">Préstamo aprobado</h4>
+              </div>
+              <div class="plantilla-texto" style="background:var(--gray-50);border-radius:8px;padding:12px;font-size:.82rem;color:var(--gray-700);line-height:1.6;margin-bottom:12px">
+                Hola {nombre} 🎉, su préstamo ha sido *aprobado*. Monto: *{cuota}* en cuotas. Puede ver los detalles en la app. Para cualquier consulta estamos a su disposición.
+              </div>
+              <button class="btn btn-secondary btn-sm btn-full" onclick="usarPlantilla(this)">Usar plantilla</button>
+            </div>
+          </div>
+
+          <div class="card plantilla-card">
+            <div class="card-body">
+              <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+                <span style="font-size:1.5rem">📸</span>
+                <h4 style="font-size:.9rem">Solicitar voucher</h4>
+              </div>
+              <div class="plantilla-texto" style="background:var(--gray-50);border-radius:8px;padding:12px;font-size:.82rem;color:var(--gray-700);line-height:1.6;margin-bottom:12px">
+                Hola {nombre}, hemos recibido notificación de su transferencia. Por favor envíe el comprobante (voucher) a través de la app para confirmar su pago. ¡Gracias! 📲
+              </div>
+              <button class="btn btn-secondary btn-sm btn-full" onclick="usarPlantilla(this)">Usar plantilla</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+<div id="toast-container"></div>
+
+<style>
+.tab-wa { padding:7px 16px;border-radius:100px;border:1.5px solid var(--gray-200);background:#fff;font-size:.82rem;font-weight:500;color:var(--gray-600);cursor:pointer;transition:all .15s; }
+.tab-wa.active { border-color:#16a34a;background:#dcfce7;color:#166534; }
+
+.wa-item { display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--gray-100); }
+.wa-item:last-child { border-bottom:none; }
+.wa-avatar { width:38px;height:38px;border-radius:50%;background:var(--cobrika-primary-light);color:var(--cobrika-primary);font-size:.8rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0; }
+.wa-info { flex:1;min-width:0; }
+.wa-nombre { font-size:.875rem;font-weight:600;color:var(--gray-800);white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
+.wa-detalle { font-size:.75rem;color:var(--gray-500);margin-top:2px; }
+.btn-wa { display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:8px;background:#dcfce7;color:#166534;border:1px solid #86efac;font-size:.8rem;font-weight:600;cursor:pointer;text-decoration:none;transition:background .15s;white-space:nowrap; }
+.btn-wa:hover { background:#bbf7d0; }
+.btn-wa svg { width:15px;height:15px; }
+.btn-wa-mora { background:#fde8e8;color:#c81e1e;border-color:#fca5a5; }
+.btn-wa-mora:hover { background:#fca5a5; }
+.empty-wa { text-align:center;padding:32px;color:var(--gray-400);font-size:.875rem; }
+</style>
+
+<script type="module">
+import { requireAdmin, logout } from '../../shared/auth.js';
+import { supabase }             from '../../shared/supabase-client.js';
+import { formatMoney, formatFecha, iniciales, confirmar, toast } from '../../shared/helpers.js';
+
+const usuario  = await requireAdmin();
+if (!usuario) throw new Error('No auth');
+const tenantId = usuario.perfil.tenant_id;
+
+const sidebar = document.getElementById('sidebar');
+const overlay = document.getElementById('sidebar-overlay');
+document.getElementById('sidebar-toggle').addEventListener('click', () => { sidebar.classList.toggle('open'); overlay.classList.toggle('open'); });
+overlay.addEventListener('click', () => { sidebar.classList.remove('open'); overlay.classList.remove('open'); });
+document.getElementById('logout-btn').addEventListener('click', async () => { if (await confirmar('¿Cerrar sesión?')) logout(); });
+
+// ── Tabs ──────────────────────────────────────────────────
+document.querySelectorAll('.tab-wa').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab-wa').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.style.display = 'none');
+    tab.classList.add('active');
+    document.getElementById('tab-' + tab.dataset.tab).style.display = '';
+  });
+});
+
+// ── Helper: generar link WhatsApp ─────────────────────────
+function waLink(telefono, mensaje) {
+  const tel = telefono.replace(/\D/g,'');
+  const tel1 = tel.startsWith('1') ? tel : '1' + tel;
+  return `https://wa.me/${tel1}?text=${encodeURIComponent(mensaje)}`;
+}
+
+function btnWA(tel, msg, esMora = false) {
+  if (!tel) return `<span style="font-size:.75rem;color:var(--gray-400)">Sin teléfono</span>`;
+  return `<a href="${waLink(tel, msg)}" target="_blank" class="btn-wa ${esMora?'btn-wa-mora':''}">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    Enviar WA
+  </a>`;
+}
+
+function itemWA(nombre, telefono, detalle, msg, esMora = false) {
+  return `<div class="wa-item">
+    <div class="wa-avatar">${iniciales(nombre)}</div>
+    <div class="wa-info">
+      <div class="wa-nombre">${nombre}</div>
+      <div class="wa-detalle">${detalle}</div>
+    </div>
+    ${btnWA(telefono, msg, esMora)}
+  </div>`;
+}
+
+// ── Cargar cobros de hoy ──────────────────────────────────
+const hoy = new Date().toISOString().split('T')[0];
+const en3 = new Date(); en3.setDate(en3.getDate() + 3);
+const en3Str = en3.toISOString().split('T')[0];
+
+const { data: cuotasHoy } = await supabase
+  .from('cuotas')
+  .select('*, prestamos(monto_cuota, clientes(nombre, telefono))')
+  .eq('tenant_id', tenantId)
+  .eq('fecha_vence', hoy)
+  .in('estado', ['pendiente','parcial']);
+
+const listaHoy = cuotasHoy || [];
+if (listaHoy.length) {
+  let links = [];
+  document.getElementById('lista-hoy').innerHTML = listaHoy.map(c => {
+    const nombre = c.prestamos?.clientes?.nombre || '—';
+    const tel    = c.prestamos?.clientes?.telefono || '';
+    const monto  = formatMoney(c.monto_total - c.monto_pagado);
+    const msg    = `Hola ${nombre} 👋, le recordamos que su cuota de *${monto}* vence *hoy*. Por favor realice su pago a tiempo. ¡Gracias por su preferencia! 🙏`;
+    links.push({ tel, msg });
+    return itemWA(nombre, tel, `Cuota: ${monto} · Vence hoy`, msg);
+  }).join('');
+
+  document.getElementById('btn-enviar-todos-hoy').addEventListener('click', () => {
+    links.forEach((l,i) => setTimeout(() => l.tel && window.open(waLink(l.tel, l.msg), '_blank'), i * 800));
+  });
+} else {
+  document.getElementById('lista-hoy').innerHTML = `<div class="empty-wa">✅ Sin cobros pendientes para hoy</div>`;
+}
+
+// ── Cargar morosos ────────────────────────────────────────
+const { data: cuotasMora } = await supabase
+  .from('cuotas')
+  .select('*, prestamos(tasa_mora, dias_gracia, clientes(nombre, telefono))')
+  .eq('tenant_id', tenantId)
+  .in('estado', ['pendiente','vencida','parcial'])
+  .lt('fecha_vence', hoy)
+  .order('fecha_vence');
+
+const morosos = cuotasMora || [];
+if (morosos.length) {
+  let links = [];
+  document.getElementById('lista-morosos').innerHTML = morosos.map(c => {
+    const nombre = c.prestamos?.clientes?.nombre || '—';
+    const tel    = c.prestamos?.clientes?.telefono || '';
+    const dias   = Math.floor((new Date() - new Date(c.fecha_vence+'T00:00:00')) / 86400000);
+    const monto  = formatMoney(c.monto_total - c.monto_pagado);
+    const msg    = `Hola ${nombre}, le informamos que tiene una cuota vencida hace *${dias} día${dias>1?'s':''}* por *${monto}*. Por favor contáctenos para regularizar su cuenta y evitar cargos adicionales. 📞`;
+    links.push({ tel, msg });
+    return itemWA(nombre, tel, `Vencida hace ${dias} días · ${monto}`, msg, true);
+  }).join('');
+
+  document.getElementById('btn-enviar-todos-morosos').addEventListener('click', () => {
+    links.forEach((l,i) => setTimeout(() => l.tel && window.open(waLink(l.tel, l.msg), '_blank'), i * 800));
+  });
+} else {
+  document.getElementById('lista-morosos').innerHTML = `<div class="empty-wa">✅ No hay clientes en mora</div>`;
+}
+
+// ── Cargar próximos 3 días ────────────────────────────────
+const { data: cuotasProx } = await supabase
+  .from('cuotas')
+  .select('*, prestamos(clientes(nombre, telefono))')
+  .eq('tenant_id', tenantId)
+  .in('estado', ['pendiente','parcial'])
+  .gt('fecha_vence', hoy)
+  .lte('fecha_vence', en3Str)
+  .order('fecha_vence');
+
+const proximos = cuotasProx || [];
+if (proximos.length) {
+  let links = [];
+  document.getElementById('lista-proximos').innerHTML = proximos.map(c => {
+    const nombre = c.prestamos?.clientes?.nombre || '—';
+    const tel    = c.prestamos?.clientes?.telefono || '';
+    const dias   = Math.floor((new Date(c.fecha_vence+'T00:00:00') - new Date()) / 86400000) + 1;
+    const monto  = formatMoney(c.monto_total - c.monto_pagado);
+    const msg    = `Hola ${nombre} 👋, le recordamos que su cuota de *${monto}* vence en *${dias} día${dias>1?'s':''}* (${formatFecha(c.fecha_vence)}). ¡Prepárese con tiempo! 😊`;
+    links.push({ tel, msg });
+    return itemWA(nombre, tel, `Vence el ${formatFecha(c.fecha_vence)} (en ${dias} días) · ${monto}`, msg);
+  }).join('');
+
+  document.getElementById('btn-enviar-todos-proximos').addEventListener('click', () => {
+    links.forEach((l,i) => setTimeout(() => l.tel && window.open(waLink(l.tel, l.msg), '_blank'), i * 800));
+  });
+} else {
+  document.getElementById('lista-proximos').innerHTML = `<div class="empty-wa">Sin cuotas próximas en los próximos 3 días</div>`;
+}
+
+// ── Masivo ────────────────────────────────────────────────
+const { data: todosClientes } = await supabase
+  .from('clientes')
+  .select('id, nombre, telefono, estado')
+  .eq('tenant_id', tenantId)
+  .eq('estado', 'activo');
+
+const { data: todosPrests } = await supabase
+  .from('prestamos')
+  .select('id, cliente_id, saldo_total, monto_cuota, fecha_vencimiento')
+  .eq('tenant_id', tenantId)
+  .in('estado', ['activo','al_dia','atrasado','en_mora']);
+
+// Preview en tiempo real
+document.getElementById('masivo-mensaje').addEventListener('input', actualizarPreview);
+function actualizarPreview() {
+  const msg = document.getElementById('masivo-mensaje').value;
+  const preview = msg
+    .replace('{nombre}', 'Juan Pérez')
+    .replace('{saldo}', 'RD$ 15,000.00')
+    .replace('{cuota}', 'RD$ 5,000.00')
+    .replace('{fecha_vence}', '25 jun 2025');
+  document.getElementById('masivo-preview').textContent = preview;
+}
+actualizarPreview();
+
+document.getElementById('btn-preparar-masivo').addEventListener('click', () => {
+  const filtro   = document.getElementById('masivo-filtro').value;
+  const template = document.getElementById('masivo-mensaje').value;
+  if (!template.trim()) { toast('Escribe un mensaje', 'error'); return; }
+
+  let clientes = todosClientes || [];
+  if (filtro === 'morosos') clientes = clientes.filter(c => c.estado === 'moroso');
+  if (filtro === 'con_prestamo') {
+    const idsConPrest = new Set((todosPrests||[]).map(p => p.cliente_id));
+    clientes = clientes.filter(c => idsConPrest.has(c.id));
+  }
+
+  if (!clientes.length) { toast('No hay clientes para este filtro', 'error'); return; }
+
+  const html = `
+    <div class="card">
+      <div class="card-header">
+        <h4 style="font-size:.9rem">${clientes.length} mensajes preparados</h4>
+        <span style="font-size:.8rem;color:var(--gray-500)">Haz clic en cada botón para abrir WhatsApp</span>
+      </div>
+      <div class="card-body" style="padding-top:8px">
+        ${clientes.map(c => {
+          const prest = (todosPrests||[]).find(p => p.cliente_id === c.id);
+          const msg = template
+            .replace(/{nombre}/g, c.nombre)
+            .replace(/{saldo}/g, formatMoney(prest?.saldo_total || 0))
+            .replace(/{cuota}/g, formatMoney(prest?.monto_cuota || 0))
+            .replace(/{fecha_vence}/g, formatFecha(prest?.fecha_vencimiento));
+          return itemWA(c.nombre, c.telefono, c.telefono || 'Sin teléfono', msg);
+        }).join('')}
+      </div>
+    </div>`;
+
+  document.getElementById('masivo-lista').innerHTML = html;
+  document.getElementById('masivo-lista').scrollIntoView({ behavior: 'smooth' });
+  toast(`${clientes.length} mensajes preparados`, 'success');
+});
+
+// ── Plantillas ────────────────────────────────────────────
+window.usarPlantilla = (btn) => {
+  const texto = btn.closest('.card').querySelector('.plantilla-texto').textContent.trim();
+  // Cambiar al tab masivo
+  document.querySelectorAll('.tab-wa').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(c => c.style.display = 'none');
+  document.querySelector('[data-tab="masivo"]').classList.add('active');
+  document.getElementById('tab-masivo').style.display = '';
+  document.getElementById('masivo-mensaje').value = texto;
+  actualizarPreview();
+  toast('Plantilla cargada en el mensaje masivo', 'success');
+};
+</script>
+</body>
+</html>
