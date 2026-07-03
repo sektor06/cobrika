@@ -421,7 +421,7 @@
       }
       try {
         await supabase.auth.resetPasswordForEmail(email, {
-          redirectTo: window.location.origin + '/index.html',
+         redirectTo: new URL('./reset-password.html', window.location.href).href,
         });
         toast('Revisa tu correo — te enviamos el enlace de recuperación.', 'success', 5000);
       } catch {
