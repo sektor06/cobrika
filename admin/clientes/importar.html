@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Importar Clientes — Cobrika</title>
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/admin.css">
+  <style>
+    /* ── Drop zone ── */
+    .drop-zone {
+      border: 2.5px dashed var(--cobrika-primary);
+      border-radius: 14px;
+      padding: 48px 24px;
+      text-align: center;
+      cursor: pointer;
+      transition: background .2s, border-color .2s;
+      background: var(--cobrika-primary-light);
+    }
+    .drop-zone.dragover { background: #d0eaff; border-color: var(--cobrika-accent); }
+    .drop-zone svg { color: var(--cobrika-primary); margin-bottom: 12px; }
+    .drop-zone p { margin: 0; color: var(--gray-600); font-size: .93rem; }
+    .drop-zone strong { color: var(--cobrika-primary); }
+
+    /* ── Steps ── */
+    .steps { display:flex; gap:0; margin-bottom:28px; }
+    .step  { flex:1; padding:10px 14px; font-size:.82rem; font-weight:600;
+             border-bottom:3px solid var(--gray-200); color:var(--gray-400); text-align:center; }
+    .step.active  { border-color:var(--cobrika-primary); color:var(--cobrika-primary); }
+    .step.done    { border-color:#10b981; color:#10b981; }
+
+    /* ── Preview table ── */
+    .preview-wrap { overflow-x:auto; max-height:420px; overflow-y:auto; border-radius:10px; border:1px solid var(--gray-200); }
+    .preview-table { width:100%; border-collapse:collapse; font-size:.82rem; }
+    .preview-table th { position:sticky; top:0; background:var(--gray-50); padding:8px 10px;
+                        text-align:left; font-weight:600; color:var(--gray-600);
+                        border-bottom:1px solid var(--gray-200); white-space:nowrap; }
+    .preview-table td { padding:7px 10px; border-bottom:1px solid var(--gray-100); vertical-align:middle; }
+    .preview-table tr:last-child td { border-bottom:none; }
+    .preview-table tr:hover td { background:var(--gray-50); }
+
+    /* ── Row status badges ── */
+    .badge-ok    { display:inline-block; padding:2px 8px; border-radius:99px; font-size:.74rem; font-weight:600; background:#d1fae5; color:#065f46; }
+    .badge-warn  { display:inline-block; padding:2px 8px; border-radius:99px; font-size:.74rem; font-weight:600; background:#fef3c7; color:#92400e; }
+    .badge-error { display:inline-block; padding:2px 8px; border-radius:99px; font-size:.74rem; font-weight:600; background:#fee2e2; color:#991b1b; }
+    .badge-dup   { display:inline-block; padding:2px 8px; border-radius:99px; font-size:.74rem; font-weight:600; background:#ede9fe; color:#5b21b6; }
+
+    /* ── Progress ── */
+    .prog-bar-wrap { background:var(--gray-200); border-radius:99px; height:14px; overflow:hidden; }
+    .prog-bar      { height:100%; background:var(--cobrika-primary); border-radius:99px; transition:width .3s; }
+
+    /* ── Summary cards ── */
+    .summary-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+    @media(max-width:640px){ .summary-grid { grid-template-columns:1fr 1fr; } }
+    .sum-card { background:#fff; border-radius:12px; padding:18px 16px; text-align:center;
+                border:1px solid var(--gray-200); }
+    .sum-card .num { font-size:2rem; font-weight:800; line-height:1; }
+    .sum-card .lbl { font-size:.78rem; color:var(--gray-500); margin-top:4px; }
+    .sum-ok   .num { color:#10b981; }
+    .sum-warn .num { color:#f59e0b; }
+    .sum-err  .num { color:#ef4444; }
+    .sum-dup  .num { color:#8b5cf6; }
+
+    /* ── Column map table ── */
+    .col-map-table { width:100%; font-size:.83rem; border-collapse:collapse; }
+    .col-map-table th { background:var(--gray-50); padding:6px 10px; text-align:left;
+                         font-weight:600; border-bottom:1px solid var(--gray-200); }
+    .col-map-table td { padding:6px 10px; border-bottom:1px solid var(--gray-100); }
+    .col-map-table .found { color:#10b981; font-weight:600; }
+    .col-map-table .missing { color:var(--gray-400); font-style:italic; }
+
+    /* paginación */
+    .pag-btn { padding:5px 12px; border:1px solid var(--gray-300); border-radius:6px;
+               background:#fff; cursor:pointer; font-size:.82rem; }
+    .pag-btn:disabled { opacity:.4; cursor:default; }
+    .pag-btn:not(:disabled):hover { background:var(--gray-50); }
+
+    #section-upload, #section-preview, #section-import, #section-done { display:none; }
+    #section-upload.active, #section-preview.active, #section-import.active, #section-done.active { display:block; }
+  </style>
+</head>
+<body>
+
+<!-- ── Sidebar ─────────────────────────────────────────── -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="var(--cobrika-primary)" style="width:28px;height:28px"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.41 16.09V20h-2.67v-1.93c-1.71-.36-3.16-1.46-3.27-3.4h1.96c.1 1.05.82 1.87 2.65 1.87 1.96 0 2.4-.98 2.4-1.59 0-.83-.44-1.61-2.67-2.14-2.48-.6-4.18-1.62-4.18-3.67 0-1.72 1.39-2.84 3.11-3.21V4h2.67v1.95c1.86.45 2.79 1.86 2.85 3.39H14.3c-.05-1.11-.64-1.87-2.22-1.87-1.5 0-2.4.68-2.4 1.64 0 .84.65 1.39 2.67 1.91s4.18 1.39 4.18 3.91c-.01 1.83-1.38 2.83-3.12 3.16z"/></svg>
+    <span>Cobrika</span>
+  </div>
+  <nav class="sidebar-nav">
+    <a href="../dashboard/index.html" class="nav-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z"/></svg>Dashboard</a>
+    <a href="index.html" class="nav-item active"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"/></svg>Clientes</a>
+    <a href="../prestamos/index.html" class="nav-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Préstamos</a>
+    <a href="../pagos/index.html" class="nav-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z"/></svg>Pagos</a>
+    <a href="../reportes/index.html" class="nav-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"/></svg>Reportes</a>
+    <a href="../configuracion/index.html" class="nav-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>Configuración</a>
+  </nav>
+  <div class="sidebar-footer">
+    <button id="logout-btn" class="btn btn-secondary btn-sm" style="width:100%">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" style="width:16px;height:16px"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"/></svg>
+      Cerrar sesión
+    </button>
+  </div>
+</div>
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+<!-- ── Main ─────────────────────────────────────────────── -->
+<div class="main-content">
+  <header class="topbar">
+    <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Menú">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:22px;height:22px"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
+    </button>
+    <div class="topbar-title">
+      <a href="index.html" style="color:inherit;text-decoration:none;opacity:.6">Clientes</a>
+      <span style="opacity:.4;margin:0 6px">/</span>
+      Importación masiva
+    </div>
+  </header>
+
+  <div class="page-container">
+
+    <!-- Steps indicator -->
+    <div class="steps" id="steps">
+      <div class="step active" id="step-1">1 · Subir archivo</div>
+      <div class="step"        id="step-2">2 · Revisar datos</div>
+      <div class="step"        id="step-3">3 · Importar</div>
+      <div class="step"        id="step-4">4 · Listo</div>
+    </div>
+
+    <!-- ══ SECCIÓN 1: UPLOAD ══════════════════════════════ -->
+    <div id="section-upload" class="active">
+      <div class="card" style="margin-bottom:20px">
+        <div class="card-header" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+          <h3 style="margin:0;font-size:1.05rem">Importar clientes desde Excel</h3>
+          <button id="btn-descargar-plantilla" class="btn btn-secondary btn-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" style="width:15px;height:15px"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
+            Descargar plantilla Excel
+          </button>
+        </div>
+        <div class="card-body">
+          <p style="color:var(--gray-600);font-size:.88rem;margin-bottom:20px">
+            Sube un archivo Excel (.xlsx) con la lista de tus clientes. Puedes usar la plantilla de arriba o tu propio formato —
+            el sistema detecta automáticamente las columnas. Los campos <strong>Teléfono</strong> son obligatorios.
+          </p>
+
+          <!-- Drop zone -->
+          <div class="drop-zone" id="drop-zone">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:48px;height:48px;display:block;margin:0 auto 12px"><path stroke-linecap="round" stroke-linejoin="round" d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.338-2.32 5.75 5.75 0 011.344 11.09"/></svg>
+            <p><strong>Arrastra tu archivo aquí</strong> o haz clic para seleccionarlo</p>
+            <p style="margin-top:6px;font-size:.8rem">.xlsx · máximo 5 000 filas</p>
+            <input type="file" id="file-input" accept=".xlsx,.xls" style="display:none">
+          </div>
+
+          <!-- Column map (hidden until file loaded) -->
+          <div id="col-map-wrap" style="display:none;margin-top:24px">
+            <h4 style="font-size:.9rem;margin-bottom:10px;color:var(--gray-700)">Columnas detectadas en tu archivo</h4>
+            <div style="overflow-x:auto">
+              <table class="col-map-table">
+                <thead><tr><th>Campo Cobrika</th><th>Columna en tu archivo</th><th>Requerido</th></tr></thead>
+                <tbody id="col-map-body"></tbody>
+              </table>
+            </div>
+            <div style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap">
+              <button id="btn-continuar-preview" class="btn btn-primary">Continuar → Revisar datos</button>
+              <button id="btn-cambiar-archivo" class="btn btn-secondary">Cambiar archivo</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ SECCIÓN 2: PREVIEW ══════════════════════════════ -->
+    <div id="section-preview">
+      <div class="card" style="margin-bottom:20px">
+        <div class="card-header" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+          <h3 style="margin:0;font-size:1.05rem">
+            Vista previa — <span id="preview-total">0</span> filas
+            &nbsp;<span id="preview-badge-ok" class="badge-ok" style="font-size:.78rem"></span>
+            <span id="preview-badge-warn" class="badge-warn" style="font-size:.78rem;margin-left:4px"></span>
+            <span id="preview-badge-err" class="badge-error" style="font-size:.78rem;margin-left:4px"></span>
+            <span id="preview-badge-dup" class="badge-dup" style="font-size:.78rem;margin-left:4px"></span>
+          </h3>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <select id="filtro-estado" class="form-control" style="width:auto;font-size:.82rem;padding:5px 10px">
+              <option value="">Todos</option>
+              <option value="ok">✅ Ok</option>
+              <option value="warn">⚠️ Advertencia</option>
+              <option value="error">❌ Error</option>
+              <option value="dup">🔁 Duplicado</option>
+            </select>
+          </div>
+        </div>
+        <div class="card-body" style="padding:0">
+          <div class="preview-wrap">
+            <table class="preview-table">
+              <thead id="preview-thead"></thead>
+              <tbody id="preview-tbody"></tbody>
+            </table>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-top:1px solid var(--gray-100)">
+            <span id="pag-info" style="font-size:.82rem;color:var(--gray-500)"></span>
+            <div style="display:flex;gap:6px">
+              <button class="pag-btn" id="pag-prev">‹ Anterior</button>
+              <button class="pag-btn" id="pag-next">Siguiente ›</button>
+            </div>
+          </div>
+        </div>
+        <div class="card-body" style="border-top:1px solid var(--gray-100);display:flex;gap:10px;flex-wrap:wrap">
+          <button id="btn-iniciar-import" class="btn btn-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" style="width:15px;height:15px"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
+            Importar clientes válidos
+          </button>
+          <button id="btn-volver-upload" class="btn btn-secondary">← Cambiar archivo</button>
+          <span id="import-aviso" style="font-size:.82rem;color:var(--gray-500);align-self:center"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ SECCIÓN 3: IMPORTING ════════════════════════════ -->
+    <div id="section-import">
+      <div class="card">
+        <div class="card-body" style="text-align:center;padding:48px 24px">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="var(--cobrika-primary)" style="width:52px;height:52px;display:block;margin:0 auto 16px"><path stroke-linecap="round" stroke-linejoin="round" d="M9 8.25H7.5a2.25 2.25 0 00-2.25 2.25v9a2.25 2.25 0 002.25 2.25h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25H15m0-3l-3-3m0 0l-3 3m3-3V15"/></svg>
+          <h3 style="margin-bottom:8px">Importando clientes…</h3>
+          <p id="import-msg" style="color:var(--gray-500);margin-bottom:24px;font-size:.9rem">Por favor espera</p>
+          <div class="prog-bar-wrap" style="max-width:480px;margin:0 auto 12px">
+            <div class="prog-bar" id="prog-bar" style="width:0%"></div>
+          </div>
+          <p id="prog-label" style="font-size:.82rem;color:var(--gray-500)">0 / 0</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ SECCIÓN 4: DONE ═════════════════════════════════ -->
+    <div id="section-done">
+      <div class="card">
+        <div class="card-body" style="padding:36px 24px">
+          <div style="text-align:center;margin-bottom:32px">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#10b981" style="width:56px;height:56px;display:block;margin:0 auto 14px"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <h2 style="margin-bottom:6px">¡Importación completada!</h2>
+            <p style="color:var(--gray-500);font-size:.9rem">Estos son los resultados:</p>
+          </div>
+          <div class="summary-grid" style="margin-bottom:28px">
+            <div class="sum-card sum-ok">
+              <div class="num" id="done-ok">0</div>
+              <div class="lbl">Importados</div>
+            </div>
+            <div class="sum-card sum-warn">
+              <div class="num" id="done-warn">0</div>
+              <div class="lbl">Con advertencia</div>
+            </div>
+            <div class="sum-card sum-err">
+              <div class="num" id="done-err">0</div>
+              <div class="lbl">Omitidos (error)</div>
+            </div>
+            <div class="sum-card sum-dup">
+              <div class="num" id="done-dup">0</div>
+              <div class="lbl">Duplicados omitidos</div>
+            </div>
+          </div>
+          <div id="done-errors-wrap" style="display:none;margin-bottom:24px">
+            <h4 style="font-size:.88rem;color:var(--gray-700);margin-bottom:8px">Filas omitidas:</h4>
+            <div id="done-errors-list" style="background:var(--gray-50);border-radius:8px;padding:12px;font-size:.82rem;color:var(--gray-600);max-height:200px;overflow-y:auto"></div>
+          </div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <a href="index.html" class="btn btn-primary">Ver clientes importados</a>
+            <button id="btn-nueva-importacion" class="btn btn-secondary">Hacer otra importación</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /page-container -->
+</div><!-- /main-content -->
+
+<!-- Toast -->
+<div id="toast-container" style="position:fixed;bottom:20px;right:20px;z-index:9999;display:flex;flex-direction:column;gap:8px"></div>
+
+<script type="module">
+import { requireAdmin, logout } from '../../shared/auth.js';
+import { supabase }             from '../../shared/supabase-client.js';
+import { esc, toast, confirmar } from '../../shared/helpers.js';
+
+// ── Auth ─────────────────────────────────────────────────
+const usuario  = await requireAdmin();
+if (!usuario) throw new Error('No auth');
+const tenantId = usuario.perfil.tenant_id;
+
+// ── Sidebar / logout ────────────────────────────────────
+const sidebar = document.getElementById('sidebar');
+const overlay = document.getElementById('sidebar-overlay');
+document.getElementById('sidebar-toggle').addEventListener('click', () => {
+  sidebar.classList.toggle('open'); overlay.classList.toggle('open');
+});
+overlay.addEventListener('click', () => {
+  sidebar.classList.remove('open'); overlay.classList.remove('open');
+});
+document.getElementById('logout-btn').addEventListener('click', async () => {
+  if (await confirmar('¿Cerrar sesión?')) logout();
+});
+
+// ── SheetJS & ExcelJS desde CDN ──────────────────────────
+const XLSX_URL    = 'https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js';
+const EXCELJS_URL = 'https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js';
+
+function loadScript(url) {
+  return new Promise((res, rej) => {
+    if (document.querySelector(`script[src="${url}"]`)) { res(); return; }
+    const s = document.createElement('script');
+    s.src = url; s.onload = res; s.onerror = rej;
+    document.head.appendChild(s);
+  });
+}
+await loadScript(XLSX_URL);
+await loadScript(EXCELJS_URL);
+
+// ── Column alias map ─────────────────────────────────────
+// Maps DB field → array of possible header names (normalised to lower/no accents)
+const ALIAS = {
+  nombre:       ['nombre','nombre completo','cliente','name','full name'],
+  cedula:       ['cedula','cedula de identidad','id','documento','dni','cedula/passport'],
+  telefono:     ['telefono','teléfono','tel','celular','movil','móvil','phone','whatsapp'],
+  telefono_alt: ['telefono alt','telefono alternativo','teléfono alt','tel2','celular2','alt phone'],
+  email:        ['email','correo','correo electronico','correo electrónico','e-mail'],
+  direccion:    ['direccion','dirección','address','domicilio','residencia'],
+  trabajo:      ['trabajo','ocupacion','ocupación','profesion','profesión','empleo','job'],
+  empleador:    ['empleador','empresa','compania','compañía','employer'],
+  salario_aprox:['salario','salario aprox','ingreso','ingresos','salary','sueldo'],
+  ref1_nombre:  ['ref1 nombre','referencia 1','ref1','referencia1 nombre','ref 1 nombre'],
+  ref1_tel:     ['ref1 tel','ref1 telefono','referencia 1 tel','ref 1 tel'],
+  ref2_nombre:  ['ref2 nombre','referencia 2','ref2','referencia2 nombre','ref 2 nombre'],
+  ref2_tel:     ['ref2 tel','ref2 telefono','referencia 2 tel','ref 2 tel'],
+  notas:        ['notas','nota','notes','observaciones','comentarios'],
+};
+const REQUIRED = ['nombre','telefono'];
+const FIELD_LABELS = {
+  nombre:'Nombre', cedula:'Cédula', telefono:'Teléfono',
+  telefono_alt:'Teléfono alternativo', email:'Email', direccion:'Dirección',
+  trabajo:'Ocupación', empleador:'Empleador', salario_aprox:'Salario aprox.',
+  ref1_nombre:'Referencia 1 — Nombre', ref1_tel:'Referencia 1 — Tel.',
+  ref2_nombre:'Referencia 2 — Nombre', ref2_tel:'Referencia 2 — Tel.',
+  notas:'Notas',
+};
+
+function normalise(str) {
+  return String(str||'').toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    .replace(/[^a-z0-9 ]/g,' ').replace(/\s+/g,' ').trim();
+}
+
+function mapColumns(headers) {
+  // returns { fieldName: colIndex | null }
+  const normHeaders = headers.map(normalise);
+  const result = {};
+  for (const [field, aliases] of Object.entries(ALIAS)) {
+    result[field] = null;
+    for (const alias of aliases) {
+      const idx = normHeaders.indexOf(alias);
+      if (idx !== -1) { result[field] = idx; break; }
+    }
+  }
+  return result;
+}
+
+function normTel(val) {
+  if (!val) return null;
+  const digits = String(val).replace(/\D/g,'');
+  if (digits.length === 10) return `${digits.slice(0,3)}-${digits.slice(3,6)}-${digits.slice(6)}`;
+  if (digits.length === 11 && digits[0]==='1') return `${digits.slice(1,4)}-${digits.slice(4,7)}-${digits.slice(7)}`;
+  return String(val).trim() || null;
+}
+function normCedula(val) {
+  if (!val) return null;
+  const d = String(val).replace(/\D/g,'');
+  if (d.length === 11) return `${d.slice(0,3)}-${d.slice(3,10)}-${d.slice(10)}`;
+  return String(val).trim() || null;
+}
+
+// ── State ────────────────────────────────────────────────
+let rawRows   = [];  // parsed from Excel (array of arrays)
+let colMap    = {};  // field -> colIndex
+let validated = [];  // [{status,warnings,errors,data}]
+let existingTels = new Set();
+let existingCed  = new Set();
+
+// pagination
+const POR_PAG = 50;
+let pagina = 0;
+let filtroEstado = '';
+
+// ── Sections / steps ────────────────────────────────────
+function goTo(section) {
+  ['upload','preview','import','done'].forEach(s => {
+    document.getElementById(`section-${s}`).classList.remove('active');
+  });
+  document.getElementById(`section-${section}`).classList.add('active');
+  const map = { upload:1, preview:2, import:3, done:4 };
+  [1,2,3,4].forEach(n => {
+    const el = document.getElementById(`step-${n}`);
+    el.classList.remove('active','done');
+    if (n < map[section]) el.classList.add('done');
+    if (n === map[section]) el.classList.add('active');
+  });
+}
+
+// ── Download template ────────────────────────────────────
+document.getElementById('btn-descargar-plantilla').addEventListener('click', async () => {
+  const wb = new ExcelJS.Workbook();
+  const ws = wb.addWorksheet('Clientes');
+
+  const headers = Object.values(FIELD_LABELS);
+  const keys    = Object.keys(FIELD_LABELS);
+
+  // Header row
+  ws.addRow(headers);
+  const headerRow = ws.getRow(1);
+  headerRow.font = { bold:true, color:{ argb:'FFFFFFFF' } };
+  headerRow.fill = { type:'pattern', pattern:'solid', fgColor:{ argb:'FF0D6E9A' } };
+  headerRow.height = 22;
+  headerRow.alignment = { vertical:'middle' };
+
+  // Mark required in red
+  ['nombre','telefono'].forEach(f => {
+    const col = keys.indexOf(f) + 1;
+    const cell = ws.getRow(1).getCell(col);
+    cell.fill = { type:'pattern', pattern:'solid', fgColor:{ argb:'FFDC2626' } };
+    cell.value = cell.value + ' *';
+  });
+
+  // Example row
+  ws.addRow(['Juan Pérez','001-0000001-0','809-555-1234','829-555-5678',
+             'jperez@email.com','Calle Duarte 45','Comerciante','Auto-empleado',
+             '35000','María García','809-111-2222','Pedro López','829-333-4444',
+             'Cliente referido']);
+
+  // Col widths
+  [20,18,16,16,24,28,16,20,14,22,16,22,16,24].forEach((w,i) => {
+    ws.getColumn(i+1).width = w;
+  });
+
+  // Note row
+  ws.addRow([]);
+  const noteRow = ws.addRow(['* Los campos marcados en rojo son obligatorios. Las demás columnas son opcionales.']);
+  noteRow.getCell(1).font = { italic:true, color:{ argb:'FF6B7280' } };
+
+  const buf = await wb.xlsx.writeBuffer();
+  const blob = new Blob([buf], { type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'plantilla_clientes_cobrika.xlsx';
+  a.click();
+  URL.revokeObjectURL(a.href);
+});
+
+// ── Drop zone / file input ───────────────────────────────
+const dropZone  = document.getElementById('drop-zone');
+const fileInput = document.getElementById('file-input');
+
+dropZone.addEventListener('click', () => fileInput.click());
+dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('dragover'); });
+dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+dropZone.addEventListener('drop', e => {
+  e.preventDefault(); dropZone.classList.remove('dragover');
+  const file = e.dataTransfer.files[0];
+  if (file) processFile(file);
+});
+fileInput.addEventListener('change', () => {
+  if (fileInput.files[0]) processFile(fileInput.files[0]);
+});
+document.getElementById('btn-cambiar-archivo').addEventListener('click', () => {
+  document.getElementById('col-map-wrap').style.display = 'none';
+  fileInput.value = '';
+  rawRows = []; colMap = {};
+});
+
+async function processFile(file) {
+  if (!file.name.match(/\.xlsx?$/i)) { toast('Solo se aceptan archivos .xlsx','error'); return; }
+
+  const buf  = await file.arrayBuffer();
+  const wb   = XLSX.read(buf, { type:'array', cellText:true });
+  const ws   = wb.Sheets[wb.SheetNames[0]];
+  const data = XLSX.utils.sheet_to_json(ws, { header:1, defval:'' });
+
+  if (!data || data.length < 2) { toast('El archivo parece estar vacío','error'); return; }
+  if (data.length > 5001) { toast('Máximo 5 000 filas por importación','error'); return; }
+
+  const headers = data[0].map(String);
+  colMap  = mapColumns(headers);
+  rawRows = data.slice(1).filter(r => r.some(c => String(c).trim() !== ''));
+
+  // Render column map
+  const tbody = document.getElementById('col-map-body');
+  tbody.innerHTML = '';
+  for (const [field, label] of Object.entries(FIELD_LABELS)) {
+    const found = colMap[field] !== null;
+    const req   = REQUIRED.includes(field);
+    const col   = colMap[field] !== null ? `"${headers[colMap[field]]}"` : '—';
+    tbody.innerHTML += `
+      <tr>
+        <td>${esc(label)}</td>
+        <td class="${found?'found':'missing'}">${esc(col)}</td>
+        <td>${req ? '<strong style="color:#dc2626">Sí</strong>' : 'No'}</td>
+      </tr>`;
+  }
+
+  // Check required fields found
+  const missingReq = REQUIRED.filter(f => colMap[f] === null);
+  if (missingReq.length > 0) {
+    toast(`No se encontró la columna requerida: ${missingReq.map(f=>FIELD_LABELS[f]).join(', ')}`, 'error');
+  }
+
+  document.getElementById('col-map-wrap').style.display = 'block';
+}
+
+// ── Continue to preview ──────────────────────────────────
+document.getElementById('btn-continuar-preview').addEventListener('click', async () => {
+  const missingReq = REQUIRED.filter(f => colMap[f] === null);
+  if (missingReq.length > 0) {
+    toast(`Faltan columnas requeridas: ${missingReq.map(f=>FIELD_LABELS[f]).join(', ')}`, 'error');
+    return;
+  }
+
+  // Load existing phones & cédulas to detect duplicates
+  toast('Verificando duplicados…', 'info');
+  const { data: existing } = await supabase
+    .from('clientes')
+    .select('telefono,cedula')
+    .eq('tenant_id', tenantId);
+
+  existingTels = new Set((existing||[]).map(c => normTel(c.telefono)).filter(Boolean));
+  existingCed  = new Set((existing||[]).map(c => normCedula(c.cedula)).filter(Boolean));
+
+  // Validate all rows
+  const seenTels = new Map(); // tel -> rowIndex (within this file)
+  const seenCed  = new Map();
+
+  validated = rawRows.map((row, i) => {
+    const get = f => colMap[f] !== null ? String(row[colMap[f]]||'').trim() : '';
+
+    const nombre   = get('nombre');
+    const telefono = normTel(get('telefono'));
+    const cedula   = normCedula(get('cedula'));
+    const email    = get('email');
+
+    const errors   = [];
+    const warnings = [];
+
+    // Required
+    if (!nombre)   errors.push('Nombre vacío');
+    if (!telefono) errors.push('Teléfono vacío');
+
+    // Format checks
+    if (telefono && !/^\d{3}-\d{3}-\d{4}$/.test(telefono))
+      warnings.push('Formato de teléfono inusual');
+    if (cedula && !/^\d{3}-\d{7}-\d{1}$/.test(cedula))
+      warnings.push('Formato de cédula inusual');
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
+      warnings.push('Email parece inválido');
+
+    // Duplicates vs DB
+    if (telefono && existingTels.has(telefono))
+      errors.push(`Teléfono ya existe en Cobrika`);
+    if (cedula && existingCed.has(cedula))
+      warnings.push('Cédula ya existe en Cobrika');
+
+    // Duplicates within file
+    if (telefono) {
+      if (seenTels.has(telefono)) errors.push(`Teléfono repetido (fila ${seenTels.get(telefono)+2})`);
+      else seenTels.set(telefono, i);
+    }
+    if (cedula) {
+      if (seenCed.has(cedula)) warnings.push(`Cédula repetida (fila ${seenCed.get(cedula)+2})`);
+      else seenCed.set(cedula, i);
+    }
+
+    // Determine status
+    let status = 'ok';
+    if (errors.some(e => e.includes('ya existe') || e.includes('repetido'))) status = 'dup';
+    else if (errors.length) status = 'error';
+    else if (warnings.length) status = 'warn';
+
+    const salario = parseFloat(get('salario_aprox')) || null;
+
+    return {
+      status, errors, warnings,
+      data: {
+        nombre:       nombre || null,
+        cedula:       cedula || null,
+        telefono:     telefono || null,
+        telefono_alt: normTel(get('telefono_alt')),
+        email:        get('email') || null,
+        direccion:    get('direccion') || null,
+        trabajo:      get('trabajo') || null,
+        empleador:    get('empleador') || null,
+        salario_aprox: salario,
+        ref1_nombre:  get('ref1_nombre') || null,
+        ref1_tel:     normTel(get('ref1_tel')),
+        ref2_nombre:  get('ref2_nombre') || null,
+        ref2_tel:     normTel(get('ref2_tel')),
+        notas:        get('notas') || null,
+        estado:       'activo',
+        tenant_id:    tenantId,
+      }
+    };
+  });
+
+  // Update badges
+  const counts = { ok:0, warn:0, error:0, dup:0 };
+  validated.forEach(v => counts[v.status]++);
+  document.getElementById('preview-total').textContent = validated.length;
+  document.getElementById('preview-badge-ok').textContent   = counts.ok   ? `✅ ${counts.ok} ok` : '';
+  document.getElementById('preview-badge-warn').textContent = counts.warn  ? `⚠️ ${counts.warn} advertencia` : '';
+  document.getElementById('preview-badge-err').textContent  = counts.error ? `❌ ${counts.error} error` : '';
+  document.getElementById('preview-badge-dup').textContent  = counts.dup   ? `🔁 ${counts.dup} duplicado` : '';
+
+  const importables = validated.filter(v => v.status === 'ok' || v.status === 'warn').length;
+  document.getElementById('import-aviso').textContent =
+    importables > 0
+      ? `Se importarán ${importables} clientes (ok + advertencia).`
+      : 'No hay clientes importables (todos tienen errores o son duplicados).';
+  document.getElementById('btn-iniciar-import').disabled = importables === 0;
+
+  pagina = 0;
+  filtroEstado = '';
+  document.getElementById('filtro-estado').value = '';
+  renderPreview();
+  goTo('preview');
+});
+
+// ── Render preview table ─────────────────────────────────
+function getFiltered() {
+  if (!filtroEstado) return validated;
+  return validated.filter(v => v.status === filtroEstado);
+}
+
+function renderPreview() {
+  const filtered = getFiltered();
+  const total    = filtered.length;
+  const start    = pagina * POR_PAG;
+  const end      = Math.min(start + POR_PAG, total);
+  const page     = filtered.slice(start, end);
+
+  // Build thead once
+  document.getElementById('preview-thead').innerHTML = `
+    <tr>
+      <th>#</th><th>Estado</th><th>Nombre</th><th>Teléfono</th><th>Cédula</th>
+      <th>Email</th><th>Dirección</th><th>Notas / Problemas</th>
+    </tr>`;
+
+  const origIdx = (row) => validated.indexOf(row);
+  document.getElementById('preview-tbody').innerHTML = page.map(v => {
+    const idx = origIdx(v) + 2; // +2: header + 1-based
+    const badge = {
+      ok:    '<span class="badge-ok">✅ Ok</span>',
+      warn:  '<span class="badge-warn">⚠️ Advertencia</span>',
+      error: '<span class="badge-error">❌ Error</span>',
+      dup:   '<span class="badge-dup">🔁 Duplicado</span>',
+    }[v.status];
+    const issues = [...v.errors.map(e=>`❌ ${e}`), ...v.warnings.map(w=>`⚠️ ${w}`)].join('<br>');
+    return `<tr>
+      <td style="color:var(--gray-400)">${idx}</td>
+      <td>${badge}</td>
+      <td>${esc(v.data.nombre||'')}</td>
+      <td>${esc(v.data.telefono||'')}</td>
+      <td>${esc(v.data.cedula||'')}</td>
+      <td>${esc(v.data.email||'')}</td>
+      <td>${esc(v.data.direccion||'')}</td>
+      <td style="font-size:.78rem;color:var(--gray-600)">${issues||'—'}</td>
+    </tr>`;
+  }).join('');
+
+  document.getElementById('pag-info').textContent =
+    total === 0 ? 'Sin resultados' : `Filas ${start+1}–${end} de ${total}`;
+  document.getElementById('pag-prev').disabled = pagina === 0;
+  document.getElementById('pag-next').disabled = end >= total;
+}
+
+document.getElementById('filtro-estado').addEventListener('change', e => {
+  filtroEstado = e.target.value; pagina = 0; renderPreview();
+});
+document.getElementById('pag-prev').addEventListener('click', () => { pagina--; renderPreview(); });
+document.getElementById('pag-next').addEventListener('click', () => { pagina++; renderPreview(); });
+
+// ── Volver upload ────────────────────────────────────────
+document.getElementById('btn-volver-upload').addEventListener('click', () => goTo('upload'));
+
+// ── Import ───────────────────────────────────────────────
+document.getElementById('btn-iniciar-import').addEventListener('click', async () => {
+  const ok = await confirmar(`¿Importar los clientes válidos ahora? Esta acción no se puede deshacer.`);
+  if (!ok) return;
+
+  const toImport = validated.filter(v => v.status === 'ok' || v.status === 'warn');
+  goTo('import');
+
+  const CHUNK = 100;
+  let importados = 0;
+  let errores    = 0;
+  const errorLog = [];
+
+  document.getElementById('prog-label').textContent = `0 / ${toImport.length}`;
+  document.getElementById('import-msg').textContent  = `Importando ${toImport.length} clientes…`;
+
+  for (let i = 0; i < toImport.length; i += CHUNK) {
+    const chunk = toImport.slice(i, i + CHUNK).map(v => v.data);
+
+    const { error } = await supabase.from('clientes').insert(chunk);
+    if (error) {
+      // Try row by row
+      for (const row of chunk) {
+        const { error: e2 } = await supabase.from('clientes').insert([row]);
+        if (e2) {
+          errores++;
+          errorLog.push(`${row.nombre || '(sin nombre)'}: ${e2.message}`);
+        } else {
+          importados++;
+        }
+      }
+    } else {
+      importados += chunk.length;
+    }
+
+    const pct = Math.round(((i + CHUNK) / toImport.length) * 100);
+    document.getElementById('prog-bar').style.width   = Math.min(pct,100) + '%';
+    document.getElementById('prog-label').textContent = `${Math.min(i+CHUNK,toImport.length)} / ${toImport.length}`;
+  }
+
+  // Done
+  const dups  = validated.filter(v => v.status === 'dup').length;
+  const warns = validated.filter(v => v.status === 'warn').length;
+  document.getElementById('done-ok').textContent   = importados - warns;
+  document.getElementById('done-warn').textContent = warns;
+  document.getElementById('done-err').textContent  = errores;
+  document.getElementById('done-dup').textContent  = dups;
+
+  if (errorLog.length > 0) {
+    document.getElementById('done-errors-wrap').style.display = 'block';
+    document.getElementById('done-errors-list').innerHTML =
+      errorLog.map(e => `<div style="padding:3px 0;border-bottom:1px solid var(--gray-200)">${esc(e)}</div>`).join('');
+  }
+  goTo('done');
+});
+
+// ── Nueva importación ────────────────────────────────────
+document.getElementById('btn-nueva-importacion').addEventListener('click', () => {
+  rawRows = []; colMap = {}; validated = [];
+  document.getElementById('col-map-wrap').style.display = 'none';
+  fileInput.value = '';
+  goTo('upload');
+});
+</script>
+</body>
+</html>
