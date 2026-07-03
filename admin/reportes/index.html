@@ -205,7 +205,7 @@
 <script type="module">
 import { requireAdmin, logout } from '../../shared/auth.js';
 import { supabase }             from '../../shared/supabase-client.js';
-import { formatMoney, formatFecha, confirmar, toast } from '../../shared/helpers.js';
+import { esc, formatMoney, formatFecha, confirmar, toast } from '../../shared/helpers.js';
 
 const usuario  = await requireAdmin();
 if (!usuario) throw new Error('No auth');
@@ -248,7 +248,7 @@ selPrestamo.innerHTML = '<option value="">Selecciona un préstamo...</option>';
 (prestamos||[]).forEach(p => {
   const o = document.createElement('option');
   o.value = p.id;
-  o.textContent = `#${p.numero||'—'} — ${p.clientes?.nombre} — ${formatMoney(p.monto_capital)}`;
+  o.textContent = `#${p.numero||'—'} — ${esc(p.clientes?.nombre)} — ${formatMoney(p.monto_capital)}`;
   selPrestamo.appendChild(o);
 });
 
@@ -317,9 +317,9 @@ window.generarEstadoCuenta = async () => {
         <div style="font-size:12px;color:#6b7280;margin-top:4px">Estado de cuenta del cliente</div>
       </div>
       <div class="reporte-info">
-        <div style="font-weight:700;color:#111827">${cliente.nombre}</div>
-        ${cliente.cedula ? `<div>Cédula: ${cliente.cedula}</div>` : ''}
-        ${cliente.telefono ? `<div>Tel: ${cliente.telefono}</div>` : ''}
+        <div style="font-weight:700;color:#111827">${esc(cliente.nombre)}</div>
+        ${cliente.cedula ? `<div>Cédula: ${esc(cliente.cedula)}</div>` : ''}
+        ${cliente.telefono ? `<div>Tel: ${esc(cliente.telefono)}</div>` : ''}
         <div style="margin-top:4px">Fecha: ${formatFecha(new Date().toISOString().split('T')[0])}</div>
       </div>
     </div>
@@ -375,7 +375,7 @@ window.generarEstadoCuenta = async () => {
             <td>${formatMoney(p.monto_interes)}</td>
             <td style="color:${p.monto_mora>0?'#c81e1e':'#9ca3af'}">${formatMoney(p.monto_mora)}</td>
             <td style="text-transform:capitalize">${p.metodo}</td>
-            <td style="color:#9ca3af">${p.referencia||'—'}</td>
+            <td style="color:#9ca3af">${esc(p.referencia||'—')}</td>
           </tr>`).join('')}
         </tbody>
       </table>
@@ -386,7 +386,7 @@ window.generarEstadoCuenta = async () => {
     </div>
   </div>`;
 
-  mostrarReporte(`Estado de cuenta — ${cliente.nombre}`, html);
+  mostrarReporte(`Estado de cuenta — ${esc(cliente.nombre)}`, html);
 };
 
 // ── REPORTE 2: Plan de cuotas ─────────────────────────────
@@ -414,9 +414,9 @@ window.generarPlanCuotas = async () => {
         <div style="font-size:12px;color:#6b7280;margin-top:4px">Plan de cuotas — Préstamo #${p.numero||'—'}</div>
       </div>
       <div class="reporte-info">
-        <div style="font-weight:700;color:#111827">${p.clientes?.nombre}</div>
-        ${p.clientes?.cedula ? `<div>Cédula: ${p.clientes.cedula}</div>` : ''}
-        ${p.clientes?.telefono ? `<div>Tel: ${p.clientes.telefono}</div>` : ''}
+        <div style="font-weight:700;color:#111827">${esc(p.clientes?.nombre)}</div>
+        ${p.clientes?.cedula ? `<div>Cédula: ${esc(p.clientes.cedula)}</div>` : ''}
+        ${p.clientes?.telefono ? `<div>Tel: ${esc(p.clientes.telefono)}</div>` : ''}
         <div style="margin-top:4px">Fecha: ${formatFecha(new Date().toISOString().split('T')[0])}</div>
       </div>
     </div>
@@ -462,7 +462,7 @@ window.generarPlanCuotas = async () => {
     </div>
   </div>`;
 
-  mostrarReporte(`Plan de cuotas — #${p.numero} ${p.clientes?.nombre}`, html);
+  mostrarReporte(`Plan de cuotas — #${p.numero} ${esc(p.clientes?.nombre)}`, html);
 };
 
 // ── REPORTE 3: Cobros del período ─────────────────────────
@@ -517,7 +517,7 @@ window.generarReporteCobros = async () => {
         ${pags.map(p => `
         <tr>
           <td>${formatFecha(p.fecha_pago)}</td>
-          <td style="font-weight:500">${p.clientes?.nombre||'—'}</td>
+          <td style="font-weight:500">${esc(p.clientes?.nombre||'—')}</td>
           <td style="color:#6b7280">#${p.prestamos?.numero||'—'}</td>
           <td style="font-weight:700;color:#057a55">${formatMoney(p.monto)}</td>
           <td>${formatMoney(p.monto_capital)}</td>
@@ -607,9 +607,9 @@ window.generarReporteMorosos = async () => {
       <tbody>
         ${lista.map(m => `
         <tr>
-          <td style="font-weight:600">${m.nombre}</td>
-          <td style="color:#6b7280">${m.cedula}</td>
-          <td>${m.telefono}</td>
+          <td style="font-weight:600">${esc(m.nombre)}</td>
+          <td style="color:#6b7280">${esc(m.cedula)}</td>
+          <td>${esc(m.telefono)}</td>
           <td style="color:#6b7280">#${m.prestamo}</td>
           <td style="text-align:center;color:#c81e1e;font-weight:700">${m.cuotas}</td>
           <td style="text-align:center"><span style="background:#fde8e8;color:#c81e1e;padding:2px 8px;border-radius:100px;font-size:11px;font-weight:700">${m.diasMax}d</span></td>
