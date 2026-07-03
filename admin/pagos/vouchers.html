@@ -137,7 +137,7 @@
 <script type="module">
 import { requireAdmin, logout } from '../../shared/auth.js';
 import { supabase }             from '../../shared/supabase-client.js';
-import { formatMoney, formatFecha, toast, confirmar } from '../../shared/helpers.js';
+import { esc, formatMoney, formatFecha, toast, confirmar } from '../../shared/helpers.js';
 
 const usuario  = await requireAdmin();
 if (!usuario) throw new Error('No auth');
@@ -203,15 +203,15 @@ function renderGrid() {
 
     return `
     <div class="voucher-card" id="vc-${v.id}">
-      <div class="voucher-img-wrap" onclick="ampliarImagen('${v.imagen_url}')">
+      <div class="voucher-img-wrap" onclick="ampliarImagen('${esc(v.imagen_url)}')">
         ${v.imagen_url
-          ? `<img src="${v.imagen_url}" alt="Voucher" loading="lazy">`
+          ? `<img src="${esc(v.imagen_url)}" alt="Voucher" loading="lazy">`
           : `<div class="voucher-img-placeholder"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:48px;height:48px"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/></svg></div>`
         }
         ${tieneOCR ? `<div class="ocr-badge">🤖 OCR ${v.ocr_confianza ? Math.round(v.ocr_confianza*100)+'%' : ''}</div>` : ''}
       </div>
       <div class="voucher-body">
-        <div class="voucher-cliente">${v.clientes?.nombre || '—'}</div>
+        <div class="voucher-cliente">${esc(v.clientes?.nombre || '—')}</div>
         <div class="voucher-prestamo">
           <a href="../prestamos/detalle.html?id=${v.prestamo_id}" style="color:var(--cobrika-primary)">
             Préstamo #${v.prestamos?.numero||'—'} · Saldo: ${formatMoney(v.prestamos?.saldo_total||0)}
@@ -226,11 +226,11 @@ function renderGrid() {
           </div>
           <div class="voucher-dato">
             <div class="voucher-dato-label">Banco</div>
-            <div class="voucher-dato-val">${banco || '—'}</div>
+            <div class="voucher-dato-val">${esc(banco) || '—'}</div>
           </div>
           <div class="voucher-dato">
             <div class="voucher-dato-label">Referencia</div>
-            <div class="voucher-dato-val ${tieneOCR&&v.ocr_referencia?'ocr':''}" style="font-size:.78rem">${ref || '—'}</div>
+            <div class="voucher-dato-val ${tieneOCR&&v.ocr_referencia?'ocr':''}" style="font-size:.78rem">${esc(ref) || '—'}</div>
           </div>
           <div class="voucher-dato">
             <div class="voucher-dato-label">Fecha transf.</div>
@@ -238,9 +238,9 @@ function renderGrid() {
           </div>
         </div>
 
-        ${v.comentario ? `<div class="voucher-comentario">"${v.comentario}"</div>` : ''}
+        ${v.comentario ? `<div class="voucher-comentario">"${esc(v.comentario)}"</div>` : ''}
 
-        ${v.motivo_rechazo ? `<div style="padding:8px;background:var(--cobrika-danger-bg);border-radius:6px;font-size:.8rem;color:var(--cobrika-danger);margin-bottom:12px">Rechazado: ${v.motivo_rechazo}</div>` : ''}
+        ${v.motivo_rechazo ? `<div style="padding:8px;background:var(--cobrika-danger-bg);border-radius:6px;font-size:.8rem;color:var(--cobrika-danger);margin-bottom:12px">Rechazado: ${esc(v.motivo_rechazo)}</div>` : ''}
 
         ${estadoActivo === 'pendiente' ? `
         <div class="voucher-acciones">

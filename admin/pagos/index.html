@@ -154,7 +154,7 @@
 <script type="module">
 import { requireAdmin, logout } from '../../shared/auth.js';
 import { supabase }             from '../../shared/supabase-client.js';
-import { formatMoney, formatFecha, debounce, toast, confirmar } from '../../shared/helpers.js';
+import { esc, formatMoney, formatFecha, debounce, toast, confirmar } from '../../shared/helpers.js';
 
 const usuario  = await requireAdmin();
 if (!usuario) throw new Error('No auth');
@@ -256,7 +256,7 @@ function render() {
     return `<tr style="${style}">
       <td style="font-size:.82rem;white-space:nowrap">${formatFecha(p.fecha_pago)}</td>
       <td>
-        <a href="../clientes/perfil.html?id=${p.cliente_id}" style="font-weight:600;font-size:.875rem;color:var(--cobrika-primary)">${p.clientes?.nombre||'—'}</a>
+        <a href="../clientes/perfil.html?id=${p.cliente_id}" style="font-weight:600;font-size:.875rem;color:var(--cobrika-primary)">${esc(p.clientes?.nombre||'—')}</a>
       </td>
       <td style="font-size:.78rem;color:var(--gray-400)">
         <a href="../prestamos/detalle.html?id=${p.prestamo_id}" style="color:var(--cobrika-primary)">#${p.prestamos?.numero||'—'}</a>
@@ -266,7 +266,7 @@ function render() {
       <td class="td-num" style="font-size:.8rem">${formatMoney(p.monto_interes)}</td>
       <td class="td-num" style="font-size:.8rem;color:${p.monto_mora>0?'var(--cobrika-danger)':'var(--gray-400)'}">${formatMoney(p.monto_mora)}</td>
       <td><span style="font-size:.78rem;text-transform:capitalize;background:var(--gray-100);padding:3px 8px;border-radius:100px">${p.metodo}</span></td>
-      <td style="font-size:.78rem;color:var(--gray-500)">${p.referencia||'—'}</td>
+      <td style="font-size:.78rem;color:var(--gray-500)">${esc(p.referencia||'—')}</td>
       <td>
         ${anulado
           ? `<span class="badge badge-danger">Anulado</span>`
