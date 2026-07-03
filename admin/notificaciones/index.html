@@ -282,7 +282,7 @@
 <script type="module">
 import { requireAdmin, logout } from '../../shared/auth.js';
 import { supabase }             from '../../shared/supabase-client.js';
-import { formatMoney, formatFecha, iniciales, confirmar, toast } from '../../shared/helpers.js';
+import { esc, formatMoney, formatFecha, iniciales, confirmar, toast } from '../../shared/helpers.js';
 
 const usuario  = await requireAdmin();
 if (!usuario) throw new Error('No auth');
@@ -321,9 +321,9 @@ function btnWA(tel, msg, esMora = false) {
 
 function itemWA(nombre, telefono, detalle, msg, esMora = false) {
   return `<div class="wa-item">
-    <div class="wa-avatar">${iniciales(nombre)}</div>
+    <div class="wa-avatar">${esc(iniciales(nombre))}</div>
     <div class="wa-info">
-      <div class="wa-nombre">${nombre}</div>
+      <div class="wa-nombre">${esc(nombre)}</div>
       <div class="wa-detalle">${detalle}</div>
     </div>
     ${btnWA(telefono, msg, esMora)}
