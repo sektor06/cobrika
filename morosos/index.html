@@ -167,7 +167,7 @@
 <script type="module">
 import { requireAdmin, logout } from '../../shared/auth.js';
 import { supabase }             from '../../shared/supabase-client.js';
-import { formatMoney, formatFecha, iniciales, debounce, toast, confirmar } from '../../shared/helpers.js';
+import { esc, formatMoney, formatFecha, iniciales, debounce, toast, confirmar } from '../../shared/helpers.js';
 
 const usuario  = await requireAdmin();
 if (!usuario) throw new Error('No auth');
@@ -282,19 +282,19 @@ function render() {
   document.getElementById('tbody-morosos').innerHTML = filtrados.map(m => {
     const total = m.montoVencido + m.mora;
     const diasClass = m.diasMax >= 60 ? 'dias-critico' : m.diasMax >= 30 ? 'dias-alto' : 'dias-medio';
-    const msg = `Hola ${m.nombre}, le informamos que tiene ${m.cuotasVenc} cuota${m.cuotasVenc>1?'s':''} vencida${m.cuotasVenc>1?'s':''} con un total de *${formatMoney(total)}* (incluye mora de ${m.diasMax} días). Por favor contáctenos para regularizar. 📞`;
+    const msg = `Hola ${esc(m.nombre)}, le informamos que tiene ${m.cuotasVenc} cuota${m.cuotasVenc>1?'s':''} vencida${m.cuotasVenc>1?'s':''} con un total de *${formatMoney(total)}* (incluye mora de ${m.diasMax} días). Por favor contáctenos para regularizar. 📞`;
 
     return `<tr>
       <td>
         <div style="display:flex;align-items:center;gap:10px">
-          <div style="width:36px;height:36px;border-radius:50%;background:var(--cobrika-danger-bg);color:var(--cobrika-danger);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem;flex-shrink:0">${iniciales(m.nombre)}</div>
+          <div style="width:36px;height:36px;border-radius:50%;background:var(--cobrika-danger-bg);color:var(--cobrika-danger);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem;flex-shrink:0">${esc(iniciales(m.nombre))}</div>
           <div>
-            <div style="font-weight:600;font-size:.875rem">${m.nombre}</div>
-            <div style="font-size:.72rem;color:var(--gray-400)">${m.cedula}</div>
+            <div style="font-weight:600;font-size:.875rem">${esc(m.nombre)}</div>
+            <div style="font-size:.72rem;color:var(--gray-400)">${esc(m.cedula)}</div>
           </div>
         </div>
       </td>
-      <td style="font-size:.82rem">${m.telefono || '—'}</td>
+      <td style="font-size:.82rem">${esc(m.telefono || '—')}</td>
       <td>
         <a href="../prestamos/detalle.html?id=${m.prestamoId}" style="color:var(--cobrika-primary);font-size:.82rem;font-weight:600">#${m.prestamoNum}</a>
       </td>

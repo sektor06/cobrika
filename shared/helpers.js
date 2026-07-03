@@ -3,6 +3,18 @@
 //  shared/helpers.js
 // ============================================================
 
+// ── Escape HTML (protección XSS) ───────────────────────────
+// Usar SIEMPRE al interpolar datos de usuario en innerHTML
+export function esc(str) {
+  if (str == null) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 // ── Formato de moneda (RD$) ────────────────────────────────
 export function formatMoney(amount) {
   if (amount == null || isNaN(amount)) return 'RD$ 0.00';

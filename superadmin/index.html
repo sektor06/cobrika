@@ -213,7 +213,7 @@
 
 <script type="module">
 import { supabase } from '../shared/supabase-client.js';
-import { formatFecha, formatMoney, debounce, toast, confirmar } from '../shared/helpers.js';
+import { esc, formatFecha, formatMoney, debounce, toast, confirmar } from '../shared/helpers.js';
 
 // ── Verificar que es superadmin ───────────────────────────
 const { data: { session } } = await supabase.auth.getSession();
@@ -279,11 +279,11 @@ function renderTabla(lista) {
 
     return `<tr>
       <td>
-        <div style="font-weight:600;color:#fff">${t.nombre}</div>
+        <div style="font-weight:600;color:#fff">${esc(t.nombre)}</div>
         <div style="font-size:.72rem;color:#64748b">${t.id.slice(0,8)}...</div>
       </td>
-      <td>${t.email}</td>
-      <td>${t.telefono || '—'}</td>
+      <td>${esc(t.email)}</td>
+      <td>${esc(t.telefono || '—')}</td>
       <td><span class="plan-badge plan-${t.plan}">${t.plan}</span></td>
       <td>
         <span class="estado-badge estado-${estadoLabel === 'vencido' ? 'inactivo' : estadoLabel}">
