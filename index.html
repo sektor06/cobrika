@@ -421,7 +421,7 @@
       }
       try {
         await supabase.auth.resetPasswordForEmail(email, {
-          redirectTo: window.location.origin + '/index.html',
+         redirectTo: new URL('./reset-password.html', window.location.href).href,
         });
         toast('Revisa tu correo — te enviamos el enlace de recuperación.', 'success', 5000);
       } catch {
@@ -432,7 +432,7 @@
     // ── Registro link ──
     document.getElementById('registro-link').addEventListener('click', e => {
       e.preventDefault();
-      window.location.href = './registro.html';
+      window.location.href = './landing.html#registro';
     });
 
     // ── Si ya hay sesión, redirigir ──
