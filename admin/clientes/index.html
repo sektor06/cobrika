@@ -197,7 +197,7 @@
 <script type="module">
 import { requireAdmin, logout } from '../../shared/auth.js';
 import { supabase }             from '../../shared/supabase-client.js';
-import { formatFecha, badgeCliente, iniciales, formatTel, debounce, toast, confirmar } from '../../shared/helpers.js';
+import { esc, formatFecha, badgeCliente, iniciales, formatTel, debounce, toast, confirmar } from '../../shared/helpers.js';
 
 const usuario  = await requireAdmin();
 if (!usuario) throw new Error('No auth');
@@ -297,17 +297,17 @@ function renderTabla() {
       <td>
         <div style="display:flex;align-items:center;gap:10px">
           ${c.foto_url
-            ? `<img src="${c.foto_url}" style="width:36px;height:36px;border-radius:50%;object-fit:cover;flex-shrink:0" onerror="this.style.display='none'">`
-            : `<div class="cliente-avatar">${iniciales(c.nombre)}</div>`
+            ? `<img src="${esc(c.foto_url)}" style="width:36px;height:36px;border-radius:50%;object-fit:cover;flex-shrink:0" onerror="this.style.display='none'">`
+            : `<div class="cliente-avatar">${esc(iniciales(c.nombre))}</div>`
           }
           <div>
-            <div style="font-weight:600;font-size:.875rem;color:var(--gray-900)">${c.nombre}</div>
-            <div style="font-size:.75rem;color:var(--gray-400)">${c.email || ''}</div>
+            <div style="font-weight:600;font-size:.875rem;color:var(--gray-900)">${esc(c.nombre)}</div>
+            <div style="font-size:.75rem;color:var(--gray-400)">${esc(c.email || '')}</div>
           </div>
         </div>
       </td>
-      <td style="font-size:.85rem;color:var(--gray-600)">${c.cedula || '—'}</td>
-      <td style="font-size:.85rem;color:var(--gray-600)">${formatTel(c.telefono)}</td>
+      <td style="font-size:.85rem;color:var(--gray-600)">${esc(c.cedula || '—')}</td>
+      <td style="font-size:.85rem;color:var(--gray-600)">${esc(formatTel(c.telefono))}</td>
       <td style="text-align:center">
         <span style="font-weight:600;color:${prestamosActivos > 0 ? 'var(--cobrika-primary)' : 'var(--gray-400)'}">${prestamosActivos}</span>
       </td>
@@ -341,14 +341,14 @@ window.verCliente     = id => window.location.href = `perfil.html?id=${id}`;
 window.editarCliente  = id => window.location.href = `nuevo.html?id=${id}`;
 
 window.eliminarCliente = async (id, nombre, btn) => {
-  if (!await confirmar(`¿Eliminar a ${nombre}? Esta acción no se puede deshacer.`, '¿Eliminar cliente?')) return;
+  if (!await confirmar(`¿Eliminar a ${esc(nombre)}? Esta acción no se puede deshacer.`, '¿Eliminar cliente?')) return;
   btn.disabled = true;
   const { error } = await supabase.from('clientes').delete().eq('id', id).eq('tenant_id', tenantId);
   if (error) {
     toast(error.message.includes('foreign key') ? 'No se puede eliminar — tiene préstamos asociados.' : 'Error al eliminar.', 'error');
     btn.disabled = false;
   } else {
-    toast(`${nombre} eliminado`, 'success');
+    toast(`${esc(nombre)} eliminado`, 'success');
     todos = todos.filter(c => c.id !== id);
     actualizarContadores();
     aplicarFiltros();

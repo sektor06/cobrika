@@ -273,7 +273,7 @@
 <script type="module">
 import { requireAdmin, logout } from '../../shared/auth.js';
 import { supabase }             from '../../shared/supabase-client.js';
-import { formatMoney, formatFecha, iniciales, badgeCliente, badgePrestamo, formatTel, linkWhatsApp, toast, confirmar } from '../../shared/helpers.js';
+import { esc, formatMoney, formatFecha, iniciales, badgeCliente, badgePrestamo, formatTel, linkWhatsApp, toast, confirmar } from '../../shared/helpers.js';
 
 const usuario  = await requireAdmin();
 if (!usuario) throw new Error('No auth');
@@ -308,7 +308,7 @@ document.getElementById('btn-nuevo-prestamo').href = `../prestamos/nuevo.html?cl
 // Foto / avatar
 const fotoEl = document.getElementById('perfil-foto');
 if (cliente.foto_url) {
-  fotoEl.innerHTML = `<img src="${cliente.foto_url}" style="width:100%;height:100%;object-fit:cover">`;
+  fotoEl.innerHTML = `<img src="${esc(cliente.foto_url)}" style="width:100%;height:100%;object-fit:cover">`;
 } else {
   fotoEl.textContent = iniciales(cliente.nombre);
 }
@@ -343,7 +343,7 @@ if (cliente.telefono) {
   const btnWA = document.getElementById('btn-whatsapp');
   btnWA.style.display = 'inline-flex';
   btnWA.addEventListener('click', () => {
-    window.open(linkWhatsApp(cliente.telefono, `Hola ${cliente.nombre}, le contactamos de parte de su prestamista.`), '_blank');
+    window.open(linkWhatsApp(cliente.telefono, `Hola ${esc(cliente.nombre)}, le contactamos de parte de su prestamista.`), '_blank');
   });
 }
 
@@ -422,7 +422,7 @@ if (pags.length > 0) {
       <td style="font-size:.82rem">${formatFecha(p.fecha_pago)}</td>
       <td class="td-num" style="font-weight:700;color:var(--cobrika-success)">${formatMoney(p.monto)}</td>
       <td style="font-size:.82rem;text-transform:capitalize">${p.metodo}</td>
-      <td style="font-size:.78rem;color:var(--gray-500)">${p.referencia || '—'}</td>
+      <td style="font-size:.78rem;color:var(--gray-500)">${esc(p.referencia || '—')}</td>
       <td><span class="badge ${p.estado === 'confirmado' ? 'badge-success' : p.estado === 'anulado' ? 'badge-danger' : 'badge-warning'}">${p.estado}</span></td>
     </tr>`).join('');
 }
