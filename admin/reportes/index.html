@@ -39,7 +39,7 @@
         <button class="sidebar-toggle" id="sidebar-toggle"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg></button>
         <div>
           <div class="topbar-title">Reportes</div>
-          <div class="topbar-breadcrumb">Genera y descarga reportes en PDF</div>
+          <div class="topbar-breadcrumb">Genera y descarga reportes en PDF y Excel</div>
         </div>
       </div>
     </div>
@@ -156,10 +156,14 @@
       <div class="card" id="preview-card" style="display:none">
         <div class="card-header">
           <h4 style="font-size:.95rem" id="preview-titulo">Vista previa</h4>
-          <div style="display:flex;gap:8px">
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
             <button class="btn btn-primary btn-sm" id="btn-descargar">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" style="width:14px;height:14px"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
               Descargar PDF
+            </button>
+            <button class="btn btn-sm" id="btn-excel" style="background:#def7ec;color:#057a55;border:1.5px solid #84e1bc;font-weight:600">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" style="width:14px;height:14px"><path stroke-linecap="round" stroke-linejoin="round" d="M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 01-1.125-1.125M3.375 19.5h7.5c.621 0 1.125-.504 1.125-1.125m-9.75 0V5.625m0 12.75v-1.5c0-.621.504-1.125 1.125-1.125m18.375 2.625V5.625m0 12.75c0 .621-.504 1.125-1.125 1.125m1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125m0 3.75h-7.5A1.125 1.125 0 0112 18.375m9.75-12.75c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125m19.5 0v1.5c0 .621-.504 1.125-1.125 1.125M2.25 5.625v1.5c0 .621.504 1.125 1.125 1.125m0 0h17.25m-17.25 0h7.5c.621 0 1.125.504 1.125 1.125M3.375 8.25c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125m17.25-3.75h-7.5c-.621 0-1.125.504-1.125 1.125m8.625-1.125c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125M12 10.875v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 10.875c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125M13.125 12h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125M20.625 12c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5M12 14.625v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 14.625c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125m0 1.5v-1.5m0 0c0-.621.504-1.125 1.125-1.125m0 0h7.5"/></svg>
+              Descargar Excel
             </button>
             <button class="btn btn-secondary btn-sm" onclick="window.print()">Imprimir</button>
           </div>
@@ -253,12 +257,214 @@ selPrestamo.innerHTML = '<option value="">Selecciona un préstamo...</option>';
 });
 
 // ── Helper: mostrar reporte ───────────────────────────────
-function mostrarReporte(titulo, html) {
+let excelData = null; // datos estructurados del último reporte para Excel
+
+function mostrarReporte(titulo, html, excel = null) {
   document.getElementById('preview-titulo').textContent = titulo;
   document.getElementById('preview-content').innerHTML = html;
   document.getElementById('preview-card').style.display = '';
   document.getElementById('preview-card').scrollIntoView({ behavior: 'smooth' });
+  excelData = excel;
+  document.getElementById('btn-excel').style.display = excel ? '' : 'none';
 }
+
+// ── Descargar Excel con ExcelJS ───────────────────────────
+const XL = {
+  navy:   'FF1E3A8A',
+  blue:   'FF1A56DB',
+  green:  'FF057A55',
+  red:    'FFC81E1E',
+  amber:  'FFC27803',
+  grisH:  'FFF3F4F6',
+  zebra:  'FFF8FAFC',
+  blanco: 'FFFFFFFF',
+  borde:  'FFE5E7EB',
+  texto:  'FF1F2937',
+  gris:   'FF6B7280',
+};
+const FMT_MONEY = '"RD$" #,##0.00';
+
+function bordeFino() {
+  return {
+    top:    { style: 'thin', color: { argb: XL.borde } },
+    bottom: { style: 'thin', color: { argb: XL.borde } },
+    left:   { style: 'thin', color: { argb: XL.borde } },
+    right:  { style: 'thin', color: { argb: XL.borde } },
+  };
+}
+
+document.getElementById('btn-excel').addEventListener('click', async () => {
+  if (!excelData) { toast('Genera un reporte primero', 'error'); return; }
+  const btn = document.getElementById('btn-excel');
+  btn.disabled = true;
+  const htmlOriginal = btn.innerHTML;
+  btn.textContent = 'Generando…';
+
+  try {
+    // Cargar ExcelJS dinámicamente
+    if (!window.ExcelJS) {
+      await new Promise((resolve, reject) => {
+        const s = document.createElement('script');
+        s.src = 'https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.4.0/exceljs.min.js';
+        s.onload = resolve; s.onerror = reject;
+        document.head.appendChild(s);
+      });
+    }
+
+    const wb = new ExcelJS.Workbook();
+    wb.creator = negocio;
+    wb.created = new Date();
+
+    const ws = wb.addWorksheet(excelData.hoja || 'Reporte', {
+      views: [{ showGridLines: false }],
+      pageSetup: { paperSize: 9, orientation: 'landscape', fitToPage: true, fitToWidth: 1, fitToHeight: 0 },
+    });
+
+    // Número máximo de columnas entre todas las secciones
+    const maxCols = Math.max(4, ...excelData.secciones.map(s => s.columnas.length));
+    let fila = 1;
+    let c;
+
+    // ── Encabezado corporativo ──
+    ws.mergeCells(fila, 1, fila, maxCols);
+    c = ws.getCell(fila, 1);
+    c.value = negocio.toUpperCase();
+    c.font = { name: 'Calibri', size: 18, bold: true, color: { argb: XL.blanco } };
+    c.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: XL.navy } };
+    c.alignment = { vertical: 'middle', horizontal: 'center' };
+    ws.getRow(fila).height = 34;
+    fila++;
+
+    ws.mergeCells(fila, 1, fila, maxCols);
+    c = ws.getCell(fila, 1);
+    c.value = excelData.titulo;
+    c.font = { name: 'Calibri', size: 12, bold: true, color: { argb: XL.blanco } };
+    c.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: XL.blue } };
+    c.alignment = { vertical: 'middle', horizontal: 'center' };
+    ws.getRow(fila).height = 22;
+    fila++;
+    fila++; // línea en blanco
+
+    // ── Metadatos (fecha, cliente, período, etc.) ──
+    (excelData.meta || []).forEach(([label, valor]) => {
+      c = ws.getCell(fila, 1);
+      c.value = label;
+      c.font = { name: 'Calibri', size: 10, bold: true, color: { argb: XL.gris } };
+      const cv = ws.getCell(fila, 2);
+      cv.value = valor;
+      cv.font = { name: 'Calibri', size: 10, color: { argb: XL.texto } };
+      fila++;
+    });
+    if ((excelData.meta || []).length) fila++;
+
+    // ── KPIs (pares etiqueta/valor en 3 columnas) ──
+    if ((excelData.kpis || []).length) {
+      excelData.kpis.forEach((k, i) => {
+        const col = (i % 3) * 2 + 1;
+        const r = fila + Math.floor(i / 3);
+        const cl = ws.getCell(r, col);
+        cl.value = k.label;
+        cl.font = { name: 'Calibri', size: 9, color: { argb: XL.gris } };
+        const cv = ws.getCell(r, col + 1);
+        cv.value = k.valor;
+        cv.font = { name: 'Calibri', size: 11, bold: true, color: { argb: k.color || XL.texto } };
+        if (k.money) cv.numFmt = FMT_MONEY;
+      });
+      fila += Math.ceil(excelData.kpis.length / 3) + 1;
+    }
+
+    // ── Secciones (tablas) ──
+    const anchos = new Array(maxCols).fill(10);
+
+    excelData.secciones.forEach(sec => {
+      // Título de la sección
+      if (sec.titulo) {
+        ws.mergeCells(fila, 1, fila, sec.columnas.length);
+        c = ws.getCell(fila, 1);
+        c.value = sec.titulo;
+        c.font = { name: 'Calibri', size: 11, bold: true, color: { argb: XL.navy } };
+        c.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: XL.grisH } };
+        c.alignment = { vertical: 'middle' };
+        ws.getRow(fila).height = 20;
+        fila++;
+      }
+
+      // Cabecera de la tabla
+      sec.columnas.forEach((col, i) => {
+        const ch = ws.getCell(fila, i + 1);
+        ch.value = col.header;
+        ch.font = { name: 'Calibri', size: 10, bold: true, color: { argb: XL.blanco } };
+        ch.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: XL.navy } };
+        ch.alignment = { vertical: 'middle', horizontal: col.align || 'left' };
+        ch.border = bordeFino();
+        anchos[i] = Math.max(anchos[i], String(col.header).length + 4, col.width || 0);
+      });
+      ws.getRow(fila).height = 20;
+      fila++;
+
+      // Filas de datos
+      sec.filas.forEach((f, idx) => {
+        sec.columnas.forEach((col, i) => {
+          const cd = ws.getCell(fila, i + 1);
+          cd.value = f[col.key];
+          cd.font = { name: 'Calibri', size: 10, color: { argb: (col.colorFn && col.colorFn(f)) || XL.texto } };
+          cd.alignment = { horizontal: col.align || (col.money ? 'right' : 'left') };
+          cd.border = bordeFino();
+          if (idx % 2 === 1) cd.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: XL.zebra } };
+          if (col.money) cd.numFmt = FMT_MONEY;
+          const len = col.money ? 15 : String(f[col.key] ?? '').length + 3;
+          anchos[i] = Math.max(anchos[i], Math.min(len, 35));
+        });
+        fila++;
+      });
+
+      // Fila de totales
+      if (sec.totales) {
+        sec.columnas.forEach((col, i) => {
+          const ct = ws.getCell(fila, i + 1);
+          ct.value = sec.totales[col.key] ?? (i === 0 ? 'TOTAL' : '');
+          ct.font = { name: 'Calibri', size: 10, bold: true, color: { argb: XL.texto } };
+          ct.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: XL.grisH } };
+          ct.border = { ...bordeFino(), top: { style: 'double', color: { argb: XL.navy } } };
+          ct.alignment = { horizontal: col.align || (col.money ? 'right' : 'left') };
+          if (col.money && typeof sec.totales[col.key] === 'number') ct.numFmt = FMT_MONEY;
+        });
+        fila++;
+      }
+
+      fila++; // espacio entre secciones
+    });
+
+    // ── Pie ──
+    ws.mergeCells(fila, 1, fila, maxCols);
+    c = ws.getCell(fila, 1);
+    c.value = `${negocio} · Generado el ${new Date().toLocaleString('es-DO')} · Cobrika Sistema de Préstamos`;
+    c.font = { name: 'Calibri', size: 9, italic: true, color: { argb: XL.gris } };
+    c.alignment = { horizontal: 'center' };
+
+    // Aplicar anchos de columna
+    anchos.forEach((a, i) => { ws.getColumn(i + 1).width = a; });
+
+    // Congelar el encabezado corporativo
+    ws.views = [{ state: 'frozen', ySplit: 2, showGridLines: false }];
+
+    // Descargar
+    const buffer = await wb.xlsx.writeBuffer();
+    const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = (excelData.filename || 'reporte') + '_' + new Date().toISOString().split('T')[0] + '.xlsx';
+    a.click();
+    URL.revokeObjectURL(a.href);
+    toast('Excel descargado', 'success');
+  } catch (err) {
+    console.error(err);
+    toast('No se pudo generar el Excel', 'error');
+  }
+
+  btn.disabled = false;
+  btn.innerHTML = htmlOriginal;
+});
 
 // ── Descargar PDF con html2pdf ────────────────────────────
 document.getElementById('btn-descargar').addEventListener('click', async () => {
@@ -386,7 +592,70 @@ window.generarEstadoCuenta = async () => {
     </div>
   </div>`;
 
-  mostrarReporte(`Estado de cuenta — ${esc(cliente.nombre)}`, html);
+  // ── Datos para Excel ──
+  const colCuotas = [
+    { header: '#',        key: 'num',     align: 'center', width: 6 },
+    { header: 'Vence',    key: 'vence',   width: 13 },
+    { header: 'Capital',  key: 'capital', money: true },
+    { header: 'Interés',  key: 'interes', money: true },
+    { header: 'Total',    key: 'total',   money: true },
+    { header: 'Pagado',   key: 'pagado',  money: true, colorFn: () => XL.green },
+    { header: 'Estado',   key: 'estado',  align: 'center', colorFn: f => f.estado === 'vencida' ? XL.red : (f.estado === 'pagada' ? XL.green : null) },
+  ];
+  const excel = {
+    hoja: 'Estado de cuenta',
+    titulo: `Estado de cuenta — ${cliente.nombre}`,
+    filename: `estado_cuenta_${cliente.nombre.replace(/\s+/g,'_').toLowerCase()}`,
+    meta: [
+      ['Cliente',  cliente.nombre],
+      ['Cédula',   cliente.cedula || '—'],
+      ['Teléfono', cliente.telefono || '—'],
+      ['Fecha',    formatFecha(new Date().toISOString().split('T')[0])],
+    ],
+    kpis: [
+      { label: 'Total prestado',  valor: totalPrestado,  money: true, color: XL.blue },
+      { label: 'Total pagado',    valor: totalPagado,    money: true, color: XL.green },
+      { label: 'Saldo pendiente', valor: saldoPendiente, money: true, color: XL.amber },
+    ],
+    secciones: [
+      ...(prests||[]).map(p => ({
+        titulo: `Préstamo #${p.numero||'—'} — ${formatMoney(p.monto_capital)} — ${p.estado.toUpperCase()}`,
+        columnas: colCuotas,
+        filas: (p.cuotas||[]).sort((a,b)=>a.numero-b.numero).map(cu => ({
+          num: cu.numero, vence: formatFecha(cu.fecha_vence),
+          capital: Number(cu.monto_capital||0), interes: Number(cu.monto_interes||0),
+          total: Number(cu.monto_total||0), pagado: Number(cu.monto_pagado||0),
+          estado: cu.estado,
+        })),
+      })),
+      {
+        titulo: `Historial de pagos (${(pags||[]).length} pagos)`,
+        columnas: [
+          { header: 'Fecha',      key: 'fecha', width: 13 },
+          { header: 'Monto',      key: 'monto',   money: true, colorFn: () => XL.green },
+          { header: 'Capital',    key: 'capital', money: true },
+          { header: 'Interés',    key: 'interes', money: true },
+          { header: 'Mora',       key: 'mora',    money: true, colorFn: f => f.mora > 0 ? XL.red : null },
+          { header: 'Método',     key: 'metodo' },
+          { header: 'Referencia', key: 'ref' },
+        ],
+        filas: (pags||[]).map(pg => ({
+          fecha: formatFecha(pg.fecha_pago), monto: Number(pg.monto||0),
+          capital: Number(pg.monto_capital||0), interes: Number(pg.monto_interes||0),
+          mora: Number(pg.monto_mora||0), metodo: pg.metodo, ref: pg.referencia || '—',
+        })),
+        totales: {
+          fecha: 'TOTAL',
+          monto:   (pags||[]).reduce((s,pg)=>s+Number(pg.monto||0),0),
+          capital: (pags||[]).reduce((s,pg)=>s+Number(pg.monto_capital||0),0),
+          interes: (pags||[]).reduce((s,pg)=>s+Number(pg.monto_interes||0),0),
+          mora:    (pags||[]).reduce((s,pg)=>s+Number(pg.monto_mora||0),0),
+        },
+      },
+    ],
+  };
+
+  mostrarReporte(`Estado de cuenta — ${esc(cliente.nombre)}`, html, excel);
 };
 
 // ── REPORTE 2: Plan de cuotas ─────────────────────────────
@@ -462,7 +731,61 @@ window.generarPlanCuotas = async () => {
     </div>
   </div>`;
 
-  mostrarReporte(`Plan de cuotas — #${p.numero} ${esc(p.clientes?.nombre)}`, html);
+  // ── Datos para Excel ──
+  const excel = {
+    hoja: 'Plan de cuotas',
+    titulo: `Plan de cuotas — Préstamo #${p.numero||'—'} — ${p.clientes?.nombre||''}`,
+    filename: `plan_cuotas_prestamo_${p.numero||'x'}`,
+    meta: [
+      ['Cliente',     p.clientes?.nombre || '—'],
+      ['Cédula',      p.clientes?.cedula || '—'],
+      ['Frecuencia',  frecLabel[p.frecuencia_pago] || p.frecuencia_pago],
+      ['Progreso',    `${p.cuotas_pagadas||0} de ${p.num_cuotas} cuotas pagadas (${pct}%)`],
+      ['Vencimiento', formatFecha(p.fecha_vencimiento)],
+    ],
+    kpis: [
+      { label: 'Capital',        valor: Number(p.monto_capital||0), money: true, color: XL.blue },
+      { label: `Interés (${(Number(p.tasa_interes)*100).toFixed(0)}% ${p.tipo_interes})`, valor: Number(p.total_interes||0), money: true },
+      { label: 'Total a pagar',  valor: Number(p.monto_total||0),   money: true },
+      { label: 'Cuota',          valor: Number(p.monto_cuota||0),   money: true, color: XL.green },
+      { label: 'Total pagado',   valor: Number(p.total_pagado||0),  money: true, color: XL.green },
+      { label: 'Saldo pendiente',valor: Number(p.saldo_total||0),   money: true, color: XL.amber },
+    ],
+    secciones: [{
+      titulo: 'Detalle de cuotas',
+      columnas: [
+        { header: '#',           key: 'num',     align: 'center', width: 6 },
+        { header: 'Fecha vence', key: 'vence',   width: 13 },
+        { header: 'Capital',     key: 'capital', money: true },
+        { header: 'Interés',     key: 'interes', money: true },
+        { header: 'Mora',        key: 'mora',    money: true, colorFn: f => f.mora > 0 ? XL.red : null },
+        { header: 'Total',       key: 'total',   money: true },
+        { header: 'Pagado',      key: 'pagado',  money: true, colorFn: () => XL.green },
+        { header: 'Saldo',       key: 'saldo',   money: true, colorFn: f => f.saldo > 0 ? XL.amber : XL.green },
+        { header: 'Estado',      key: 'estado',  align: 'center', colorFn: f => f.estado === 'vencida' ? XL.red : (f.estado === 'pagada' ? XL.green : null) },
+      ],
+      filas: cuotas.map(cu => {
+        const saldo = Math.max(0, Number(cu.monto_total||0) + Number(cu.monto_mora||0) - Number(cu.monto_pagado||0));
+        return {
+          num: cu.numero, vence: formatFecha(cu.fecha_vence),
+          capital: Number(cu.monto_capital||0), interes: Number(cu.monto_interes||0),
+          mora: Number(cu.monto_mora||0), total: Number(cu.monto_total||0),
+          pagado: Number(cu.monto_pagado||0), saldo, estado: cu.estado,
+        };
+      }),
+      totales: {
+        num: 'TOTAL',
+        capital: cuotas.reduce((s,cu)=>s+Number(cu.monto_capital||0),0),
+        interes: cuotas.reduce((s,cu)=>s+Number(cu.monto_interes||0),0),
+        mora:    cuotas.reduce((s,cu)=>s+Number(cu.monto_mora||0),0),
+        total:   cuotas.reduce((s,cu)=>s+Number(cu.monto_total||0),0),
+        pagado:  cuotas.reduce((s,cu)=>s+Number(cu.monto_pagado||0),0),
+        saldo:   cuotas.reduce((s,cu)=>s+Math.max(0, Number(cu.monto_total||0)+Number(cu.monto_mora||0)-Number(cu.monto_pagado||0)),0),
+      },
+    }],
+  };
+
+  mostrarReporte(`Plan de cuotas — #${p.numero} ${esc(p.clientes?.nombre)}`, html, excel);
 };
 
 // ── REPORTE 3: Cobros del período ─────────────────────────
@@ -538,7 +861,49 @@ window.generarReporteCobros = async () => {
     <div class="reporte-footer">${negocio} · Cobrika Sistema de Préstamos</div>
   </div>`;
 
-  mostrarReporte(`Cobros ${formatFecha(desde)} — ${formatFecha(hasta)}`, html);
+  // ── Datos para Excel ──
+  const excel = {
+    hoja: 'Cobros',
+    titulo: `Reporte de cobros — ${formatFecha(desde)} al ${formatFecha(hasta)}`,
+    filename: 'reporte_cobros',
+    meta: [
+      ['Período', `${formatFecha(desde)} — ${formatFecha(hasta)}`],
+      ['Pagos registrados', pags.length],
+    ],
+    kpis: [
+      { label: 'Total cobrado',    valor: totalCobrado, money: true, color: XL.green },
+      { label: 'Capital cobrado',  valor: totalCapital, money: true },
+      { label: 'Interés cobrado',  valor: totalInteres, money: true },
+      { label: 'Mora cobrada',     valor: totalMora,    money: true, color: XL.red },
+      { label: 'En efectivo',      valor: pags.filter(pg=>pg.metodo==='efectivo').reduce((s,pg)=>s+Number(pg.monto),0), money: true },
+      { label: 'Transferencias',   valor: pags.filter(pg=>pg.metodo==='transferencia').reduce((s,pg)=>s+Number(pg.monto),0), money: true },
+    ],
+    secciones: [{
+      titulo: 'Detalle de pagos',
+      columnas: [
+        { header: 'Fecha',    key: 'fecha',   width: 13 },
+        { header: 'Cliente',  key: 'cliente', width: 24 },
+        { header: 'Préstamo', key: 'prestamo', align: 'center' },
+        { header: 'Monto',    key: 'monto',   money: true, colorFn: () => XL.green },
+        { header: 'Capital',  key: 'capital', money: true },
+        { header: 'Interés',  key: 'interes', money: true },
+        { header: 'Mora',     key: 'mora',    money: true, colorFn: f => f.mora > 0 ? XL.red : null },
+        { header: 'Método',   key: 'metodo' },
+      ],
+      filas: pags.map(pg => ({
+        fecha: formatFecha(pg.fecha_pago), cliente: pg.clientes?.nombre || '—',
+        prestamo: '#' + (pg.prestamos?.numero || '—'), monto: Number(pg.monto||0),
+        capital: Number(pg.monto_capital||0), interes: Number(pg.monto_interes||0),
+        mora: Number(pg.monto_mora||0), metodo: pg.metodo,
+      })),
+      totales: {
+        fecha: 'TOTAL',
+        monto: totalCobrado, capital: totalCapital, interes: totalInteres, mora: totalMora,
+      },
+    }],
+  };
+
+  mostrarReporte(`Cobros ${formatFecha(desde)} — ${formatFecha(hasta)}`, html, excel);
 };
 
 // ── REPORTE 4: Morosos ────────────────────────────────────
@@ -620,7 +985,44 @@ window.generarReporteMorosos = async () => {
     <div class="reporte-footer">${negocio} · Cobrika Sistema de Préstamos · ${new Date().toLocaleString('es-DO')}</div>
   </div>`;
 
-  mostrarReporte(`Lista de morosos — ${formatFecha(hoy)}`, html);
+  // ── Datos para Excel ──
+  const excel = {
+    hoja: 'Morosos',
+    titulo: `Lista de clientes morosos — ${formatFecha(hoy)}`,
+    filename: 'lista_morosos',
+    meta: [
+      ['Fecha', formatFecha(hoy)],
+    ],
+    kpis: [
+      { label: 'Clientes morosos', valor: lista.length, color: XL.red },
+      { label: 'Total adeudado',   valor: totalMora, money: true, color: XL.red },
+      { label: 'Cuotas vencidas',  valor: lista.reduce((s,m)=>s+m.cuotas,0) },
+    ],
+    secciones: [{
+      titulo: 'Detalle por cliente',
+      columnas: [
+        { header: 'Cliente',         key: 'nombre',  width: 24 },
+        { header: 'Cédula',          key: 'cedula',  width: 15 },
+        { header: 'Teléfono',        key: 'telefono', width: 15 },
+        { header: 'Préstamo',        key: 'prestamo', align: 'center' },
+        { header: 'Cuotas vencidas', key: 'cuotas',  align: 'center', colorFn: () => XL.red },
+        { header: 'Días atraso',     key: 'dias',    align: 'center', colorFn: () => XL.red },
+        { header: 'Monto adeudado',  key: 'monto',   money: true, colorFn: () => XL.red },
+      ],
+      filas: lista.map(m => ({
+        nombre: m.nombre, cedula: m.cedula, telefono: m.telefono,
+        prestamo: '#' + m.prestamo, cuotas: m.cuotas, dias: m.diasMax,
+        monto: m.monto,
+      })),
+      totales: {
+        nombre: 'TOTAL',
+        cuotas: lista.reduce((s,m)=>s+m.cuotas,0),
+        monto: totalMora,
+      },
+    }],
+  };
+
+  mostrarReporte(`Lista de morosos — ${formatFecha(hoy)}`, html, excel);
 };
 </script>
 </body>
