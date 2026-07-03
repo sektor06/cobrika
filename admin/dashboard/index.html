@@ -231,7 +231,7 @@
 <script type="module">
 import { requireAdmin, logout } from '../../shared/auth.js';
 import { supabase }             from '../../shared/supabase-client.js';
-import { formatMoney, formatFecha, iniciales, linkWhatsApp, toast, confirmar } from '../../shared/helpers.js';
+import { esc, formatMoney, formatFecha, iniciales, linkWhatsApp, toast, confirmar } from '../../shared/helpers.js';
 
 // ── Auth ──────────────────────────────────────────────────
 const usuario = await requireAdmin();
@@ -326,9 +326,9 @@ async function cargarKPIs() {
       const msg    = `Hola ${nombre}, le recordamos que su cuota de ${formatMoney(monto)} vence hoy. Por favor realice su pago. Gracias — Cobrika`;
       return `
         <div class="cobro-item">
-          <div class="cobro-avatar">${iniciales(nombre)}</div>
+          <div class="cobro-avatar">${esc(iniciales(nombre))}</div>
           <div>
-            <div class="cobro-nombre">${nombre}</div>
+            <div class="cobro-nombre">${esc(nombre)}</div>
             <div class="cobro-monto">${formatMoney(monto)}</div>
           </div>
           <div class="cobro-right">
@@ -383,7 +383,7 @@ async function cargarMovimientos() {
     <div class="movimiento-item">
       <div class="mov-icon ${m.tipo}">${iconos[m.tipo]}</div>
       <div class="mov-info">
-        <div class="mov-nombre">${m.nombre}</div>
+        <div class="mov-nombre">${esc(m.nombre)}</div>
         <div class="mov-desc">${m.desc}</div>
       </div>
       <div class="mov-right">
@@ -410,10 +410,10 @@ async function cargarVouchers() {
     const monto = v.ocr_monto || v.monto_declarado;
     return `
       <div class="voucher-item">
-        <img class="voucher-thumb" src="${v.imagen_url || '../../assets/icons/receipt.png'}" alt="voucher"
+        <img class="voucher-thumb" src="${esc(v.imagen_url || '../../assets/icons/receipt.png')}" alt="voucher"
              onerror="this.style.background='var(--gray-200)';this.removeAttribute('src')">
         <div class="voucher-info">
-          <div class="voucher-cliente">${v.clientes?.nombre || '—'}</div>
+          <div class="voucher-cliente">${esc(v.clientes?.nombre || '—')}</div>
           <div class="voucher-monto">${monto ? formatMoney(monto) : 'Monto pendiente'}</div>
         </div>
         <div class="voucher-actions">
