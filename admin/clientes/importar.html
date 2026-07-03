@@ -23,9 +23,10 @@
     .drop-zone strong { color: var(--cobrika-primary); }
 
     /* ── Steps ── */
-    .steps { display:flex; gap:0; margin-bottom:28px; }
-    .step  { flex:1; padding:10px 14px; font-size:.82rem; font-weight:600;
-             border-bottom:3px solid var(--gray-200); color:var(--gray-400); text-align:center; }
+    .steps { display:flex; gap:0; margin-bottom:28px; overflow-x:auto; }
+    .step  { flex:1; min-width:100px; padding:10px 14px; font-size:.82rem; font-weight:600;
+             border-bottom:3px solid var(--gray-200); color:var(--gray-400); text-align:center;
+             white-space:nowrap; }
     .step.active  { border-color:var(--cobrika-primary); color:var(--cobrika-primary); }
     .step.done    { border-color:#10b981; color:#10b981; }
 
@@ -107,13 +108,21 @@
 <!-- ── Main ─────────────────────────────────────────────── -->
 <div class="main-content">
   <header class="topbar">
-    <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Menú">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:22px;height:22px"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
-    </button>
-    <div class="topbar-title">
-      <a href="index.html" style="color:inherit;text-decoration:none;opacity:.6">Clientes</a>
-      <span style="opacity:.4;margin:0 6px">/</span>
-      Importación masiva
+    <div class="topbar-left">
+      <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Menú">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:22px;height:22px"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
+      </button>
+      <div>
+        <div class="topbar-title">
+          <a href="index.html" style="color:inherit;text-decoration:none;opacity:.6">Clientes</a>
+          <span style="opacity:.4;margin:0 6px">/</span>
+          Importación masiva
+        </div>
+        <div class="topbar-breadcrumb">Carga masiva desde Excel</div>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <a href="index.html" class="btn btn-secondary btn-sm">← Volver a clientes</a>
     </div>
   </header>
 
