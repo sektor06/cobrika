@@ -249,7 +249,7 @@
 import { requireAdmin, logout } from '../../shared/auth.js';
 import { supabase }             from '../../shared/supabase-client.js';
 import { calcularPlan }         from '../../shared/calculadora-core.js';
-import { formatMoney, formatFecha, iniciales, toast, confirmar, debounce } from '../../shared/helpers.js';
+import { esc, formatMoney, formatFecha, iniciales, toast, confirmar, debounce } from '../../shared/helpers.js';
 
 const usuario  = await requireAdmin();
 if (!usuario) throw new Error('No auth');
@@ -294,10 +294,10 @@ document.getElementById('cliente-buscar').addEventListener('input', debounce(asy
   if (!data?.length) { dd.innerHTML = `<div style="padding:12px;color:var(--gray-400);font-size:.85rem">Sin resultados</div>`; dd.style.display = 'block'; return; }
   dd.innerHTML = data.map(c => `
     <div class="dd-item" data-id="${c.id}" style="padding:10px 14px;cursor:pointer;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--gray-100);transition:background .1s">
-      <div style="width:30px;height:30px;border-radius:50%;background:var(--cobrika-primary-light);color:var(--cobrika-primary);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.75rem;flex-shrink:0">${iniciales(c.nombre)}</div>
+      <div style="width:30px;height:30px;border-radius:50%;background:var(--cobrika-primary-light);color:var(--cobrika-primary);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.75rem;flex-shrink:0">${esc(iniciales(c.nombre))}</div>
       <div>
-        <div style="font-weight:600;font-size:.875rem">${c.nombre}</div>
-        <div style="font-size:.75rem;color:var(--gray-400)">${c.cedula||''} ${c.telefono||''}</div>
+        <div style="font-weight:600;font-size:.875rem">${esc(c.nombre)}</div>
+        <div style="font-size:.75rem;color:var(--gray-400)">${esc(c.cedula||'')} ${esc(c.telefono||'')}</div>
       </div>
     </div>`).join('');
   dd.querySelectorAll('.dd-item').forEach(el => {

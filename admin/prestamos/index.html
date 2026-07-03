@@ -151,7 +151,7 @@
 <script type="module">
 import { requireAdmin, logout } from '../../shared/auth.js';
 import { supabase }             from '../../shared/supabase-client.js';
-import { formatMoney, formatFecha, badgePrestamo, debounce, toast, confirmar, iniciales } from '../../shared/helpers.js';
+import { esc, formatMoney, formatFecha, badgePrestamo, debounce, toast, confirmar, iniciales } from '../../shared/helpers.js';
 
 const usuario  = await requireAdmin();
 if (!usuario) throw new Error('No auth');
@@ -239,7 +239,7 @@ function render() {
     return `<tr style="cursor:pointer" onclick="window.location.href='detalle.html?id=${p.id}'">
       <td style="font-size:.78rem;color:var(--gray-400)">#${p.numero||'—'}</td>
       <td>
-        <div style="font-weight:600;font-size:.875rem">${nombre}</div>
+        <div style="font-weight:600;font-size:.875rem">${esc(nombre)}</div>
         <div style="font-size:.72rem;color:var(--gray-400)">${p.tipo_interes === 'fijo' ? 'Interés fijo' : 'Saldo reducido'}</div>
       </td>
       <td class="td-num">${formatMoney(p.monto_capital)}</td>

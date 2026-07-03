@@ -258,7 +258,7 @@
 import { requireAdmin, logout }   from '../../shared/auth.js';
 import { supabase }               from '../../shared/supabase-client.js';
 import { calcularMora, diasAtraso } from '../../shared/calculadora-core.js';
-import { formatMoney, formatFecha, badgePrestamo, linkWhatsApp, toast, confirmar } from '../../shared/helpers.js';
+import { esc, formatMoney, formatFecha, badgePrestamo, linkWhatsApp, toast, confirmar } from '../../shared/helpers.js';
 
 const usuario  = await requireAdmin();
 if (!usuario) throw new Error('No auth');
@@ -348,16 +348,16 @@ function renderTodo() {
     document.getElementById('info-cliente').innerHTML = `
       <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
         <div style="width:40px;height:40px;border-radius:50%;background:var(--cobrika-primary-light);color:var(--cobrika-primary);display:flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0">
-          ${cliente.nombre.split(' ').slice(0,2).map(p=>p[0]).join('').toUpperCase()}
+          ${esc(cliente.nombre.split(' ').slice(0,2).map(p=>p[0]).join('').toUpperCase())}
         </div>
         <div>
-          <div style="font-weight:600;font-size:.875rem">${cliente.nombre}</div>
-          <div style="font-size:.75rem;color:var(--gray-400)">${cliente.cedula||''}</div>
+          <div style="font-weight:600;font-size:.875rem">${esc(cliente.nombre)}</div>
+          <div style="font-size:.75rem;color:var(--gray-400)">${esc(cliente.cedula||'')}</div>
         </div>
       </div>
       <div style="display:flex;flex-direction:column;gap:6px">
-        ${cliente.telefono ? `<div style="font-size:.82rem;color:var(--gray-600)">📞 ${cliente.telefono}</div>` : ''}
-        ${cliente.direccion ? `<div style="font-size:.82rem;color:var(--gray-600)">📍 ${cliente.direccion}</div>` : ''}
+        ${cliente.telefono ? `<div style="font-size:.82rem;color:var(--gray-600)">📞 ${esc(cliente.telefono)}</div>` : ''}
+        ${cliente.direccion ? `<div style="font-size:.82rem;color:var(--gray-600)">📍 ${esc(cliente.direccion)}</div>` : ''}
       </div>
       <div style="margin-top:10px">
         <a href="../clientes/perfil.html?id=${cliente.id}" class="btn btn-secondary btn-sm btn-full">Ver perfil completo</a>
@@ -387,7 +387,7 @@ function renderTodo() {
         <td class="td-num" style="font-size:.8rem">${formatMoney(pg.monto_interes)}</td>
         <td class="td-num" style="font-size:.8rem;color:${pg.monto_mora>0?'var(--cobrika-danger)':'var(--gray-400)'}">${formatMoney(pg.monto_mora)}</td>
         <td style="font-size:.82rem;text-transform:capitalize">${pg.metodo}</td>
-        <td style="font-size:.78rem;color:var(--gray-400)">${pg.referencia||'—'}</td>
+        <td style="font-size:.78rem;color:var(--gray-400)">${esc(pg.referencia)||'—'}</td>
         <td>
           ${pg.estado === 'confirmado'
             ? `<span class="badge badge-success">Confirmado</span>`
@@ -402,7 +402,7 @@ function renderTodo() {
   if (cliente?.telefono) {
     const saldo = Number(prestamo.saldo_total || 0);
     const proxCuota = cuotas.find(c => ['pendiente','vencida','parcial'].includes(c.estado));
-    const msg = `Hola ${cliente.nombre}, le recordamos que tiene un saldo pendiente de ${formatMoney(saldo)} en su préstamo con nosotros.${proxCuota ? ` Su próxima cuota de ${formatMoney(proxCuota.monto_total)} vence el ${formatFecha(proxCuota.fecha_vence)}.` : ''} Gracias — Cobrika`;
+    const msg = `Hola ${esc(cliente.nombre)}, le recordamos que tiene un saldo pendiente de ${formatMoney(saldo)} en su préstamo con nosotros.${proxCuota ? ` Su próxima cuota de ${formatMoney(proxCuota.monto_total)} vence el ${formatFecha(proxCuota.fecha_vence)}.` : ''} Gracias — Cobrika`;
     document.getElementById('btn-whatsapp-recordatorio').onclick = () => window.open(linkWhatsApp(cliente.telefono, msg), '_blank');
   }
 
