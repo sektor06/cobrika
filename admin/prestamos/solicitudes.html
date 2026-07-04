@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solicitudes de Préstamo — Cobrika</title>
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/admin.css">
+  <style>
+    .sol-card {
+      background: #fff;
+      border: 1px solid var(--gray-200);
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: box-shadow .15s;
+    }
+    .sol-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,.08); }
+    .sol-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 16px;
+    }
+    .badge-solicitado { background:#eff6ff; color:#1d4ed8; border:1px solid #bfdbfe; }
+    .badge-aprobado   { background:#f0fdf4; color:#15803d; border:1px solid #bbf7d0; }
+    .badge-rechazado  { background:#fef2f2; color:#dc2626; border:1px solid #fecaca; }
+    .badge-activo     { background:#f0fdf4; color:#15803d; border:1px solid #bbf7d0; }
+    .sol-badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 99px;
+      font-size: .73rem;
+      font-weight: 600;
+    }
+    .sol-meta { font-size: .8rem; color: var(--gray-500); }
+    .sol-monto { font-size: 1.35rem; font-weight: 800; color: var(--cobrika-primary); }
+    .sol-cliente { font-weight: 600; color: var(--gray-900); font-size: .95rem; }
+    .sol-detail { display: flex; gap: 16px; flex-wrap: wrap; }
+    .sol-detail-item { font-size: .82rem; color: var(--gray-600); }
+    .sol-detail-item strong { color: var(--gray-800); display: block; font-size: .75rem; margin-bottom:1px; }
+    .sol-actions { display: flex; gap: 8px; margin-top: 4px; }
+    .tab-pill {
+      padding: 6px 16px;
+      border-radius: 99px;
+      font-size: .82rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1.5px solid var(--gray-200);
+      background: #fff;
+      color: var(--gray-500);
+      transition: all .15s;
+    }
+    .tab-pill.active {
+      background: var(--cobrika-primary);
+      color: #fff;
+      border-color: var(--cobrika-primary);
+    }
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--gray-400);
+    }
+    .empty-state svg { width: 48px; height: 48px; margin-bottom: 12px; display: block; margin-inline: auto; }
+
+    /* Modal */
+    .modal-overlay {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,.45);
+      z-index: 200;
+      display: flex; align-items: center; justify-content: center;
+      padding: 16px;
+    }
+    .modal-box {
+      background: #fff;
+      border-radius: 16px;
+      width: 100%; max-width: 520px;
+      padding: 28px 24px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.18);
+    }
+    .modal-box h3 { margin: 0 0 16px; font-size: 1.1rem; }
+    .modal-field { margin-bottom: 14px; }
+    .modal-field label { font-size: .82rem; font-weight: 600; color: var(--gray-600); display: block; margin-bottom: 4px; }
+    .modal-actions { display: flex; gap: 10px; margin-top: 20px; justify-content: flex-end; }
+  </style>
+</head>
+<body>
+<div class="admin-layout">
+
+  <!-- ── Sidebar ──────────────────────────────────────── -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="sidebar-logo-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75"/></svg></div>
+      <div><div class="sidebar-logo-text">Cobrika</div><div class="sidebar-logo-sub">Panel administrativo</div></div>
+    </div>
+    <div class="sidebar-tenant"><div class="sidebar-tenant-label">Negocio</div><div class="sidebar-tenant-name" id="admin-tenant">—</div></div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Principal</div>
+      <a href="../dashboard/index.html" class="nav-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z"/></svg>Dashboard</a>
+      <a href="../clientes/index.html" class="nav-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"/></svg>Clientes</a>
+      <a href="index.html" class="nav-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Préstamos</a>
+      <a href="../pagos/index.html" class="nav-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z"/></svg>Pagos</a>
+      <div class="nav-section-label">Operaciones</div>
+      <a href="../pagos/vouchers.html" class="nav-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/></svg>Vouchers</a>
+      <a href="../notificaciones/index.html" class="nav-item"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>WhatsApp</a>
+      <a href="solicitudes.html" class="nav-item active"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z"/></svg>Solicitudes</a>
+      <div class="nav-section-label">Reportes</div>
+      <a href="../reportes/index.html" class="nav-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"/></svg>Reportes</a>
+      <a href="../configuracion/index.html" class="nav-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>Configuración</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user" id="logout-btn">
+        <div class="avatar" id="admin-avatar">A</div>
+        <div class="sidebar-user-info">
+          <div class="sidebar-user-name" id="admin-nombre">—</div>
+          <div class="sidebar-user-role">Administrador</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  <!-- ── Main ─────────────────────────────────────────── -->
+  <main class="admin-main">
+    <div class="topbar">
+      <div class="topbar-left">
+        <button class="sidebar-toggle" id="sidebar-toggle">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
+        </button>
+        <div>
+          <div class="topbar-title">Solicitudes de Préstamo</div>
+          <div class="topbar-breadcrumb">Solicitudes enviadas por los clientes desde la app</div>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <span id="badge-pendientes" style="display:none;background:#eff6ff;color:#1d4ed8;border:1px solid #bfdbfe;padding:3px 12px;border-radius:99px;font-size:.8rem;font-weight:700"></span>
+      </div>
+    </div>
+
+    <div class="page-content">
+
+      <!-- KPIs -->
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px">
+        <div class="card"><div class="card-body" style="padding:16px">
+          <div style="font-size:.75rem;color:var(--gray-500);margin-bottom:4px">Pendientes</div>
+          <div id="kpi-pendientes" style="font-size:1.5rem;font-weight:800;color:#1d4ed8">—</div>
+        </div></div>
+        <div class="card"><div class="card-body" style="padding:16px">
+          <div style="font-size:.75rem;color:var(--gray-500);margin-bottom:4px">Aprobadas</div>
+          <div id="kpi-aprobadas" style="font-size:1.5rem;font-weight:800;color:#15803d">—</div>
+        </div></div>
+        <div class="card"><div class="card-body" style="padding:16px">
+          <div style="font-size:.75rem;color:var(--gray-500);margin-bottom:4px">Rechazadas</div>
+          <div id="kpi-rechazadas" style="font-size:1.5rem;font-weight:800;color:#dc2626">—</div>
+        </div></div>
+        <div class="card"><div class="card-body" style="padding:16px">
+          <div style="font-size:.75rem;color:var(--gray-500);margin-bottom:4px">Monto total solicitado</div>
+          <div id="kpi-monto" style="font-size:1.5rem;font-weight:800;color:var(--cobrika-primary)">—</div>
+        </div></div>
+      </div>
+
+      <!-- Filtro por tab -->
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px">
+        <button class="tab-pill active" data-tab="solicitado">🕐 Pendientes</button>
+        <button class="tab-pill" data-tab="aprobado">✅ Aprobadas</button>
+        <button class="tab-pill" data-tab="rechazado">❌ Rechazadas</button>
+        <button class="tab-pill" data-tab="">📋 Todas</button>
+      </div>
+
+      <!-- Cards de solicitudes -->
+      <div id="sol-grid" class="sol-grid"></div>
+
+    </div>
+  </main>
+</div>
+
+<!-- Modal aprobar -->
+<div id="modal-aprobar" class="modal-overlay" style="display:none">
+  <div class="modal-box">
+    <h3>✅ Aprobar solicitud</h3>
+    <p style="font-size:.88rem;color:var(--gray-500);margin-bottom:18px">
+      Al aprobar, el préstamo cambiará a estado <strong>activo</strong> y se generará el plan de cuotas automáticamente.
+      Puedes ajustar los parámetros antes de confirmar.
+    </p>
+    <input type="hidden" id="modal-id">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+      <div class="modal-field">
+        <label>Monto aprobado (RD$)</label>
+        <input type="number" class="form-control" id="modal-monto" min="1000" step="100">
+      </div>
+      <div class="modal-field">
+        <label>Tasa de interés (%/mes)</label>
+        <input type="number" class="form-control" id="modal-tasa" min="0.1" max="100" step="0.5" value="10">
+      </div>
+      <div class="modal-field">
+        <label>Número de cuotas</label>
+        <input type="number" class="form-control" id="modal-cuotas" min="1" max="360">
+      </div>
+      <div class="modal-field">
+        <label>Frecuencia de pago</label>
+        <select class="form-control" id="modal-frecuencia">
+          <option value="semanal">Semanal</option>
+          <option value="quincenal">Quincenal</option>
+          <option value="mensual" selected>Mensual</option>
+          <option value="diario">Diario</option>
+        </select>
+      </div>
+      <div class="modal-field">
+        <label>Tipo de interés</label>
+        <select class="form-control" id="modal-tipo">
+          <option value="fijo" selected>Fijo (sobre capital original)</option>
+          <option value="reducido">Reducido (sobre saldo)</option>
+        </select>
+      </div>
+      <div class="modal-field">
+        <label>Fecha primer pago</label>
+        <input type="date" class="form-control" id="modal-fecha">
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" id="btn-cancelar-modal">Cancelar</button>
+      <button class="btn btn-primary" id="btn-confirmar-aprobar">
+        <span id="span-confirmar">Aprobar préstamo</span>
+        <span id="span-spinner" style="display:none">Procesando…</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal rechazar -->
+<div id="modal-rechazar" class="modal-overlay" style="display:none">
+  <div class="modal-box">
+    <h3>❌ Rechazar solicitud</h3>
+    <input type="hidden" id="modal-rechazar-id">
+    <div class="modal-field">
+      <label>Motivo del rechazo (opcional)</label>
+      <textarea class="form-control" id="modal-motivo" rows="3" placeholder="Ej: Documentación incompleta, historial de pagos, etc."></textarea>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" id="btn-cancelar-rechazar">Cancelar</button>
+      <button class="btn btn-danger" id="btn-confirmar-rechazar">Rechazar solicitud</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast-container" style="position:fixed;bottom:20px;right:20px;z-index:9999;display:flex;flex-direction:column;gap:8px"></div>
+
+<script type="module">
+import { requireAdmin, logout } from '../../shared/auth.js';
+import { supabase }             from '../../shared/supabase-client.js';
+import { esc, formatMoney, formatFecha, toast, confirmar } from '../../shared/helpers.js';
+import { calcularPlan }         from '../../shared/calculadora-core.js';
+
+// ── Auth ─────────────────────────────────────────────────
+const usuario  = await requireAdmin();
+if (!usuario) throw new Error('No auth');
+const tenantId = usuario.perfil.tenant_id;
+
+// Sidebar info
+document.getElementById('admin-tenant').textContent  = usuario.perfil?.nombre_negocio || '—';
+document.getElementById('admin-nombre').textContent  = usuario.perfil?.nombre || usuario.email || '—';
+document.getElementById('admin-avatar').textContent  = (usuario.perfil?.nombre || 'A')[0].toUpperCase();
+
+// Sidebar toggle
+const sidebar = document.getElementById('sidebar');
+const overlay  = document.getElementById('sidebar-overlay');
+document.getElementById('sidebar-toggle').addEventListener('click', () => {
+  sidebar.classList.toggle('open'); overlay.classList.toggle('open');
+});
+overlay.addEventListener('click', () => {
+  sidebar.classList.remove('open'); overlay.classList.remove('open');
+});
+document.getElementById('logout-btn').addEventListener('click', async () => {
+  if (await confirmar('¿Cerrar sesión?')) logout();
+});
+
+// ── State ─────────────────────────────────────────────────
+let todas = [];
+let tabActual = 'solicitado';
+
+// ── Cargar solicitudes ─────────────────────────────────────
+async function cargar() {
+  const { data, error } = await supabase
+    .from('prestamos')
+    .select(`
+      id, monto_capital, tasa_interes, tipo_interes, frecuencia_pago,
+      num_cuotas, estado, observaciones, documentos_urls, created_at,
+      clientes(id, nombre, telefono, cedula, foto_url)
+    `)
+    .eq('tenant_id', tenantId)
+    .in('estado', ['solicitado','aprobado','rechazado'])
+    .order('created_at', { ascending: false });
+
+  if (error) { toast('Error al cargar solicitudes: ' + error.message, 'error'); return; }
+
+  todas = data || [];
+
+  // KPIs
+  const pendientes = todas.filter(s => s.estado === 'solicitado').length;
+  const aprobadas  = todas.filter(s => s.estado === 'aprobado').length;
+  const rechazadas = todas.filter(s => s.estado === 'rechazado').length;
+  const montoTotal = todas.reduce((s,p) => s + Number(p.monto_capital||0), 0);
+
+  document.getElementById('kpi-pendientes').textContent = pendientes;
+  document.getElementById('kpi-aprobadas').textContent  = aprobadas;
+  document.getElementById('kpi-rechazadas').textContent = rechazadas;
+  document.getElementById('kpi-monto').textContent      = formatMoney(montoTotal);
+
+  if (pendientes > 0) {
+    document.getElementById('badge-pendientes').textContent = `${pendientes} pendiente${pendientes>1?'s':''}`;
+    document.getElementById('badge-pendientes').style.display = 'inline';
+  }
+
+  render();
+}
+
+// ── Render cards ───────────────────────────────────────────
+function render() {
+  const filtradas = tabActual ? todas.filter(s => s.estado === tabActual) : todas;
+  const grid = document.getElementById('sol-grid');
+
+  if (!filtradas.length) {
+    grid.innerHTML = `
+      <div class="empty-state" style="grid-column:1/-1">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:48px;height:48px;display:block;margin:0 auto 12px;color:var(--gray-300)">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25z"/>
+        </svg>
+        <p style="font-size:.95rem;color:var(--gray-400)">No hay solicitudes en esta sección</p>
+      </div>`;
+    return;
+  }
+
+  grid.innerHTML = filtradas.map(s => {
+    const cliente  = s.clientes || {};
+    const esPend   = s.estado === 'solicitado';
+    const esApro   = s.estado === 'aprobado';
+    const esRech   = s.estado === 'rechazado';
+    const badgeClass = `badge-${s.estado}`;
+    const badgeLabel = { solicitado:'🕐 Pendiente', aprobado:'✅ Aprobado', rechazado:'❌ Rechazado' }[s.estado] || s.estado;
+
+    const docsHtml = (s.documentos_urls||[]).length
+      ? `<div style="margin-top:6px;display:flex;gap:6px;flex-wrap:wrap">
+           ${(s.documentos_urls||[]).map((u,i) => `<a href="${esc(u)}" target="_blank"
+             style="font-size:.75rem;color:var(--cobrika-primary);text-decoration:underline">Doc ${i+1}</a>`).join('')}
+         </div>` : '';
+
+    const telLink = cliente.telefono
+      ? `<a href="https://wa.me/1${(cliente.telefono||'').replace(/\D/g,'')}" target="_blank"
+           style="font-size:.78rem;color:#15803d;text-decoration:none">
+           📱 ${esc(cliente.telefono)}</a>` : '';
+
+    const acciones = esPend
+      ? `<button class="btn btn-primary btn-sm" onclick="abrirAprobar('${s.id}',${s.monto_capital},${s.num_cuotas||12},'${s.frecuencia_pago||'mensual'}')">
+           ✅ Aprobar
+         </button>
+         <button class="btn btn-danger btn-sm" onclick="abrirRechazar('${s.id}')">
+           ❌ Rechazar
+         </button>`
+      : esApro
+      ? `<a href="detalle.html?id=${s.id}" class="btn btn-secondary btn-sm">Ver préstamo →</a>`
+      : `<span style="font-size:.8rem;color:var(--gray-400)">${s.observaciones ? esc(s.observaciones.slice(-80)) : 'Sin motivo'}</span>`;
+
+    return `
+      <div class="sol-card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+          <div>
+            <div class="sol-cliente">${esc(cliente.nombre||'Cliente desconocido')}</div>
+            <div class="sol-meta">${esc(cliente.cedula||'')} ${telLink ? '· ' : ''}${telLink}</div>
+          </div>
+          <span class="sol-badge ${badgeClass}">${badgeLabel}</span>
+        </div>
+        <div class="sol-monto">${formatMoney(s.monto_capital)}</div>
+        <div class="sol-detail">
+          <div class="sol-detail-item"><strong>Cuotas</strong>${s.num_cuotas||'—'}</div>
+          <div class="sol-detail-item"><strong>Frecuencia</strong>${esc(s.frecuencia_pago||'—')}</div>
+          <div class="sol-detail-item"><strong>Fecha solicitud</strong>${formatFecha(s.created_at)}</div>
+        </div>
+        ${s.observaciones ? `<div style="font-size:.82rem;color:var(--gray-600);background:var(--gray-50);padding:8px 10px;border-radius:7px">${esc(s.observaciones)}</div>` : ''}
+        ${docsHtml}
+        <div class="sol-actions">${acciones}</div>
+      </div>`;
+  }).join('');
+}
+
+// ── Tab pills ─────────────────────────────────────────────
+document.querySelectorAll('.tab-pill').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-pill').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    tabActual = btn.dataset.tab;
+    render();
+  });
+});
+
+// ── Modal: Aprobar ────────────────────────────────────────
+window.abrirAprobar = (id, monto, cuotas, frecuencia) => {
+  document.getElementById('modal-id').value          = id;
+  document.getElementById('modal-monto').value       = monto;
+  document.getElementById('modal-cuotas').value      = cuotas || 12;
+  document.getElementById('modal-frecuencia').value  = frecuencia || 'mensual';
+  // Default fecha primer pago: mañana
+  const manana = new Date(); manana.setDate(manana.getDate()+1);
+  document.getElementById('modal-fecha').value = manana.toISOString().split('T')[0];
+  document.getElementById('modal-fecha').min   = manana.toISOString().split('T')[0];
+  document.getElementById('modal-aprobar').style.display = 'flex';
+};
+
+document.getElementById('btn-cancelar-modal').addEventListener('click', () => {
+  document.getElementById('modal-aprobar').style.display = 'none';
+});
+document.getElementById('modal-aprobar').addEventListener('click', e => {
+  if (e.target === document.getElementById('modal-aprobar'))
+    document.getElementById('modal-aprobar').style.display = 'none';
+});
+
+document.getElementById('btn-confirmar-aprobar').addEventListener('click', async () => {
+  const id         = document.getElementById('modal-id').value;
+  const capital    = parseFloat(document.getElementById('modal-monto').value);
+  const tasa       = parseFloat(document.getElementById('modal-tasa').value) / 100;
+  const numCuotas  = parseInt(document.getElementById('modal-cuotas').value);
+  const frecuencia = document.getElementById('modal-frecuencia').value;
+  const tipo       = document.getElementById('modal-tipo').value;
+  const fechaInicio = document.getElementById('modal-fecha').value;
+
+  if (!capital || !tasa || !numCuotas || !fechaInicio) {
+    toast('Completa todos los campos', 'error'); return;
+  }
+
+  document.getElementById('span-confirmar').style.display = 'none';
+  document.getElementById('span-spinner').style.display   = 'inline';
+  document.getElementById('btn-confirmar-aprobar').disabled = true;
+
+  try {
+    // 1. Calcular plan
+    const plan = calcularPlan({ capital, tasa, tipo, numCuotas, frecuencia, fechaInicio });
+    if (!plan) throw new Error('Error calculando el plan de pagos');
+
+    // 2. Actualizar préstamo a activo
+    const { error: errP } = await supabase
+      .from('prestamos')
+      .update({
+        estado:           'activo',
+        monto_capital:    capital,
+        tasa_interes:     tasa,
+        tipo_interes:     tipo,
+        frecuencia_pago:  frecuencia,
+        num_cuotas:       numCuotas,
+        monto_cuota:      plan.montoCuota,
+        monto_total:      plan.montoTotal,
+        total_interes:    plan.totalInteres,
+        saldo_capital:    capital,
+        saldo_total:      plan.montoTotal,
+        fecha_primer_pago: fechaInicio,
+        cuotas_pagadas:   0,
+      })
+      .eq('id', id)
+      .eq('tenant_id', tenantId);
+
+    if (errP) throw errP;
+
+    // 3. Insertar cuotas
+    const cuotasInsert = plan.cuotas.map(c => ({
+      prestamo_id:   id,
+      tenant_id:     tenantId,
+      numero:        c.numero,
+      fecha_vence:   c.fecha_vence,
+      monto_capital: c.monto_capital,
+      monto_interes: c.monto_interes,
+      monto_total:   c.monto_total,
+      monto_mora:    0,
+      monto_pagado:  0,
+      estado:        'pendiente',
+    }));
+
+    const { error: errC } = await supabase.from('cuotas').insert(cuotasInsert);
+    if (errC) throw errC;
+
+    toast('✅ Solicitud aprobada — préstamo activado', 'success');
+    document.getElementById('modal-aprobar').style.display = 'none';
+    await cargar();
+
+  } catch (err) {
+    toast('Error: ' + err.message, 'error');
+  } finally {
+    document.getElementById('span-confirmar').style.display = 'inline';
+    document.getElementById('span-spinner').style.display   = 'none';
+    document.getElementById('btn-confirmar-aprobar').disabled = false;
+  }
+});
+
+// ── Modal: Rechazar ───────────────────────────────────────
+window.abrirRechazar = (id) => {
+  document.getElementById('modal-rechazar-id').value = id;
+  document.getElementById('modal-motivo').value      = '';
+  document.getElementById('modal-rechazar').style.display = 'flex';
+};
+
+document.getElementById('btn-cancelar-rechazar').addEventListener('click', () => {
+  document.getElementById('modal-rechazar').style.display = 'none';
+});
+document.getElementById('modal-rechazar').addEventListener('click', e => {
+  if (e.target === document.getElementById('modal-rechazar'))
+    document.getElementById('modal-rechazar').style.display = 'none';
+});
+
+document.getElementById('btn-confirmar-rechazar').addEventListener('click', async () => {
+  const id     = document.getElementById('modal-rechazar-id').value;
+  const motivo = document.getElementById('modal-motivo').value.trim();
+
+  const ok = await confirmar('¿Rechazar esta solicitud? Esta acción no se puede deshacer.');
+  if (!ok) return;
+
+  const { error } = await supabase
+    .from('prestamos')
+    .update({
+      estado:       'rechazado',
+      observaciones: motivo || null,
+    })
+    .eq('id', id)
+    .eq('tenant_id', tenantId);
+
+  if (error) { toast('Error: ' + error.message, 'error'); return; }
+
+  toast('Solicitud rechazada', 'info');
+  document.getElementById('modal-rechazar').style.display = 'none';
+  await cargar();
+});
+
+// ── Init ──────────────────────────────────────────────────
+await cargar();
+
+// Realtime: actualizar si llega nueva solicitud
+supabase
+  .channel('solicitudes-rt')
+  .on('postgres_changes', {
+    event: '*',
+    schema: 'public',
+    table: 'prestamos',
+    filter: `tenant_id=eq.${tenantId}`,
+  }, () => cargar())
+  .subscribe();
+</script>
+</body>
+</html>
